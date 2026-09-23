@@ -155,6 +155,15 @@ export default function Home() {
                ))}
              </div>
           </div>
+
+          {/* Card 4: Short Info / Beyond the Code */}
+          <div className="md:col-span-3 border border-line-light dark:border-line-dark p-6 md:p-8 bg-chalk dark:bg-void flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden">
+             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
+             <span className="mono-label block mb-4 lowercase">short info / beyond the code</span>
+             <p className="text-sm md:text-base text-ink/70 dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
+               i am a full-stack developer and ui/ux engineer, but beyond the code, i build bare-metal linux homelabs, produce dark house and synthwave music, edit cinematic video, and play pickleball.
+             </p>
+          </div>
         </motion.div>
 
       </div>

@@ -1,29 +1,10 @@
-import { useEffect, useState } from "react";
-
-function LiveClock() {
-  const [t, setT] = useState("");
-  useEffect(() => {
-    const tick = () =>
-      setT(
-        new Date().toLocaleTimeString("en-PH", {
-          hour: "2-digit", minute: "2-digit", second: "2-digit",
-          hour12: false, timeZone: "Asia/Manila",
-        }) + " PHT"
-      );
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return <span className="tabular-nums">{t}</span>;
-}
+import { motion } from "framer-motion";
 
 /**
  * Baseline — the "ultimate" persistent footer.
  * Grounded by a single top hairline.
- * Contains: availability · live clock · social links.
+ * Contains: availability · copyright · social links.
  */
-import { motion } from "framer-motion";
-
 export default function Baseline() {
   return (
     <motion.footer
@@ -48,12 +29,12 @@ export default function Baseline() {
           </span>
         </div>
 
-        {/* Clock */}
+        {/* Copyright */}
         <span
           className="font-mono text-ink/40 dark:text-chalk/30 lowercase"
           style={{ fontSize: "0.6rem", letterSpacing: "0.12em" }}
         >
-          <LiveClock />
+          daryl tumaneng, 2026
         </span>
 
         {/* Socials */}
