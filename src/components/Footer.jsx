@@ -22,9 +22,14 @@ function LiveClock() {
  * Grounded by a single top hairline.
  * Contains: availability · live clock · social links.
  */
+import { motion } from "framer-motion";
+
 export default function Baseline() {
   return (
-    <footer
+    <motion.footer
+      initial={{ y: "100%" }}
+      animate={{ y: "0%" }}
+      transition={{ delay: 1.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="fixed bottom-0 left-0 right-0 z-50
                  bg-chalk dark:bg-void
                  border-t border-line-light dark:border-line-dark
@@ -72,6 +77,6 @@ export default function Baseline() {
         </nav>
 
       </div>
-    </footer>
+    </motion.footer>
   );
 }

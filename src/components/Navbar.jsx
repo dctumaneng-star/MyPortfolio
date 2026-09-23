@@ -69,8 +69,9 @@ export default function Navbar({ dark, onToggle }) {
   return (
     <>
       <motion.header
-        animate={{ y: hidden ? -100 : 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y: "-100%" }}
+        animate={{ y: hidden ? "-100%" : "0%" }}
+        transition={{ delay: 1.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300
           bg-chalk dark:bg-void
           ${scrolled || menuOpen ? "border-b border-line-light dark:border-line-dark" : ""}`}
