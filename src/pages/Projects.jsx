@@ -6,14 +6,24 @@ import PageTransition from "../components/PageTransition";
 const PROJECTS = [
   {
     index: "01",
-    name: "ProfConnect",
-    subtitle: "Digital Consultation Logbook",
-    description: "Collaborated on front-end design and created fundamental back-end application logic using MySQL for persistent storage.",
-    stack: ["Laravel", "React.js", "MySQL"],
+    name: "The Bottom Baseline",
+    subtitle: "Financial Tracking & Player Management",
+    description: "A web application custom-built to completely automate financial tracking and player management for court organizers. Designed to eliminate manual spreadsheet calculations, it is the perfect solution for streamlining weekly badminton sessions, pickleball meetups, and other open play events into a clean, mobile-friendly dashboard.",
+    stack: ["Web App", "Dashboard", "Automation"],
     size: "large",
+    status: "In Development",
   },
   {
     index: "02",
+    name: "ProfConnect",
+    subtitle: "Digital Consultation Logbook for UST-CICS Faculty Appointments",
+    description: "Collaborated on front-end design and created fundamental back-end application logic using MySQL for persistent storage.",
+    stack: ["Laravel", "React.js", "MySQL"],
+    size: "small",
+    href: "https://profconnect-cics.com/login",
+  },
+  {
+    index: "03",
     name: "Austin's Cafe IMS-POS",
     subtitle: "Inventory & Point-of-Sale System",
     description: "Developed functional UAT protocol, oversaw post-deployment troubleshooting, and trained end users.",
@@ -21,20 +31,24 @@ const PROJECTS = [
     size: "small",
   },
   {
-    index: "03",
+    index: "04",
     name: "Roar Call",
     subtitle: "Responsive Web Application",
     description: "Engineered complete website flow and crafted engaging, responsive UI/UX using React.js.",
     stack: ["React.js", "UI/UX"],
-    size: "small",
+    size: "large",
   },
 ];
 
 function ProjectCard({ project, index }) {
   const [hovered, setHovered] = useState(false);
 
+  const Component = project.href ? motion.a : motion.article;
+  const linkProps = project.href ? { href: project.href, target: "_blank", rel: "noopener noreferrer", "data-hover": "true" } : {};
+
   return (
-    <motion.article
+    <Component
+      {...linkProps}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
@@ -43,8 +57,9 @@ function ProjectCard({ project, index }) {
       onHoverEnd={() => setHovered(false)}
       className={`relative border border-line-light dark:border-line-dark p-8 flex flex-col justify-between
         min-h-[220px] md:min-h-[260px] transition-colors duration-300 group
-        hover:border-neon dark:hover:border-neon bg-chalk dark:bg-void
-        ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}`}
+        hover:border-neon dark:hover:border-neon bg-chalk dark:bg-void block
+        ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}
+        ${project.href ? "cursor-none" : ""}`}
     >
       <motion.div
         className="absolute top-0 left-0 h-px bg-neon"
@@ -53,13 +68,20 @@ function ProjectCard({ project, index }) {
       />
       
       <div className="flex items-start justify-between mb-auto">
-        <div>
+        <div className="pr-4">
           <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-300">
             {project.index}
           </span>
-          <h3 className="font-display text-display-md text-ink dark:text-chalk leading-none mb-1">
-            {project.name}
-          </h3>
+          <div className="flex flex-wrap items-center gap-3 mb-1">
+            <h3 className="font-display text-display-md text-ink dark:text-chalk leading-none">
+              {project.name}
+            </h3>
+            {project.status && (
+              <span className="neon-tag !py-0.5 !px-1.5 !text-[10px] self-start mt-1">
+                {project.status}
+              </span>
+            )}
+          </div>
           <p className="font-mono text-xs text-ink/40 dark:text-chalk/30">{project.subtitle}</p>
         </div>
         <motion.div
@@ -80,7 +102,7 @@ function ProjectCard({ project, index }) {
           <span key={s} className="neon-tag">{s}</span>
         ))}
       </div>
-    </motion.article>
+    </Component>
   );
 }
 
@@ -104,7 +126,7 @@ export default function Projects() {
         </div>
 
         {/* Asymmetric grid */}
-        <div className="grid md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark">
+        <div className="grid md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark">
           {PROJECTS.map((p, i) => (
             <ProjectCard key={p.index} project={p} index={i} />
           ))}
@@ -114,4 +136,3 @@ export default function Projects() {
     </PageTransition>
   );
 }
-
