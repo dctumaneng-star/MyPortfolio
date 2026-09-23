@@ -1,11 +1,11 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const LINKS = [
-  { href: "#about",     label: "About"     },
-  { href: "#work",      label: "Work"      },
-  { href: "#projects",  label: "Projects"  },
-  { href: "#skills",    label: "Skills"    },
+  { href: "/about",     label: "About"     },
+  { href: "/projects",  label: "Projects"  },
+  { href: "/contact",   label: "Contact"   },
 ];
 
 function ThemeToggle({ dark, onToggle }) {
@@ -25,6 +25,7 @@ export default function Navbar({ dark, onToggle }) {
   const [scrolled, setScrolled] = useState(false);
   const [hidden,   setHidden]   = useState(false);
   const { scrollY } = useScroll();
+  const location = useLocation();
   let prev = 0;
 
   useMotionValueEvent(scrollY, "change", (y) => {
@@ -44,22 +45,30 @@ export default function Navbar({ dark, onToggle }) {
       <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
 
         {/* Name */}
-        <a href="#" className="font-display text-xl tracking-tight text-ink dark:text-chalk
-                                hover:text-neon dark:hover:text-neon transition-colors duration-200">
+        <Link 
+          to="/" 
+          className="font-display text-xl tracking-tight text-ink dark:text-chalk
+                     hover:text-neon dark:hover:text-neon transition-colors duration-200"
+        >
           DARYL TUMANENG
-        </a>
+        </Link>
 
         {/* Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {LINKS.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className="mono-label hover:text-neon dark:hover:text-neon transition-colors duration-200"
-            >
-              {label}
-            </a>
-          ))}
+          {LINKS.map(({ href, label }) => {
+            const isActive = location.pathname === href;
+            return (
+              <Link
+                key={href}
+                to={href}
+                className={`mono-label transition-colors duration-200
+                  ${isActive ? 'text-neon dark:text-neon' : 'hover:text-neon dark:hover:text-neon'}
+                `}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Toggle */}
