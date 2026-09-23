@@ -4,38 +4,53 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["'Inter'", "Helvetica Neue", "Arial", "sans-serif"],
-        mono: ["'JetBrains Mono'", "'Fira Code'", "monospace"],
-      },
       colors: {
-        // Light mode tokens
+        neon: {
+          DEFAULT: "#C8FF00",
+          dim:     "#9BCC00",
+          glow:    "rgba(200,255,0,0.15)",
+        },
+        void:  "#0A0A0A",
+        chalk: "#F5F5F3",
+        // Structural grays — same names, context-switched via dark:
+        line: {
+          light: "#E0E0E0",
+          dark:  "#1E1E1E",
+        },
         ink: {
+          muted:   "#707070",
           DEFAULT: "#0A0A0A",
-          50:  "#F5F5F5",
-          100: "#E8E8E8",
-          200: "#D0D0D0",
-          300: "#A8A8A8",
-          400: "#707070",
-          500: "#404040",
-          600: "#282828",
-          700: "#1A1A1A",
-          800: "#111111",
-          900: "#0A0A0A",
         },
       },
+      fontFamily: {
+        display: ["'Bebas Neue'", "Impact", "Arial Narrow", "sans-serif"],
+        body:    ["'Inter'",      "Helvetica Neue", "sans-serif"],
+        mono:    ["'JetBrains Mono'", "monospace"],
+      },
       fontSize: {
-        "2xs": ["0.625rem", { lineHeight: "1", letterSpacing: "0.1em" }],
-      },
-      letterSpacing: {
-        tightest: "-0.04em",
-        "wider-xl": "0.2em",
-      },
-      borderWidth: {
-        px: "1px",
+        // Fluid display sizes
+        "display-xl": ["clamp(5rem,14vw,13rem)",  { lineHeight: "0.9",  letterSpacing: "-0.02em" }],
+        "display-lg": ["clamp(3rem,8vw,8rem)",    { lineHeight: "0.92", letterSpacing: "-0.02em" }],
+        "display-md": ["clamp(2rem,5vw,5rem)",    { lineHeight: "0.94", letterSpacing: "-0.01em" }],
+        "label":      ["0.6rem",                  { lineHeight: "1",    letterSpacing: "0.2em"   }],
       },
       transitionTimingFunction: {
-        "expo-out": "cubic-bezier(0.16,1,0.3,1)",
+        "expo":   "cubic-bezier(0.16,1,0.3,1)",
+        "cinema": "cubic-bezier(0.77,0,0.175,1)",
+      },
+      keyframes: {
+        ticker: {
+          "0%":   { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "pulse-dot": {
+          "0%,100%": { opacity: 1 },
+          "50%":     { opacity: 0.3 },
+        },
+      },
+      animation: {
+        ticker:      "ticker 30s linear infinite",
+        "pulse-dot": "pulse-dot 2s ease-in-out infinite",
       },
     },
   },

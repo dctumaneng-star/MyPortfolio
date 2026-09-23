@@ -1,34 +1,61 @@
-import { motion } from "framer-motion";
-import ThemeToggle from "./ThemeToggle";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useState } from "react";
 
-const NAV = [
-  { href: "#about",      label: "About" },
-  { href: "#work",       label: "Work" },
-  { href: "#projects",   label: "Projects" },
-  { href: "#skills",     label: "Skills" },
-  { href: "#education",  label: "Education" },
+const LINKS = [
+  { href: "#about",     label: "About"     },
+  { href: "#work",      label: "Work"      },
+  { href: "#projects",  label: "Projects"  },
+  { href: "#skills",    label: "Skills"    },
 ];
 
-export default function Navbar({ dark, onToggle }) {
+function ThemeToggle({ dark, onToggle }) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-ink-900 border-b border-ink-100 dark:border-ink-800 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
+    <button
+      onClick={onToggle}
+      className="toggle-track"
+      aria-label="Toggle dark mode"
+      aria-pressed={dark}
+    >
+      <span className="toggle-thumb" />
+    </button>
+  );
+}
 
-        {/* Name mark */}
-        <a
-          href="#"
-          className="font-sans font-semibold text-sm tracking-tighter text-ink-900 dark:text-ink-50 hover:opacity-60 transition-opacity duration-200"
-        >
-          DARYL TUMANENG.
+export default function Navbar({ dark, onToggle }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden,   setHidden]   = useState(false);
+  const { scrollY } = useScroll();
+  let prev = 0;
+
+  useMotionValueEvent(scrollY, "change", (y) => {
+    setScrolled(y > 40);
+    setHidden(y > prev && y > 120);
+    prev = y;
+  });
+
+  return (
+    <motion.header
+      animate={{ y: hidden ? -100 : 0 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300
+        bg-chalk dark:bg-void
+        ${scrolled ? "border-b border-line-light dark:border-line-dark" : ""}`}
+    >
+      <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
+
+        {/* Name */}
+        <a href="#" className="font-display text-xl tracking-tight text-ink dark:text-chalk
+                                hover:text-neon dark:hover:text-neon transition-colors duration-200">
+          DARYL TUMANENG
         </a>
 
-        {/* Nav — desktop */}
+        {/* Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {NAV.map(({ href, label }) => (
+          {LINKS.map(({ href, label }) => (
             <a
               key={href}
               href={href}
-              className="label hover:text-ink-900 dark:hover:text-ink-100 transition-colors duration-200"
+              className="mono-label hover:text-neon dark:hover:text-neon transition-colors duration-200"
             >
               {label}
             </a>
@@ -38,6 +65,6 @@ export default function Navbar({ dark, onToggle }) {
         {/* Toggle */}
         <ThemeToggle dark={dark} onToggle={onToggle} />
       </div>
-    </header>
+    </motion.header>
   );
 }

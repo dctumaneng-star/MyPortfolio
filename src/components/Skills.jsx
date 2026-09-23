@@ -1,64 +1,70 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const SKILL_GROUPS = [
-  {
-    label: "Languages",
-    items: ["Java", "JavaScript", "PHP", "Python"],
-  },
-  {
-    label: "Web & Mobile",
-    items: ["Firebase", "Laravel", "Node.js", "React", "TailwindCSS", "Android Studio", "Flutter"],
-  },
-  {
-    label: "Databases & Admin",
-    items: ["PostgreSQL", "SQL", "Docker", "Kubernetes", "Samba", "Ubuntu Server", "Windows Server", "ADDS"],
-  },
-  {
-    label: "Other",
-    items: ["Full-Stack Development", "OOP", "Networking & Security basics", "Game Servers"],
-  },
+const TICKER_ITEMS = [
+  "Java", "JavaScript", "PHP", "Python",
+  "Firebase", "Laravel", "Node.js", "React", "TailwindCSS", "Android Studio", "Flutter",
+  "PostgreSQL", "SQL", "Docker", "Kubernetes", "Samba", "Ubuntu Server", "Windows Server", "ADDS",
+  "Full-Stack Development", "OOP", "Networking & Security", "Game Servers",
 ];
+// Duplicate for seamless loop
+const TICKER_DOUBLE = [...TICKER_ITEMS, ...TICKER_ITEMS];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: (i) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
+const SKILL_GROUPS = [
+  { label: "Languages",         items: ["Java", "JavaScript", "PHP", "Python"] },
+  { label: "Web & Mobile",      items: ["Firebase", "Laravel", "Node.js", "React", "TailwindCSS", "Android Studio", "Flutter"] },
+  { label: "Databases & Admin", items: ["PostgreSQL", "SQL", "Docker", "Kubernetes", "Samba", "Ubuntu Server", "Windows Server", "ADDS"] },
+  { label: "Other",             items: ["Full-Stack Development", "OOP", "Networking & Security basics", "Game Servers"] },
+];
 
 export default function Skills() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="skills" className="section-base py-16 md:py-24" ref={ref}>
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="skills" className="section-rule py-20 md:py-28 overflow-hidden">
 
-        <motion.p
-          className="label mb-12"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-        >
-          Skills
-        </motion.p>
+      {/* ── High-speed marquee strip ── */}
+      <div className="fade-edges border-y border-line-light dark:border-line-dark py-4 mb-20 overflow-hidden">
+        <div className="ticker-track">
+          {TICKER_DOUBLE.map((item, i) => (
+            <span key={i} className="inline-flex items-center">
+              <span className="font-display text-xl md:text-2xl text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
+                {item}
+              </span>
+              <span className="text-neon font-mono text-sm px-2">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Skill table ── */}
+      <div ref={ref} className="max-w-6xl mx-auto px-6">
+        <div className="mb-16 overflow-hidden">
+          <motion.h2
+            className="font-display text-display-lg text-ink dark:text-chalk leading-none"
+            initial={{ y: "105%" }}
+            animate={inView ? { y: "0%" } : {}}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          >
+            SKILL SET
+          </motion.h2>
+        </div>
 
         <div className="space-y-0">
           {SKILL_GROUPS.map((group, i) => (
             <motion.div
               key={group.label}
-              variants={fadeUp}
-              custom={i}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              className="grid md:grid-cols-[1fr_2fr] gap-6 md:gap-24 py-6 border-t border-ink-100 dark:border-ink-800"
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-16 py-6 border-t border-line-light dark:border-line-dark group"
             >
-              <p className="font-mono text-xs text-ink-400 dark:text-ink-500 pt-0.5">
+              <p className="mono-label pt-0.5 group-hover:text-neon transition-colors duration-300">
                 {group.label}
               </p>
-              <p className="text-sm text-ink-700 dark:text-ink-300 leading-relaxed">
-                {group.items.join(", ")}.
+              <p className="text-sm text-ink/60 dark:text-chalk/45 leading-relaxed">
+                {group.items.join(",  ")}.
               </p>
             </motion.div>
           ))}
@@ -67,4 +73,3 @@ export default function Skills() {
     </section>
   );
 }
-

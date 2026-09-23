@@ -4,30 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daryl Tumaneng — Web Developer</title>
-    <meta name="description" content="Portfolio of Daryl Tumaneng — Web Developer and BSIT student specializing in full-stack web and mobile application development." />
+    <meta name="description" content="Portfolio of Daryl Tumaneng — Web Developer specializing in full-stack web and mobile application development." />
 
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Prevent FOUC on dark mode -->
+    <!-- Zero-FOUC dark mode init -->
     <script>
       (function () {
-        var saved = localStorage.getItem("theme");
-        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (saved === "dark" || (!saved && prefersDark)) {
-          document.documentElement.classList.add("dark");
-        }
+        try {
+          var saved = localStorage.getItem("dt-theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (saved === "dark" || (!saved && prefersDark)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
       })();
     </script>
 
     <style>
-      body { background: #fff; }
-      .dark body { background: #0a0a0a; }
+      /* Prevent flash — applied before React mounts */
+      html { background: #F5F5F3; }
+      html.dark { background: #0A0A0A; }
+      * { cursor: none; }
     </style>
   </head>
   <body>
