@@ -94,10 +94,10 @@ export default function Navbar({ dark, onToggle }) {
                 <Link
                   key={href}
                   to={href}
-                  className={`mono-label transition-colors duration-200
+                  className={`mono-label transition-colors duration-200 px-2 py-0.5 rounded-sm
                     ${isActive
-                      ? "text-neon dark:text-neon"
-                      : "hover:text-neon dark:hover:text-neon"}`}
+                      ? "bg-neon text-ink dark:bg-transparent dark:text-neon"
+                      : "hover:bg-neon hover:text-ink dark:hover:bg-transparent dark:hover:text-neon"}`}
                 >
                   {label}
                 </Link>
