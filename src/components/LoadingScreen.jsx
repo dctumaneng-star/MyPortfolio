@@ -1,38 +1,56 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const BOOT_SEQUENCE = [
   "Initializing boot sequence...",
+  "Mounting virtual file systems...",
   "Loading core Ubuntu modules...",
   "Mounting root filesystem...",
-  "Configuring network interfaces via Netplan...",
+  "Checking storage integrity (ZFS pool)...",
+  "Configuring Netplan interfaces...",
   "Starting Docker daemon...",
+  "Initializing container orchestrator...",
   "Starting Caddy reverse proxy daemon...",
-  "Initializing Laravel backend application...",
+  "Loading TLS certificates...",
+  "Booting Laravel core...",
+  "Connecting to PostgreSQL database...",
   "Establishing secure connections...",
-  "Boot sequence complete. Welcome."
+  "Injecting motion libraries (framer-motion)...",
+  "Compiling Tailwind utility classes...",
+  "> System ready."
 ];
 
 export default function LoadingScreen({ onComplete }) {
+  // phase 1: Percentage Load
+  // phase 2: Terminal Boot
+  // phase 3: Name Reveal
+  const [phase, setPhase] = useState(1);
   const [progress, setProgress] = useState(0);
   const [displayedLines, setDisplayedLines] = useState([]);
 
-  // Counter Logic
+  // Phase 1 Logic: 0 to 100%
   useEffect(() => {
+    if (phase !== 1) return;
+    
     let current = 0;
     const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 5) + 1;
+      // Slower increments to make loading time longer
+      current += Math.floor(Math.random() * 3) + 1;
       if (current >= 100) {
         current = 100;
         clearInterval(interval);
+        setTimeout(() => setPhase(2), 600); // Trigger Phase 2 after a pause
       }
       setProgress(current);
-    }, 25);
+    }, 45); // Slower interval
+    
     return () => clearInterval(interval);
-  }, []);
+  }, [phase]);
 
-  // Terminal Logic
+  // Phase 2 Logic: Terminal Sequence
   useEffect(() => {
+    if (phase !== 2) return;
+    
     let currentIndex = 0;
     let timeoutId;
     
@@ -40,76 +58,103 @@ export default function LoadingScreen({ onComplete }) {
       if (currentIndex < BOOT_SEQUENCE.length) {
         setDisplayedLines((prev) => [...prev, BOOT_SEQUENCE[currentIndex]]);
         currentIndex++;
-        const delay = Math.random() * 100 + 100; 
+        // Slower terminal line delays (150ms to 350ms)
+        const delay = Math.random() * 200 + 150; 
         timeoutId = setTimeout(printNextLine, delay);
       } else {
+        // Once the last line prints, wait 1000ms and trigger Phase 3
         timeoutId = setTimeout(() => {
-          onComplete();
+          setPhase(3);
         }, 1000);
       }
     };
     
-    timeoutId = setTimeout(printNextLine, 200);
+    timeoutId = setTimeout(printNextLine, 400);
     return () => clearTimeout(timeoutId);
-  }, [onComplete]);
+  }, [phase]);
+
+  // Phase 3 Logic: Name Reveal -> Phase 4 (Complete)
+  useEffect(() => {
+    if (phase !== 3) return;
+    
+    // Hold centered name for 1.5 seconds, then trigger Phase 4
+    const timeoutId = setTimeout(() => {
+      onComplete(); // Phase 4: Full Page Reveal
+    }, 1500);
+    
+    return () => clearTimeout(timeoutId);
+  }, [phase, onComplete]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] bg-void overflow-hidden"
-      exit={{ y: "-100%" }}
-      transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }} 
+      className="fixed inset-0 z-[100] bg-void overflow-hidden flex flex-col justify-center items-center"
+      exit={{ opacity: 0, y: "-10%" }}
+      transition={{ duration: 0.8, ease: [0.77, 0, 0.175, 1] }} 
     >
-      
-      {/* Centered Massive Design (Restored) */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
-        <div className="overflow-hidden">
+      <AnimatePresence mode="wait">
+        
+        {/* PHASE 1: Percentage Load */}
+        {phase === 1 && (
           <motion.div
-            exit={{ y: "-105%", opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display font-medium text-[clamp(6rem,15vw,12rem)] text-chalk leading-none tracking-tighter lowercase flex flex-col items-center"
+            key="phase-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col items-center justify-center w-full max-w-sm px-6"
           >
-            {progress.toString().padStart(2, "0")}
+            <div className="font-mono text-neon text-6xl md:text-8xl font-bold tracking-tighter">
+              {progress}%
+            </div>
+            <div className="w-full h-1 bg-line-dark mt-6 overflow-hidden">
+              <motion.div
+                className="h-full bg-neon"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </motion.div>
-        </div>
+        )}
 
-        <motion.div 
-          className="w-48 md:w-64 h-1.5 border border-line-dark mt-8 p-[1px]"
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        >
+        {/* PHASE 2: Terminal Boot */}
+        {phase === 2 && (
           <motion.div
-            className="h-full bg-neon"
-            style={{ width: `${progress}%` }}
-          />
-        </motion.div>
-      </div>
+            key="phase-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end"
+          >
+            <div className="font-mono text-neon text-sm md:text-base leading-relaxed break-words max-w-3xl">
+              {displayedLines.map((line, index) => (
+                <div key={index} className="mb-1">
+                  {line}
+                </div>
+              ))}
+              <div className="mt-1 flex items-center h-5">
+                <span className="w-2.5 h-4 bg-neon animate-pulse block"></span>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
-      {/* Terminal Sequence */}
-      <motion.div 
-        className="absolute bottom-12 left-6 md:left-12 font-mono text-neon text-xs md:text-sm leading-relaxed break-words max-w-2xl opacity-70"
-        exit={{ opacity: 0, x: -20 }}
-        transition={{ duration: 0.4 }}
-      >
-        {displayedLines.map((line, index) => (
-          <div key={index} className="mb-1">
-            <span className="text-neon/50 mr-2">[OK]</span> {line}
-          </div>
-        ))}
-        <div className="mt-1 flex items-center h-4">
-          <span className="w-2 h-3.5 bg-neon animate-pulse block"></span>
-        </div>
-      </motion.div>
-
-      {/* Razor-thin Neon Progress Baseline */}
-      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-void">
-        <motion.div
-          className="h-full bg-neon"
-          style={{ width: `${progress}%` }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        />
-      </div>
-      
+        {/* PHASE 3: Name Reveal */}
+        {phase === 3 && (
+          <motion.div
+            key="phase-3"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center justify-center"
+          >
+            <h1 className="font-display font-medium text-4xl md:text-5xl text-chalk tracking-tight lowercase">
+              daryl tumaneng.
+            </h1>
+          </motion.div>
+        )}
+        
+      </AnimatePresence>
     </motion.div>
   );
 }
