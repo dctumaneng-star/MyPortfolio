@@ -45,3 +45,4 @@ export function KineticText({ text, className = "", delay = 0, as: Component = "
     </Component>
   );
 }
+
