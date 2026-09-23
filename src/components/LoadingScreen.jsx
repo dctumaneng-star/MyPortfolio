@@ -33,11 +33,23 @@ export default function LoadingScreen({ onComplete }) {
         <motion.div
           exit={{ y: "-105%", opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-medium text-[clamp(6rem,15vw,12rem)] text-chalk leading-none tracking-tighter lowercase"
+          className="font-display font-medium text-[clamp(6rem,15vw,12rem)] text-chalk leading-none tracking-tighter lowercase flex flex-col items-center"
         >
           {progress.toString().padStart(2, "0")}
         </motion.div>
       </div>
+
+      {/* Mechanical Central Loading Bar */}
+      <motion.div 
+        className="w-48 md:w-64 h-1.5 border border-line-dark mt-8 p-[1px]"
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <motion.div
+          className="h-full bg-neon"
+          style={{ width: `${progress}%` }}
+        />
+      </motion.div>
 
       {/* Razor-thin Neon Progress Baseline */}
       <div className="absolute bottom-0 left-0 w-full h-[2px] bg-void">
