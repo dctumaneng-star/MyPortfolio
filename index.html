@@ -3,20 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daryl Cruz Tumaneng · Full-Stack Developer</title>
-    <meta name="description" content="Portfolio of Daryl Cruz Tumaneng — Full-Stack Developer & UI/UX Engineer, BSIT student at the University of Santo Tomas." />
+    <title>Daryl Tumaneng — Web Developer</title>
+    <meta name="description" content="Portfolio of Daryl Tumaneng — Web Developer and BSIT student specializing in full-stack web and mobile application development." />
 
-    <!-- Google Fonts preconnect -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Prevent FOUC -->
+    <!-- Prevent FOUC on dark mode -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (saved === "dark" || (!saved && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
     <style>
-      body { background: #0a0a0a; }
+      body { background: #fff; }
+      .dark body { background: #0a0a0a; }
     </style>
   </head>
   <body>
