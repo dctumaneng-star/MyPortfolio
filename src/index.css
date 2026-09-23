@@ -61,7 +61,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.6rem;
     letter-spacing: 0.2em;
-    text-transform: lowercase;
+    text-transform: uppercase;
     color: #707070;
   }
   .dark .mono-label {
@@ -79,7 +79,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.6rem;
     letter-spacing: 0.15em;
-    text-transform: lowercase;
+    text-transform: uppercase;
     border-radius: 2px;
   }
   .dark .neon-tag {
@@ -125,13 +125,12 @@
    UTILITIES
 ───────────────────────────────────────────── */
 @layer utilities {
-  /* Custom cursor */
+  /* Custom cursor (Mechanical Square) */
   .cursor-dot {
     position: fixed;
     top: 0; left: 0;
-    width: 6px; height: 6px;
+    width: 4px; height: 4px;
     background: #0A0A0A;
-    border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
@@ -142,25 +141,25 @@
   .cursor-ring {
     position: fixed;
     top: 0; left: 0;
-    width: 28px; height: 28px;
+    width: 32px; height: 32px;
     border: 1px solid rgba(10,10,10,0.5);
-    border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
-    transition: all 0.12s cubic-bezier(0.16,1,0.3,1);
+    transition: all 0.15s cubic-bezier(0.16,1,0.3,1);
   }
   .cursor-ring.active {
-    width: 48px; height: 48px;
+    width: 20px; height: 20px;
     border-color: #0A0A0A;
-    background: rgba(10,10,10,0.04);
+    background: rgba(10,10,10,0.1);
+    transform: translate(-50%, -50%) rotate(45deg);
   }
   .dark .cursor-ring {
     border-color: rgba(200,255,0,0.5);
   }
   .dark .cursor-ring.active {
     border-color: #C8FF00;
-    background: rgba(200,255,0,0.04);
+    background: rgba(200,255,0,0.1);
   }
 
   /* Marquee */

@@ -58,49 +58,49 @@ function Entry({ id, left, right, description, tags, delay }) {
 
 export default function About() {
   return (
-    <PageTransition className="pt-8 pb-16 lowercase">
+    <PageTransition className="pt-8 pb-16">
       <div className="max-w-6xl mx-auto px-6 w-full">
         
         {/* Header */}
         <div className="mb-16 overflow-hidden">
           <motion.h1 
-            className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none"
+            className="font-display text-display-lg text-ink dark:text-chalk leading-none"
             initial={{ y: "105%" }}
             animate={{ y: "0%" }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           >
-            background
+            BACKGROUND
           </motion.h1>
         </div>
 
         {/* Experience */}
         <div className="mb-4">
-          <span className="mono-label">— work experience</span>
+          <span className="mono-label">— WORK EXPERIENCE</span>
         </div>
         {EXPERIENCE.map((exp, i) => (
           <Entry
             key={exp.id}
             id={exp.id}
-            left={{ period: exp.period, name: exp.company.toLowerCase() }}
-            right={exp.role.toLowerCase()}
-            description={exp.description.toLowerCase()}
-            tags={exp.tags.map(t => t.toLowerCase())}
+            left={{ period: exp.period, name: exp.company }}
+            right={exp.role}
+            description={exp.description}
+            tags={exp.tags}
             delay={0.1 + i * 0.1}
           />
         ))}
 
         {/* Education */}
         <div className="mt-16 mb-4">
-          <span className="mono-label">— education & certifications</span>
+          <span className="mono-label">— EDUCATION & CERTIFICATIONS</span>
         </div>
         {EDUCATION.map((edu, i) => (
           <Entry
             key={edu.id}
             id={edu.id}
-            left={{ period: edu.period, name: edu.institution.toLowerCase() }}
-            right={edu.credential.toLowerCase()}
+            left={{ period: edu.period, name: edu.institution }}
+            right={edu.credential}
             description={null}
-            tags={edu.tags.map(t => t.toLowerCase())}
+            tags={edu.tags}
             delay={0.1 + i * 0.1}
           />
         ))}

@@ -42,9 +42,9 @@ function MobileMenu({ open, onClose }) {
           <Link
             to={href}
             onClick={onClose}
-            className="block font-display font-medium text-5xl text-ink dark:text-chalk py-4 hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
+            className="block font-display text-5xl text-ink dark:text-chalk py-4 hover:text-neon dark:hover:text-neon transition-colors duration-200"
           >
-            {label.toLowerCase()}
+            {label}
           </Link>
         </motion.div>
       ))}
@@ -81,14 +81,14 @@ export default function Navbar({ dark, onToggle }) {
           {/* Name mark */}
           <Link
             to="/"
-            className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
-                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
+            className="font-display text-xl tracking-tight text-ink dark:text-chalk
+                       hover:text-neon dark:hover:text-neon transition-colors duration-200"
           >
-            daryl tumaneng
+            DARYL TUMANENG
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 lowercase">
+          <nav className="hidden md:flex items-center gap-8">
             {LINKS.map(({ href, label }) => {
               const isActive = location.pathname === href;
               return (

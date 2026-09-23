@@ -4,7 +4,7 @@ import PageTransition from "../components/PageTransition";
 
 export default function Contact() {
   return (
-    <PageTransition className="pt-8 pb-16 justify-center lowercase">
+    <PageTransition className="pt-8 pb-16 justify-center">
       <div className="max-w-6xl mx-auto px-6 w-full flex-1 flex flex-col justify-center">
         
         <div className="overflow-hidden mb-6">
@@ -13,15 +13,15 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
           >
-            <span className="neon-tag lowercase">open for opportunities</span>
+            <span className="neon-tag">OPEN FOR OPPORTUNITIES</span>
           </motion.div>
         </div>
 
         <div className="mb-12">
-          {["let's build", "something", "great."].map((line, i) => (
+          {["LET'S BUILD", "SOMETHING", "GREAT."].map((line, i) => (
             <div key={i} className="overflow-hidden">
               <motion.h1
-                className={`font-display font-medium text-display-xl leading-none ${i === 1 ? 'text-stroke text-ink dark:text-chalk' : 'text-ink dark:text-chalk'}`}
+                className={`font-display text-display-xl leading-none ${i === 1 ? 'text-stroke text-ink dark:text-chalk' : 'text-ink dark:text-chalk'}`}
                 initial={{ y: "105%" }}
                 animate={{ y: "0%" }}
                 transition={{ delay: 0.2 + i * 0.1, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
@@ -47,8 +47,8 @@ export default function Contact() {
               whileHover={{ width: "100%" }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             />
-            <span className="font-display font-medium text-3xl md:text-5xl text-ink dark:text-chalk group-hover:text-void transition-colors duration-300 relative z-10">
-              say hello
+            <span className="font-display text-3xl md:text-5xl text-ink dark:text-chalk group-hover:text-void transition-colors duration-300 relative z-10">
+              SAY HELLO
             </span>
             <ArrowUpRight size={32} className="text-ink dark:text-chalk group-hover:text-void transition-colors duration-300 relative z-10" />
           </a>
@@ -61,13 +61,13 @@ export default function Contact() {
           transition={{ delay: 0.8, duration: 0.7 }}
         >
           <div>
-            <p className="mono-label mb-2">location</p>
+            <p className="mono-label mb-2">LOCATION</p>
             <p className="font-mono text-sm text-ink/70 dark:text-chalk/60">
-              rocka village, tabang, plaridel, bulacan
+              Rocka Village, Tabang, Plaridel, Bulacan
             </p>
           </div>
           <div>
-            <p className="mono-label mb-2">phone</p>
+            <p className="mono-label mb-2">PHONE</p>
             <p className="font-mono text-sm text-ink/70 dark:text-chalk/60">
               0969-596-7105
             </p>
@@ -78,4 +78,3 @@ export default function Contact() {
     </PageTransition>
   );
 }
-
