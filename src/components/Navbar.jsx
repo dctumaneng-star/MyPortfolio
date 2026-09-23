@@ -95,7 +95,7 @@ export default function Navbar({ dark, onToggle }) {
             className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
                        hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
           >
-            daryl tumaneng
+            daryl tumaneng.
           </Link>
 
           {/* Desktop nav */}
