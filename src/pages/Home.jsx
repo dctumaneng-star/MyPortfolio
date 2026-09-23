@@ -84,7 +84,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: delayCascade + 0.1, duration: 0.7, ease: TE_EASE }}
             >
-              full-stack developer. bare-metal linux builder. electronic music producer. pickleball player.
+              software engineer. bare-metal linux builder. electronic music producer. pickleball player.
             </motion.p>
           </div>
 
