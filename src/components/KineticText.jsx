@@ -18,7 +18,7 @@ export function KineticText({ text, className = "", delay = 0, as: Component = "
   };
 
   const item = {
-    hidden: { y: "110%" },
+    hidden: { y: "140%" },
     show: {
       y: "0%",
       transition: { duration: 0.8, ease: TE_EASE }
@@ -35,7 +35,7 @@ export function KineticText({ text, className = "", delay = 0, as: Component = "
         className="flex flex-wrap"
       >
         {words.map((word, i) => (
-          <div key={i} className="overflow-hidden inline-block mr-[0.25em]">
+          <div key={i} className="overflow-hidden inline-block mr-[0.25em] pb-4 -mb-4 pt-4 -mt-4">
             <motion.span variants={item} className="inline-block">
               {word}
             </motion.span>
