@@ -1,12 +1,12 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const LINKS = [
-  { href: "/",         label: "Home"     },
-  { href: "/about",    label: "About"    },
-  { href: "/projects", label: "Projects" },
-  { href: "/contact",  label: "Contact"  },
+  { href: "/",         label: "home"     },
+  { href: "/about",    label: "about"    },
+  { href: "/projects", label: "projects" },
+  { href: "/contact",  label: "contact"  },
 ];
 
 function ThemeToggle({ dark, onToggle }) {
@@ -65,6 +65,17 @@ export default function Navbar({ dark, onToggle }) {
     setHidden(y > prev && y > 120 && !menuOpen);
     prev = y;
   });
+
+  // Reveal navbar when hovering near the top of the screen
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (hidden && e.clientY < 60) {
+        setHidden(false);
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [hidden]);
 
   return (
     <>
