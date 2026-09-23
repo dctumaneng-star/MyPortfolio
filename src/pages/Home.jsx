@@ -72,7 +72,7 @@ export default function Home() {
                 delay={isFirstLoad ? 0.8 : 0.1} 
               />
               <KineticText 
-                text="tumaneng" 
+                text="tumaneng." 
                 className="font-display font-medium leading-none text-display-xl text-stroke text-ink dark:text-chalk mb-0" 
                 delay={isFirstLoad ? 0.92 : 0.2} 
               />
