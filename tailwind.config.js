@@ -27,9 +27,9 @@ export default {
         mono:    ["'JetBrains Mono'", "monospace"],
       },
       fontSize: {
-        "display-xl": ["clamp(5rem,14vw,12rem)",  { lineHeight: "0.9",  letterSpacing: "-0.04em" }],
-        "display-lg": ["clamp(3rem,8vw,7rem)",    { lineHeight: "0.92", letterSpacing: "-0.03em" }],
-        "display-md": ["clamp(2rem,5vw,4rem)",    { lineHeight: "0.94", letterSpacing: "-0.02em" }],
+        "display-xl": ["clamp(3.5rem,8vw,7rem)",  { lineHeight: "0.95", letterSpacing: "-0.04em" }],
+        "display-lg": ["clamp(2.5rem,6vw,5rem)",  { lineHeight: "0.95", letterSpacing: "-0.03em" }],
+        "display-md": ["clamp(1.5rem,3vw,3rem)",  { lineHeight: "0.95", letterSpacing: "-0.02em" }],
         "label":      ["0.6rem",                  { lineHeight: "1",    letterSpacing: "0.2em"   }],
       },
       transitionTimingFunction: {

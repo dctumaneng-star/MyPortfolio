@@ -33,7 +33,7 @@ export default function LoadingScreen({ onComplete }) {
         <motion.div
           exit={{ y: "-105%", opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-[clamp(10rem,25vw,25rem)] text-chalk leading-none tracking-tighter"
+          className="font-display font-medium text-[clamp(6rem,15vw,12rem)] text-chalk leading-none tracking-tighter"
         >
           {progress.toString().padStart(2, "0")}
         </motion.div>
