@@ -1,11 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Send, Mail, GitBranch, Link2, MessageCircle, ArrowRight } from "lucide-react";
+import { Send, Mail, GitBranch, Link2, ArrowRight } from "lucide-react";
 
 const SOCIALS = [
-  { icon: <GitBranch size={18} />, label: "GitHub", handle: "@daryltumaneng", href: "#" },
-  { icon: <Link2 size={18} />, label: "LinkedIn", handle: "Daryl Cruz Tumaneng", href: "#" },
-  { icon: <Mail size={18} />, label: "Email", handle: "daryl@example.com", href: "mailto:daryl@example.com" },
+  { icon: <GitBranch size={16} />, label: "GitHub", handle: "@daryltumaneng", href: "#" },
+  { icon: <Link2 size={16} />, label: "LinkedIn", handle: "Daryl Cruz Tumaneng", href: "#" },
+  { icon: <Mail size={16} />, label: "Email", handle: "daryl@example.com", href: "mailto:daryl@example.com" },
 ];
 
 export default function Contact() {
@@ -20,61 +20,70 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 md:px-16 lg:px-24 bg-dark-100 relative overflow-hidden">
-      {/* Giant watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <span className="font-display text-[20vw] text-white/[0.015] leading-none select-none whitespace-nowrap">
-          CONTACT
-        </span>
-      </div>
+    <section id="contact" className="bg-dark relative overflow-hidden">
+      {/* OFF+BRAND style: massive full-width heading that bleeds to edges */}
+      <div className="border-t border-white/5 pt-20 md:pt-32 pb-16 px-6 md:px-16 lg:px-24" ref={ref}>
 
-      <div className="max-w-6xl mx-auto relative z-10" ref={ref}>
-        {/* Heading */}
-        <div className="mb-20">
-          <motion.p
-            className="section-label mb-4"
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            / Get In Touch
-          </motion.p>
-          <div className="overflow-hidden">
-            <motion.h2
-              className="font-display text-[clamp(3rem,7vw,7rem)] leading-none tracking-tightest uppercase text-white"
-              initial={{ y: "100%" }}
-              animate={inView ? { y: "0%" } : {}}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Let's Build
-              <br />
-              <span className="text-neon">Something.</span>
-            </motion.h2>
-          </div>
+        {/* Section watermark */}
+        <div className="absolute top-16 right-0 font-display text-[18vw] text-white/[0.02] leading-none select-none pointer-events-none pr-2">
+          04
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <motion.p
+          className="section-label mb-8"
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          / Get In Touch
+        </motion.p>
+
+        {/* Giant heading — line-by-line, OFF+BRAND stacked style */}
+        <div className="mb-16 md:mb-24">
+          {["Let's Build", "Something"].map((line, i) => (
+            <div key={i} className="overflow-hidden">
+              <motion.h2
+                className={`font-display uppercase leading-none tracking-tightest ${
+                  i === 0
+                    ? "text-white"
+                    : "text-stroke"
+                }`}
+                style={{ fontSize: "clamp(3rem,9vw,9rem)" }}
+                initial={{ y: "105%" }}
+                animate={inView ? { y: "0%" } : {}}
+                transition={{ delay: i * 0.15 + 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {line}{i === 1 && <span className="text-neon">.</span>}
+              </motion.h2>
+            </div>
+          ))}
+        </div>
+
+        {/* Content grid */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+
           {/* Left: Form */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             {submitted ? (
-              <div className="glass-card rounded-2xl p-12 text-center">
-                <div className="w-16 h-16 rounded-full bg-neon/10 border border-neon/30 flex items-center justify-center text-neon mx-auto mb-6 shadow-neon-sm">
-                  <Send size={24} />
+              <div className="glass-card rounded-2xl p-12 text-center border-neon/20">
+                <div className="w-14 h-14 rounded-full bg-neon/10 border border-neon/30 flex items-center justify-center text-neon mx-auto mb-6">
+                  <Send size={20} />
                 </div>
-                <h3 className="font-display text-3xl text-white mb-2">Message Sent!</h3>
-                <p className="text-ash">I'll get back to you as soon as possible.</p>
+                <h3 className="font-display text-4xl text-white mb-2 uppercase tracking-tight">Sent!</h3>
+                <p className="text-ash text-sm">I'll get back to you as soon as possible.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-0">
                 {[
                   { id: "name", label: "Your Name", type: "text", placeholder: "e.g. Lando Norris" },
                   { id: "email", label: "Email Address", type: "email", placeholder: "you@example.com" },
                 ].map(({ id, label, type, placeholder }) => (
-                  <div key={id} className="relative">
+                  /* OFF+BRAND: border-b only input fields */
+                  <div key={id} className="border-b border-white/10 hover:border-neon/30 transition-colors duration-300 py-4">
                     <label htmlFor={id} className="section-label block mb-2">{label}</label>
                     <input
                       id={id}
@@ -83,84 +92,87 @@ export default function Contact() {
                       placeholder={placeholder}
                       onFocus={() => setFocused(id)}
                       onBlur={() => setFocused(null)}
-                      className={`w-full bg-dark-300 border rounded-xl px-5 py-4 text-white text-sm font-body 
-                        placeholder-ash/40 outline-none transition-all duration-300 cursor-none
-                        ${focused === id ? "border-neon shadow-neon-sm" : "border-white/10"}`}
+                      className={`w-full bg-transparent text-white text-sm font-body 
+                        placeholder-ash/30 outline-none transition-all duration-300 cursor-none py-1`}
                     />
                   </div>
                 ))}
 
-                <div className="relative">
+                <div className="border-b border-white/10 hover:border-neon/30 transition-colors duration-300 py-4">
                   <label htmlFor="message" className="section-label block mb-2">Message</label>
                   <textarea
                     id="message"
                     required
-                    rows={5}
+                    rows={4}
                     placeholder="Tell me about your project..."
                     onFocus={() => setFocused("message")}
                     onBlur={() => setFocused(null)}
-                    className={`w-full bg-dark-300 border rounded-xl px-5 py-4 text-white text-sm font-body 
-                      placeholder-ash/40 outline-none resize-none transition-all duration-300 cursor-none
-                      ${focused === "message" ? "border-neon shadow-neon-sm" : "border-white/10"}`}
+                    className="w-full bg-transparent text-white text-sm font-body 
+                      placeholder-ash/30 outline-none resize-none transition-all duration-300 cursor-none py-1"
                   />
                 </div>
 
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-3 py-4 rounded-xl
-                    bg-neon text-dark font-bold text-sm tracking-wider uppercase
-                    hover:shadow-neon-md transition-shadow duration-300 cursor-none"
-                >
-                  Send Message <ArrowRight size={16} />
-                </motion.button>
+                {/* OFF+BRAND btn-w style submit */}
+                <div className="pt-8">
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group relative inline-flex items-center gap-3 px-8 py-4 
+                      border border-neon/40 hover:border-neon rounded-full
+                      font-mono text-xs text-white tracking-widest uppercase
+                      overflow-hidden transition-colors duration-300 cursor-none"
+                  >
+                    <span className="relative z-10">Send Message</span>
+                    <ArrowRight size={14} className="text-neon relative z-10 group-hover:translate-x-1 transition-transform" />
+                    {/* Neon fill sweep */}
+                    <span
+                      className="absolute inset-0 bg-neon origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 -z-0"
+                      style={{ transitionTimingFunction: "cubic-bezier(0.165,0.84,0.44,1)" }}
+                    />
+                    <span className="absolute inset-0 group-hover:text-dark" />
+                  </motion.button>
+                </div>
               </form>
             )}
           </motion.div>
 
-          {/* Right: Socials + info */}
+          {/* Right: Info + socials */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-8"
+            transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-10"
           >
-            <div>
-              <p className="text-ash leading-relaxed text-sm max-w-sm">
-                I'm currently open to freelance projects, internship extensions, and full-time opportunities.
-                If you have a project in mind or just want to connect — don't hesitate to reach out.
-              </p>
-            </div>
+            <p className="text-ash text-sm leading-relaxed max-w-sm">
+              I'm open to freelance projects, internship extensions, and full-time opportunities.
+              If you have a project in mind or just want to connect — reach out.
+            </p>
 
-            <div className="space-y-4">
-              {SOCIALS.map((social) => (
+            {/* Socials — OFF+BRAND border-row style */}
+            <div>
+              {SOCIALS.map((social, i) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  className="group flex items-center gap-4 p-4 glass-card rounded-xl hover:border-neon/30 transition-all duration-300"
+                  className="group flex items-center justify-between py-4 border-b border-white/5 hover:border-neon/20 transition-colors duration-300"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-dark-400 flex items-center justify-center text-ash group-hover:text-neon group-hover:bg-neon/10 transition-all duration-300">
-                    {social.icon}
+                  <div className="flex items-center gap-3">
+                    <span className="text-ash group-hover:text-neon transition-colors duration-300">{social.icon}</span>
+                    <div>
+                      <p className="text-white text-sm font-medium">{social.label}</p>
+                      <p className="text-ash text-xs font-mono">{social.handle}</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-white text-sm font-medium">{social.label}</p>
-                    <p className="text-ash text-xs font-mono">{social.handle}</p>
-                  </div>
-                  <ArrowRight size={14} className="text-ash group-hover:text-neon group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight size={14} className="text-ash/30 group-hover:text-neon group-hover:translate-x-1 transition-all duration-300" />
                 </a>
               ))}
             </div>
 
-            {/* Availability badge */}
-            <div className="glass-card rounded-xl p-5 border border-neon/20">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="w-2 h-2 rounded-full bg-neon animate-pulse" />
-                <p className="text-neon text-sm font-semibold">Currently Available</p>
-              </div>
-              <p className="text-ash text-xs leading-relaxed">
-                Open to full-stack roles, internship opportunities, and freelance web projects.
-              </p>
+            {/* Availability — neon pill */}
+            <div className="flex items-center gap-3 pt-2">
+              <div className="w-2 h-2 rounded-full bg-neon animate-pulse" />
+              <p className="font-mono text-xs text-neon tracking-wider">Currently Available for Work</p>
             </div>
           </motion.div>
         </div>

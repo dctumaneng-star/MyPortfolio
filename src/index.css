@@ -7,75 +7,104 @@
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   html {
     scroll-behavior: smooth;
     cursor: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply bg-dark text-white font-body antialiased;
     overflow-x: hidden;
+    font-size: clamp(14px, 1vw, 16px);
   }
 
   ::selection {
-    @apply bg-neon text-dark;
+    background: #C8FF00;
+    color: #0A0A0A;
+    text-shadow: none;
   }
 
-  ::-webkit-scrollbar {
-    width: 4px;
+  img::selection, svg::selection {
+    background: transparent;
   }
-  ::-webkit-scrollbar-track {
-    @apply bg-dark-200;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-neon rounded-full;
-  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { @apply bg-dark-200; }
+  ::-webkit-scrollbar-thumb { @apply bg-neon rounded-full; }
 }
 
 @layer components {
   .section-label {
-    @apply font-mono text-xs tracking-widest2 text-neon uppercase;
+    @apply font-mono text-[10px] tracking-[0.25em] text-neon uppercase;
   }
 
   .display-heading {
-    @apply font-display text-fluid-hero text-white leading-none tracking-tightest uppercase;
-  }
-
-  .neon-border {
-    @apply border border-neon/30 hover:border-neon/80 transition-colors duration-300;
+    @apply font-display leading-none tracking-tightest uppercase;
   }
 
   .glass-card {
-    @apply bg-dark-200/60 backdrop-blur-sm border border-white/5;
+    @apply bg-dark-200/60 backdrop-blur-sm border border-white/[0.06];
   }
 
   .neon-pill {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full 
-           bg-neon/10 border border-neon/30 text-neon text-xs font-mono tracking-wider;
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+           bg-neon/10 border border-neon/20 text-neon text-[10px] font-mono tracking-wider;
+  }
+
+  /* OFF+BRAND: link track fill system */
+  .link-w {
+    @apply relative inline-flex items-center gap-2 py-1 font-mono text-xs text-ash
+           hover:text-white transition-colors duration-300 tracking-widest uppercase;
+  }
+  .link-w .link-track {
+    @apply absolute bottom-0 left-0 h-px w-full bg-white/10;
+  }
+  .link-w .link-track-fill {
+    @apply absolute inset-0 bg-neon origin-left scale-x-0 transition-transform duration-500;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .link-w:hover .link-track-fill {
+    @apply scale-x-100;
   }
 }
 
 @layer utilities {
+  /* OFF+BRAND: text stroke for hollow display type */
   .text-stroke {
-    -webkit-text-stroke: 1px rgba(200, 255, 0, 0.6);
+    -webkit-text-stroke: 1.5px rgba(200, 255, 0, 0.6);
     color: transparent;
   }
-
   .text-stroke-white {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.12);
+    color: transparent;
+  }
+  .text-stroke-dim {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.06);
     color: transparent;
   }
 
+  /* OFF+BRAND: mix-blend-mode difference blocks */
+  .blend-diff {
+    mix-blend-mode: difference;
+    color: #fff;
+    user-select: none;
+  }
+
+  /* Diagonal clips */
   .clip-diagonal {
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
-
   .clip-diagonal-reverse {
     clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
   }
 
+  /* Noise overlay */
   .noise-overlay::after {
     content: '';
     position: absolute;
@@ -84,57 +113,70 @@
     pointer-events: none;
     opacity: 0.4;
   }
+
+  /* O-hidden — OFF+BRAND overflow wrapper */
+  .o-hidden {
+    overflow: hidden;
+  }
 }
 
-/* Custom cursor */
+/* ── Custom cursor ── */
 .cursor-dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: #C8FF00;
   border-radius: 50%;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.1s ease;
+  /* OFF+BRAND: mix-blend-mode difference cursor */
   mix-blend-mode: difference;
+  background: #fff;
 }
 
 .cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(200, 255, 0, 0.7);
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(200, 255, 0, 0.6);
   border-radius: 50%;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .cursor-ring.hovering {
-  width: 60px;
-  height: 60px;
+  width: 52px;
+  height: 52px;
   border-color: #C8FF00;
   background: rgba(200, 255, 0, 0.05);
 }
 
-/* Ticker tape */
+/* ── Ticker tape ── */
 .ticker-wrapper {
   overflow: hidden;
   width: 100%;
 }
-
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker 25s linear infinite;
+  animation: ticker 28s linear infinite;
 }
-
 .ticker-track:hover {
   animation-play-state: paused;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── HUD scroll indicator pulse ── */
+@keyframes hudPulse {
+  0%   { transform: scaleY(0); opacity: 0; }
+  50%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0); opacity: 0; }
 }
