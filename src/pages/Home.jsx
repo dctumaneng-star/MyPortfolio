@@ -91,7 +91,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: delayCascade + 0.1, duration: 0.7 }}
             >
-              self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
+              full-stack developer. bare-metal linux builder. electronic music producer. pickleball player.
             </motion.p>
           </div>
 
@@ -161,7 +161,7 @@ export default function Home() {
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
              <span className="mono-label block mb-4 lowercase">short info / beyond the code</span>
              <p className="font-body text-sm md:text-base text-ink/70 dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
-               full-stack developer. bare-metal linux builder. electronic music producer. pickleball player.
+               self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
              </p>
           </div>
         </motion.div>
