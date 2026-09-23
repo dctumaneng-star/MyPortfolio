@@ -120,7 +120,7 @@ export default function Home() {
           variants={bentoContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-15%" }}
+          viewport={{ once: false, margin: "-15%" }}
           className="grid md:grid-cols-3 gap-4 lg:gap-6 w-full"
         >
           {/* Card 1: Status */}

@@ -144,7 +144,7 @@ export default function Projects() {
           variants={gridContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-15%" }}
+          viewport={{ once: false, margin: "-15%" }}
           className="grid md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark"
         >
           {PROJECTS.map((p) => (

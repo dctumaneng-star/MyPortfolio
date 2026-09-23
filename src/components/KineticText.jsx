@@ -31,7 +31,7 @@ export function KineticText({ text, className = "", delay = 0, as: Component = "
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-15%" }}
+        viewport={{ once: false, margin: "-15%" }}
         className="flex flex-wrap"
       >
         {words.map((word, i) => (

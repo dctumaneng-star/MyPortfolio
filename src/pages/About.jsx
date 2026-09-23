@@ -124,7 +124,7 @@ export default function About() {
           variants={gridContainer}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-15%" }}
+          viewport={{ once: false, margin: "-15%" }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark mb-24"
         >
           {HOBBIES.map((hobby) => (
@@ -164,7 +164,7 @@ export default function About() {
           <div className="border-t border-line-light dark:border-line-dark lg:border-none lg:pt-0 pt-12">
             <span className="mono-label block mb-12">experience</span>
             <motion.div 
-              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-15%" }}
+              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
             >
               {EXPERIENCE.map((item, i) => (
                 <Entry 
@@ -184,7 +184,7 @@ export default function About() {
           <div>
             <span className="mono-label block mb-12">education & certs</span>
             <motion.div 
-              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-15%" }}
+              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
             >
               {EDUCATION.map((item, i) => (
                 <Entry 
