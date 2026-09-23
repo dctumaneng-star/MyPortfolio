@@ -74,16 +74,16 @@ function ProjectCard({ project, index }) {
             {project.index}
           </span>
           <div className="flex flex-wrap items-center gap-3 mb-1">
-            <h3 className="font-display text-display-md text-ink dark:text-chalk leading-none">
+            <h3 className="font-display font-bold text-display-md text-ink dark:text-chalk leading-none lowercase">
               {project.name}
             </h3>
             {project.status && (
-              <span className="neon-tag !py-0.5 !px-1.5 !text-[10px] self-start mt-1">
+              <span className="neon-tag !py-0.5 !px-1.5 !text-[10px] self-start mt-1 lowercase">
                 {project.status}
               </span>
             )}
           </div>
-          <p className="font-mono text-xs text-ink/40 dark:text-chalk/30">{project.subtitle}</p>
+          <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 lowercase">{project.subtitle}</p>
         </div>
         <motion.div
           animate={{ rotate: hovered ? 45 : 0, color: hovered ? "#C8FF00" : "inherit" }}
@@ -116,12 +116,12 @@ export default function Projects() {
         <div className="mb-16">
           <div className="overflow-hidden">
             <motion.h1 
-              className="font-display text-display-lg text-ink dark:text-chalk leading-none"
+              className="font-display font-bold text-display-lg text-ink dark:text-chalk leading-none lowercase"
               initial={{ y: "105%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
             >
-              SELECTED WORK
+              selected work
             </motion.h1>
           </div>
         </div>

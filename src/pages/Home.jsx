@@ -27,7 +27,7 @@ export default function Home() {
   const delayCascade = isFirstLoad ? 1.8 : 0.4;
 
   return (
-    <PageTransition className="justify-start pt-8 pb-16 overflow-x-hidden">
+    <PageTransition className="justify-start pt-8 pb-16 overflow-x-hidden lowercase">
       
       {/* ── High-speed marquee strip ── */}
       <motion.div 
@@ -39,7 +39,7 @@ export default function Home() {
         <div className="ticker-track">
           {TICKER_DOUBLE.map((item, i) => (
             <span key={i} className="inline-flex items-center">
-              <span className="font-display text-xl md:text-2xl text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
+              <span className="font-display font-bold text-xl md:text-2xl text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
                 {item}
               </span>
               <span className="text-neon font-mono text-sm px-2">✦</span>
@@ -59,10 +59,10 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: delayCascade, duration: 0.6 }}
             >
-              <span className="neon-tag">SOFTWARE ENGINEER</span>
+              <span className="neon-tag lowercase">software engineer</span>
             </motion.div>
 
-            <h1 className="font-display leading-none text-ink dark:text-chalk mb-0" aria-label="Daryl Tumaneng">
+            <h1 className="font-display font-bold leading-none text-ink dark:text-chalk mb-0" aria-label="daryl tumaneng">
               <div className="overflow-hidden">
                 <motion.span
                   className="block text-display-xl"
@@ -70,7 +70,7 @@ export default function Home() {
                   animate={{ y: "0%" }}
                   transition={{ delay: delayName1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  DARYL
+                  daryl
                 </motion.span>
               </div>
               <div className="overflow-hidden -mt-2 md:-mt-6">
@@ -80,7 +80,7 @@ export default function Home() {
                   animate={{ y: "0%" }}
                   transition={{ delay: delayName2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  TUMANENG
+                  tumaneng
                 </motion.span>
               </div>
             </h1>
@@ -91,7 +91,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: delayCascade + 0.1, duration: 0.7 }}
             >
-              Self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
+              self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
             </motion.p>
           </div>
 
@@ -106,7 +106,7 @@ export default function Home() {
             <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-neon z-10" />
             <img 
               src="/portrait.jpg" 
-              alt="Daryl Tumaneng" 
+              alt="daryl tumaneng" 
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -124,12 +124,12 @@ export default function Home() {
           <div className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
              <div>
-                <span className="mono-label block mb-3">CURRENT STATUS</span>
-                <p className="font-body font-medium text-ink dark:text-chalk">Actively looking for full-time opportunities & internships.</p>
+                <span className="mono-label block mb-3 lowercase">current status</span>
+                <p className="font-body font-medium text-ink dark:text-chalk">actively looking for full-time opportunities & internships.</p>
              </div>
              <div className="flex items-center gap-2 mt-4">
                 <span className="w-2 h-2 rounded-full bg-neon animate-pulse-dot" />
-                <span className="font-mono text-xs text-ink/50 dark:text-chalk/40 uppercase tracking-wider">AVAILABLE</span>
+                <span className="font-mono text-xs text-ink/50 dark:text-chalk/40 uppercase tracking-wider lowercase">available</span>
              </div>
           </div>
 
@@ -137,21 +137,21 @@ export default function Home() {
           <Link to="/projects" className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden cursor-none" data-hover="true">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
              <div className="flex justify-between items-start">
-               <span className="mono-label block mb-3">FEATURED WORK</span>
+               <span className="mono-label block mb-3 lowercase">featured work</span>
                <ArrowUpRight size={20} className="text-ink/30 dark:text-chalk/20 group-hover:text-neon transition-colors duration-300" />
              </div>
-             <h3 className="font-display text-3xl text-ink dark:text-chalk leading-none uppercase">
-                VIEW PROJECTS
+             <h3 className="font-display font-bold text-3xl text-ink dark:text-chalk leading-none lowercase">
+                view projects
              </h3>
           </Link>
 
           {/* Card 3: Tech Focus */}
           <div className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
-             <span className="mono-label block mb-3">CORE STACK</span>
+             <span className="mono-label block mb-3 lowercase">core stack</span>
              <div className="flex flex-wrap gap-2 mt-auto">
                {["React", "Laravel", "TailwindCSS"].map(tech => (
-                 <span key={tech} className="neon-tag !py-1 !px-2 !text-[10px]">{tech}</span>
+                 <span key={tech} className="neon-tag !py-1 !px-2 !text-[10px] lowercase">{tech}</span>
                ))}
              </div>
           </div>
@@ -159,9 +159,9 @@ export default function Home() {
           {/* Card 4: Short Info / Beyond the Code */}
           <div className="md:col-span-3 border border-line-light dark:border-line-dark p-6 md:p-8 bg-chalk dark:bg-void flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
-             <span className="mono-label block mb-4">SHORT INFO / BEYOND THE CODE</span>
-             <p className="font-body text-sm md:text-base text-ink/70 dark:text-chalk/60 leading-relaxed max-w-4xl">
-               Full-Stack Developer. Bare-metal Linux builder. Electronic music producer. Pickleball player.
+             <span className="mono-label block mb-4 lowercase">short info / beyond the code</span>
+             <p className="font-body text-sm md:text-base text-ink/70 dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
+               full-stack developer. bare-metal linux builder. electronic music producer. pickleball player.
              </p>
           </div>
         </motion.div>

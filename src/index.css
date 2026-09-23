@@ -61,7 +61,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.6rem;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
+    text-transform: lowercase;
     color: #707070;
   }
   .dark .mono-label {
@@ -79,7 +79,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.6rem;
     letter-spacing: 0.15em;
-    text-transform: uppercase;
+    text-transform: lowercase;
     border-radius: 2px;
   }
   .dark .neon-tag {
