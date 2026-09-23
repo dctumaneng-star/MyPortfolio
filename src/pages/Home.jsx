@@ -159,7 +159,7 @@ export default function Home() {
           {/* Card 4: Short Info / Beyond the Code */}
           <div className="md:col-span-3 border border-line-light dark:border-line-dark p-6 md:p-8 bg-chalk dark:bg-void flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
-             <span className="mono-label block mb-4 lowercase">short info / beyond the code</span>
+             <span className="mono-label block mb-4 lowercase">short info</span>
              <p className="font-body text-sm md:text-base text-ink/70 dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
                self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
              </p>
