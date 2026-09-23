@@ -1,4 +1,5 @@
 import "./index.css";
+import { useState } from "react";
 import { useTheme } from "./hooks/useTheme";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -8,6 +9,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
+import LoadingScreen from "./components/LoadingScreen";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -26,10 +28,19 @@ function AnimatedRoutes() {
 
 export default function App() {
   const [dark, toggleDark] = useTheme();
+  const [loading, setLoading] = useState(true);
 
   return (
-    <Layout dark={dark} onToggle={toggleDark}>
-      <AnimatedRoutes />
-    </Layout>
+    <>
+      <AnimatePresence>
+        {loading && <LoadingScreen key="preloader" onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      {!loading && (
+        <Layout dark={dark} onToggle={toggleDark}>
+          <AnimatedRoutes />
+        </Layout>
+      )}
+    </>
   );
 }
