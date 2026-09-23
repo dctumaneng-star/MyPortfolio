@@ -12,7 +12,6 @@ export default {
         },
         void:  "#0A0A0A",
         chalk: "#F5F5F3",
-        // Structural grays — same names, context-switched via dark:
         line: {
           light: "#E0E0E0",
           dark:  "#1E1E1E",
@@ -23,15 +22,14 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Bebas Neue'", "Impact", "Arial Narrow", "sans-serif"],
-        body:    ["'Inter'",      "Helvetica Neue", "sans-serif"],
+        display: ["'Inter'", "sans-serif"],
+        body:    ["'Inter'", "sans-serif"],
         mono:    ["'JetBrains Mono'", "monospace"],
       },
       fontSize: {
-        // Fluid display sizes
-        "display-xl": ["clamp(5rem,14vw,13rem)",  { lineHeight: "0.9",  letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(3rem,8vw,8rem)",    { lineHeight: "0.92", letterSpacing: "-0.02em" }],
-        "display-md": ["clamp(2rem,5vw,5rem)",    { lineHeight: "0.94", letterSpacing: "-0.01em" }],
+        "display-xl": ["clamp(5rem,14vw,12rem)",  { lineHeight: "0.9",  letterSpacing: "-0.04em" }],
+        "display-lg": ["clamp(3rem,8vw,7rem)",    { lineHeight: "0.92", letterSpacing: "-0.03em" }],
+        "display-md": ["clamp(2rem,5vw,4rem)",    { lineHeight: "0.94", letterSpacing: "-0.02em" }],
         "label":      ["0.6rem",                  { lineHeight: "1",    letterSpacing: "0.2em"   }],
       },
       transitionTimingFunction: {

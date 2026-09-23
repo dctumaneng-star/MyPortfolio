@@ -5,18 +5,16 @@ import { useEffect } from "react";
 import PageTransition from "../components/PageTransition";
 
 const TICKER_ITEMS = [
-  "Java", "JavaScript", "PHP", "Python",
-  "Firebase", "Laravel", "Node.js", "React", "TailwindCSS", "Android Studio", "Flutter",
-  "PostgreSQL", "SQL", "Docker", "Kubernetes", "Samba", "Ubuntu Server", "Windows Server", "ADDS"
+  "java", "javascript", "php", "python",
+  "firebase", "laravel", "node.js", "react", "tailwindcss", "android studio", "flutter",
+  "postgresql", "sql", "docker", "kubernetes", "samba", "ubuntu server", "windows server", "adds"
 ];
 const TICKER_DOUBLE = [...TICKER_ITEMS, ...TICKER_ITEMS];
 
-// Global flag to track if the massive initial sequence has already played
 let isFirstLoad = true;
 
 export default function Home() {
   
-  // Set flag to false after the component mounts so subsequent visits are faster
   useEffect(() => {
     const timer = setTimeout(() => {
       isFirstLoad = false;
@@ -24,13 +22,12 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Orchestrated Timings
   const delayName1 = isFirstLoad ? 0.8 : 0.1;
   const delayName2 = isFirstLoad ? 0.92 : 0.2;
   const delayCascade = isFirstLoad ? 1.8 : 0.4;
 
   return (
-    <PageTransition className="justify-start pt-8 pb-16 overflow-x-hidden">
+    <PageTransition className="justify-start pt-8 pb-16 overflow-x-hidden lowercase">
       
       {/* ── High-speed marquee strip ── */}
       <motion.div 
@@ -42,7 +39,7 @@ export default function Home() {
         <div className="ticker-track">
           {TICKER_DOUBLE.map((item, i) => (
             <span key={i} className="inline-flex items-center">
-              <span className="font-display text-xl md:text-2xl text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
+              <span className="font-display text-xl md:text-2xl font-medium text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
                 {item}
               </span>
               <span className="text-neon font-mono text-sm px-2">✦</span>
@@ -62,10 +59,10 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: delayCascade, duration: 0.6 }}
             >
-              <span className="neon-tag">Software Engineer</span>
+              <span className="neon-tag lowercase">software engineer</span>
             </motion.div>
 
-            <h1 className="font-display leading-none text-ink dark:text-chalk mb-0" aria-label="Daryl Tumaneng">
+            <h1 className="font-display font-medium leading-none text-ink dark:text-chalk mb-0" aria-label="daryl tumaneng">
               <div className="overflow-hidden">
                 <motion.span
                   className="block text-display-xl"
@@ -73,7 +70,7 @@ export default function Home() {
                   animate={{ y: "0%" }}
                   transition={{ delay: delayName1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  DARYL
+                  daryl
                 </motion.span>
               </div>
               <div className="overflow-hidden -mt-2 md:-mt-6">
@@ -83,7 +80,7 @@ export default function Home() {
                   animate={{ y: "0%" }}
                   transition={{ delay: delayName2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  TUMANENG
+                  tumaneng
                 </motion.span>
               </div>
             </h1>
@@ -94,7 +91,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: delayCascade + 0.1, duration: 0.7 }}
             >
-              Self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
+              self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
             </motion.p>
           </div>
 
@@ -109,7 +106,7 @@ export default function Home() {
             <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-neon z-10" />
             <img 
               src="/portrait.jpg" 
-              alt="Daryl Tumaneng" 
+              alt="daryl tumaneng" 
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -127,12 +124,12 @@ export default function Home() {
           <div className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
              <div>
-                <span className="mono-label block mb-3">Current Status</span>
-                <p className="font-medium text-ink dark:text-chalk">Actively looking for full-time opportunities & internships.</p>
+                <span className="mono-label block mb-3 lowercase">current status</span>
+                <p className="font-medium text-ink dark:text-chalk">actively looking for full-time opportunities & internships.</p>
              </div>
              <div className="flex items-center gap-2 mt-4">
                 <span className="w-2 h-2 rounded-full bg-neon animate-pulse-dot" />
-                <span className="font-mono text-xs text-ink/50 dark:text-chalk/40 uppercase tracking-wider">Available</span>
+                <span className="font-mono text-xs text-ink/50 dark:text-chalk/40 uppercase tracking-wider lowercase">available</span>
              </div>
           </div>
 
@@ -140,21 +137,21 @@ export default function Home() {
           <Link to="/projects" className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden cursor-none" data-hover="true">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
              <div className="flex justify-between items-start">
-               <span className="mono-label block mb-3">Featured Work</span>
+               <span className="mono-label block mb-3 lowercase">featured work</span>
                <ArrowUpRight size={20} className="text-ink/30 dark:text-chalk/20 group-hover:text-neon transition-colors duration-300" />
              </div>
-             <h3 className="font-display text-3xl text-ink dark:text-chalk leading-none uppercase">
-                View Projects
+             <h3 className="font-display font-medium text-3xl text-ink dark:text-chalk leading-none lowercase">
+                view projects
              </h3>
           </Link>
 
           {/* Card 3: Tech Focus */}
           <div className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
-             <span className="mono-label block mb-3">Core Stack</span>
+             <span className="mono-label block mb-3 lowercase">core stack</span>
              <div className="flex flex-wrap gap-2 mt-auto">
-               {["React", "Laravel", "TailwindCSS"].map(tech => (
-                 <span key={tech} className="neon-tag !py-1 !px-2 !text-[10px]">{tech}</span>
+               {["react", "laravel", "tailwindcss"].map(tech => (
+                 <span key={tech} className="neon-tag !py-1 !px-2 !text-[10px] lowercase">{tech}</span>
                ))}
              </div>
           </div>

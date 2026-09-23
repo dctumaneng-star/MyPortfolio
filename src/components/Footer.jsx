@@ -42,25 +42,25 @@ export default function Baseline() {
           <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse-dot" />
           <span
             className="font-mono hidden sm:inline"
-            style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#707070" }}
+            style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "#707070" }}
           >
-            Available
+            available
           </span>
         </div>
 
         {/* Clock */}
         <span
-          className="font-mono text-ink/40 dark:text-chalk/30"
+          className="font-mono text-ink/40 dark:text-chalk/30 lowercase"
           style={{ fontSize: "0.6rem", letterSpacing: "0.12em" }}
         >
           <LiveClock />
         </span>
 
         {/* Socials */}
-        <nav className="flex items-center gap-5">
+        <nav className="flex items-center gap-5 lowercase">
           {[
-            { label: "LinkedIn", href: "https://linkedin.com/in/daryl-tumaneng-a594a1196" },
-            { label: "GitHub",   href: "https://github.com/daryltumaneng" },
+            { label: "linkedin", href: "https://linkedin.com/in/daryl-tumaneng-a594a1196" },
+            { label: "github",   href: "https://github.com/daryltumaneng" },
           ].map(({ label, href }) => (
             <a
               key={label}
@@ -68,7 +68,7 @@ export default function Baseline() {
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono hover:text-neon transition-colors duration-200"
-              style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase",
+              style={{ fontSize: "0.6rem", letterSpacing: "0.2em",
                        color: "inherit", opacity: 0.4 }}
             >
               {label}
