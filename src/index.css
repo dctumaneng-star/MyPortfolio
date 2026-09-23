@@ -162,18 +162,7 @@
     background: rgba(200,255,0,0.1);
   }
 
-  /* Marquee */
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  
-  .ticker-track {
-    display: flex;
-    width: max-content;
-    animation: ticker 30s linear infinite;
-  }
-  .ticker-track:hover { animation-play-state: paused; }
+
 
   /* Text stroke */
   .text-stroke {

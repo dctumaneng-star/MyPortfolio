@@ -3,13 +3,15 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import PageTransition from "../components/PageTransition";
+import DraggableMarquee from "../components/DraggableMarquee";
 
 const TICKER_ITEMS = [
   "Java", "JavaScript", "PHP", "Python",
   "Firebase", "Laravel", "Node.js", "React", "TailwindCSS", "Android Studio", "Flutter",
   "PostgreSQL", "SQL", "Docker", "Kubernetes", "Samba", "Ubuntu Server", "Windows Server", "ADDS"
 ];
-const TICKER_DOUBLE = [...TICKER_ITEMS, ...TICKER_ITEMS];
+// Duplicate 4 times so the -50% wrap contains enough items to span the screen seamlessly
+const TICKER_QUAD = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
 
 let isFirstLoad = true;
 
@@ -36,16 +38,7 @@ export default function Home() {
         animate={{ opacity: 1 }}
         transition={{ delay: delayCascade, duration: 0.8 }}
       >
-        <div className="ticker-track">
-          {TICKER_DOUBLE.map((item, i) => (
-            <span key={i} className="inline-flex items-center">
-              <span className="font-display font-medium text-xl md:text-2xl text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
-                {item}
-              </span>
-              <span className="text-neon font-mono text-sm px-2">✦</span>
-            </span>
-          ))}
-        </div>
+        <DraggableMarquee items={TICKER_QUAD} baseVelocity={-0.8} />
       </motion.div>
 
       <div className="max-w-6xl mx-auto px-6 w-full flex-1 flex flex-col">
