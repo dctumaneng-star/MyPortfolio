@@ -68,37 +68,39 @@ function ProjectCard({ project, index }) {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       />
       
-      <div className="flex items-start justify-between mb-auto">
-        <div className="pr-4">
-          <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-300">
-            {project.index}
-          </span>
-          <div className="flex flex-wrap items-center gap-3 mb-1">
-            <h3 className="font-display font-medium text-display-md text-ink dark:text-chalk leading-none lowercase">
-              {project.name}
-            </h3>
-            {project.status && (
-              <span className="neon-tag !py-0.5 !px-1.5 !text-[10px] self-start mt-1 lowercase">
-                {project.status}
-              </span>
-            )}
+      <div className="flex flex-col flex-1">
+        <div className="flex items-start justify-between">
+          <div className="pr-4">
+            <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-300">
+              {project.index}
+            </span>
+            <div className="flex flex-wrap items-center gap-3 mb-1">
+              <h3 className="font-display font-medium text-display-md text-ink dark:text-chalk leading-none lowercase break-words">
+                {project.name}
+              </h3>
+              {project.status && (
+                <span className="neon-tag !py-0.5 !px-1.5 !text-[10px] self-start mt-1 lowercase">
+                  {project.status}
+                </span>
+              )}
+            </div>
+            <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 lowercase">{project.subtitle}</p>
           </div>
-          <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 lowercase">{project.subtitle}</p>
+          <motion.div
+            animate={{ rotate: hovered ? 45 : 0, color: hovered ? "#C8FF00" : "inherit" }}
+            transition={{ duration: 0.3 }}
+            className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0"
+          >
+            <ArrowUpRight size={18} />
+          </motion.div>
         </div>
-        <motion.div
-          animate={{ rotate: hovered ? 45 : 0, color: hovered ? "#C8FF00" : "inherit" }}
-          transition={{ duration: 0.3 }}
-          className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0"
-        >
-          <ArrowUpRight size={18} />
-        </motion.div>
+
+        <p className="text-sm text-ink/50 dark:text-chalk/35 leading-relaxed mt-6 mb-8">
+          {project.description}
+        </p>
       </div>
 
-      <p className="text-sm text-ink/50 dark:text-chalk/35 leading-relaxed mt-6 mb-5">
-        {project.description}
-      </p>
-
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 mt-auto">
         {project.stack.map((s) => (
           <span key={s} className="neon-tag">{s}</span>
         ))}
