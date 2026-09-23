@@ -22,8 +22,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Space Grotesk'", "sans-serif"],
-        body:    ["'Space Grotesk'", "sans-serif"],
+        display: ["'Inter'", "sans-serif"],
+        body:    ["'Inter'", "sans-serif"],
         mono:    ["'JetBrains Mono'", "monospace"],
       },
       fontSize: {
