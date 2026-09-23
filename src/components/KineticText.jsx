@@ -35,7 +35,7 @@ export function KineticText({ text, className = "", delay = 0, as: Component = "
         className="flex flex-wrap"
       >
         {words.map((word, i) => (
-          <div key={i} className="overflow-hidden inline-block mr-[0.25em] pb-4 -mb-4 pt-4 -mt-4">
+          <div key={i} className="overflow-hidden inline-block mr-[0.25em] pb-[0.3em] -mb-[0.3em] pt-[0.2em] -mt-[0.2em]">
             <motion.span variants={item} className="inline-block">
               {word}
             </motion.span>
