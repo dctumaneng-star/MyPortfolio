@@ -158,7 +158,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
             className="flex flex-col items-center justify-center"
           >
             <h1 className="font-display font-medium text-4xl md:text-5xl text-chalk tracking-tight lowercase">
-              daryl tumaneng.
+              <motion.span layoutId="brand-name" className="inline-block">daryl tumaneng.</motion.span>
             </h1>
           </motion.div>
         )}

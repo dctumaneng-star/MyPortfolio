@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
 export const TE_EASE = [0.22, 1, 0.36, 1];
+export const TE_LAYOUT = { type: "spring", stiffness: 400, damping: 30, mass: 0.8 };
 
 export function KineticText({ text, className = "", delay = 0, as: Component = "h1" }) {
   // Split into words, but preserve spaces

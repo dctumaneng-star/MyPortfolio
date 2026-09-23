@@ -80,6 +80,8 @@ const gridItem = {
 function Entry({ id, left, right, description, tags, delay }) {
   return (
     <motion.div
+      layout
+      transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }}
       variants={gridItem}
       className="grid md:grid-cols-[1.2fr_2fr] gap-6 md:gap-16 py-8 border-t border-line-light dark:border-line-dark group"
     >
@@ -123,7 +125,7 @@ export default function About() {
         {/* Header */}
         <div className="mb-16">
           <KineticText 
-            text="beyond the code" 
+            text="beyond the code." 
             className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none mb-0" 
             delay={delayCascade}
           />
@@ -131,6 +133,8 @@ export default function About() {
 
         {/* Hobbies / Interests Bento Grid */}
         <motion.div 
+          layout
+          transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }}
           style={{ y: yParallaxHobby }}
           variants={dynamicGridContainer}
           initial="hidden"

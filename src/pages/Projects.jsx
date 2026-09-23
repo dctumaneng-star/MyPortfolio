@@ -66,6 +66,8 @@ function ProjectCard({ project }) {
   return (
     <Component
       {...linkProps}
+      layout
+      transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }}
       variants={cardItem}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
@@ -148,7 +150,7 @@ export default function Projects() {
         {/* Heading */}
         <div className="mb-16">
           <KineticText 
-            text="selected work" 
+            text="selected work." 
             className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none lowercase mb-0" 
             delay={delayCascade}
           />
@@ -156,6 +158,8 @@ export default function Projects() {
 
         {/* Asymmetric grid */}
         <motion.div 
+          layout
+          transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }}
           style={{ y: yParallaxGrid }}
           variants={dynamicGridContainer}
           initial="hidden"

@@ -93,9 +93,9 @@ export default function Navbar({ dark, onToggle }) {
           <Link
             to="/"
             className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
-                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
+                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block"
           >
-            daryl tumaneng.
+            <motion.span layoutId="brand-name" className="inline-block">daryl tumaneng.</motion.span>
           </Link>
 
           {/* Desktop nav */}
