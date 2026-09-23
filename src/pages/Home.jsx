@@ -55,7 +55,7 @@ export default function Home() {
         animate={{ opacity: 1 }}
         transition={{ delay: delayCascade, duration: 0.8 }}
       >
-        <DraggableMarquee items={TICKER_QUAD} baseVelocity={-0.04} />
+        <DraggableMarquee items={TICKER_QUAD} baseVelocity={-1} />
       </motion.div>
 
       <div className="max-w-6xl mx-auto px-6 w-full flex-1 flex flex-col">
