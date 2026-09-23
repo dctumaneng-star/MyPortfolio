@@ -12,6 +12,7 @@ const PROJECTS = [
     stack: ["Web App", "Dashboard", "Automation"],
     size: "large",
     status: "In Development",
+    href: "https://opfintracker.vercel.app/?utm_source=gemini",
   },
   {
     index: "02",
