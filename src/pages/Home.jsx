@@ -11,9 +11,9 @@ const TICKER_ITEMS = [
   "Firebase", "Laravel", "Node.js", "React", "TailwindCSS", "Android Studio", "Flutter",
   "PostgreSQL", "SQL", "Docker", "Kubernetes", "Samba", "Ubuntu Server", "Windows Server", "ADDS"
 ];
-const TICKER_QUAD = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
+import { isFirstLoad } from "../utils/firstLoad";
 
-let isFirstLoad = true;
+const TICKER_QUAD = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
 
 const bentoContainer = {
   hidden: { opacity: 0 },
@@ -35,13 +35,6 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const yParallaxBento = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const yParallaxImage = useTransform(scrollYProgress, [0, 1], [0, 40]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      isFirstLoad = false;
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const delayCascade = isFirstLoad ? 1.8 : 0.4;
 

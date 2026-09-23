@@ -122,9 +122,24 @@ function ProjectCard({ project }) {
   );
 }
 
+import { isFirstLoad } from "../utils/firstLoad";
+
 export default function Projects() {
   const { scrollYProgress } = useScroll();
   const yParallaxGrid = useTransform(scrollYProgress, [0, 1], [0, -60]);
+
+  const delayCascade = isFirstLoad ? 1.8 : 0.1;
+
+  const dynamicGridContainer = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: delayCascade + 0.1
+      }
+    }
+  };
 
   return (
     <PageTransition className="pt-8 pb-16">
@@ -135,13 +150,14 @@ export default function Projects() {
           <KineticText 
             text="selected work" 
             className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none lowercase mb-0" 
+            delay={delayCascade}
           />
         </div>
 
         {/* Asymmetric grid */}
         <motion.div 
           style={{ y: yParallaxGrid }}
-          variants={gridContainer}
+          variants={dynamicGridContainer}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}

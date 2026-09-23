@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTheme } from "./hooks/useTheme";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { clearFirstLoad } from "./utils/firstLoad";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -33,7 +34,15 @@ export default function App() {
   return (
     <>
       <AnimatePresence>
-        {loading && <LoadingScreen key="preloader" onComplete={() => setLoading(false)} />}
+        {loading && (
+          <LoadingScreen 
+            key="preloader" 
+            onComplete={() => {
+              setLoading(false);
+              clearFirstLoad();
+            }} 
+          />
+        )}
       </AnimatePresence>
 
       {!loading && (

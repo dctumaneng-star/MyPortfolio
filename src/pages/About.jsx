@@ -101,10 +101,20 @@ function Entry({ id, left, right, description, tags, delay }) {
   );
 }
 
+import { isFirstLoad } from "../utils/firstLoad";
+
 export default function About() {
   const { scrollYProgress } = useScroll();
   const yParallaxHobby = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const yParallaxLists = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
+  const delayCascade = isFirstLoad ? 1.8 : 0.1;
+
+  // We inline the container variant to inject dynamic delay
+  const dynamicGridContainer = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: delayCascade + 0.2 } }
+  };
 
   return (
     <PageTransition className="pt-8 pb-16 lowercase">
@@ -115,13 +125,14 @@ export default function About() {
           <KineticText 
             text="beyond the code" 
             className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none mb-0" 
+            delay={delayCascade}
           />
         </div>
 
         {/* Hobbies / Interests Bento Grid */}
         <motion.div 
           style={{ y: yParallaxHobby }}
-          variants={gridContainer}
+          variants={dynamicGridContainer}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}
@@ -164,7 +175,7 @@ export default function About() {
           <div className="border-t border-line-light dark:border-line-dark lg:border-none lg:pt-0 pt-12">
             <span className="mono-label block mb-12">experience</span>
             <motion.div 
-              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
+              variants={dynamicGridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
             >
               {EXPERIENCE.map((item, i) => (
                 <Entry 
@@ -184,7 +195,7 @@ export default function About() {
           <div>
             <span className="mono-label block mb-12">education & certs</span>
             <motion.div 
-              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
+              variants={dynamicGridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
             >
               {EDUCATION.map((item, i) => (
                 <Entry 

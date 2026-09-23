@@ -2,10 +2,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import PageTransition from "../components/PageTransition";
 import { KineticText, TE_EASE } from "../components/KineticText";
+import { isFirstLoad } from "../utils/firstLoad";
 
 export default function Contact() {
   const { scrollYProgress } = useScroll();
   const yParallax = useTransform(scrollYProgress, [0, 1], [0, -40]);
+
+  const delayCascade = isFirstLoad ? 1.8 : 0.1;
 
   return (
     <PageTransition className="pt-8 pb-16 justify-center lowercase">
@@ -15,22 +18,22 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6, ease: TE_EASE }}
+            transition={{ delay: delayCascade, duration: 0.6, ease: TE_EASE }}
           >
             <span className="neon-tag lowercase">open for opportunities</span>
           </motion.div>
         </div>
 
         <div className="mb-12">
-          <KineticText text="let's build" className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk mb-2 md:mb-0" delay={0.2} />
-          <KineticText text="something" className="font-display font-medium text-display-xl leading-none text-stroke text-ink dark:text-chalk mb-2 md:mb-0" delay={0.3} />
-          <KineticText text="great." className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk" delay={0.4} />
+          <KineticText text="let's build" className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk mb-2 md:mb-0" delay={delayCascade + 0.1} />
+          <KineticText text="something" className="font-display font-medium text-display-xl leading-none text-stroke text-ink dark:text-chalk mb-2 md:mb-0" delay={delayCascade + 0.2} />
+          <KineticText text="great." className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk" delay={delayCascade + 0.3} />
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.7, ease: TE_EASE }}
+          transition={{ delay: delayCascade + 0.5, duration: 0.7, ease: TE_EASE }}
         >
           <motion.a
             href="mailto:dctumaneng13@gmail.com"
@@ -51,7 +54,7 @@ export default function Contact() {
           className="mt-20 pt-8 border-t border-line-light dark:border-line-dark grid grid-cols-1 md:grid-cols-3 gap-8"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.7, ease: TE_EASE }}
+          transition={{ delay: delayCascade + 0.7, duration: 0.7, ease: TE_EASE }}
         >
           <div>
             <p className="mono-label mb-2">email</p>
