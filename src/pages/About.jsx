@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import PageTransition from "../components/PageTransition";
+import { KineticText, TE_EASE } from "../components/KineticText";
 
 const HOBBIES = [
   {
@@ -67,17 +68,23 @@ const EDUCATION = [
   },
 ];
 
+const gridContainer = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
+};
+const gridItem = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: TE_EASE } }
+};
+
 function Entry({ id, left, right, description, tags, delay }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ delay, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      variants={gridItem}
       className="grid md:grid-cols-[1.2fr_2fr] gap-6 md:gap-16 py-8 border-t border-line-light dark:border-line-dark group"
     >
       <div>
-        <span className="mono-label block mb-2 group-hover:text-neon transition-colors duration-300">{id}</span>
+        <span className="mono-label block mb-2 group-hover:text-neon transition-colors duration-150">{id}</span>
         <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 mb-1">{left.period}</p>
         <p className="font-medium text-sm text-ink dark:text-chalk leading-snug">{left.name}</p>
       </div>
@@ -87,7 +94,7 @@ function Entry({ id, left, right, description, tags, delay }) {
           <p className="text-sm text-ink/55 dark:text-chalk/40 leading-relaxed mb-4">{description}</p>
         )}
         <div className="flex flex-wrap gap-2">
-          {tags.map((t) => <span key={t} className="neon-tag lowercase">{t}</span>)}
+          {tags.map((t) => <span key={t} className="neon-tag lowercase group-hover:bg-void group-hover:text-neon transition-colors duration-150">{t}</span>)}
         </div>
       </div>
     </motion.div>
@@ -95,84 +102,104 @@ function Entry({ id, left, right, description, tags, delay }) {
 }
 
 export default function About() {
+  const { scrollYProgress } = useScroll();
+  const yParallaxHobby = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const yParallaxLists = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
   return (
     <PageTransition className="pt-8 pb-16 lowercase">
       <div className="max-w-6xl mx-auto px-6 w-full">
         
         {/* Header */}
-        <div className="mb-16 overflow-hidden">
-          <motion.h1 
-            className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none"
-            initial={{ y: "105%" }}
-            animate={{ y: "0%" }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          >
-            background
-          </motion.h1>
+        <div className="mb-16">
+          <KineticText 
+            text="beyond the code" 
+            className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none mb-0" 
+          />
         </div>
 
-        {/* Interests & Hobbies (Bento Grid) - Seen First */}
-        <div className="mb-4">
-          <span className="mono-label">— beyond the code</span>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-24">
-          {HOBBIES.map((hobby, i) => (
+        {/* Hobbies / Interests Bento Grid */}
+        <motion.div 
+          style={{ y: yParallaxHobby }}
+          variants={gridContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-15%" }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark mb-24"
+        >
+          {HOBBIES.map((hobby) => (
             <motion.div
               key={hobby.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: 0.1 + i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className={`${hobby.colSpan} border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-300 relative overflow-hidden min-h-[180px]`}
+              variants={gridItem}
+              className={`bg-chalk dark:bg-void p-6 md:p-8 flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden min-h-[220px] ${hobby.colSpan}`}
             >
-              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
-              <div>
-                <span className="mono-label block mb-3">{hobby.id}</span>
-                <h3 className="font-display font-medium text-2xl text-ink dark:text-chalk leading-none mb-3">{hobby.title}</h3>
+              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
+              
+              <div className="flex flex-col flex-1">
+                <span className="mono-label block mb-4 group-hover:text-neon transition-colors duration-150">{hobby.id}</span>
+                <h3 className="font-display font-medium text-3xl md:text-4xl text-ink dark:text-chalk leading-none mb-4 break-words">
+                  {hobby.title}
+                </h3>
                 <p className="font-body text-sm text-ink/70 dark:text-chalk/60 leading-relaxed mb-6">
                   {hobby.description}
                 </p>
               </div>
+
               <div className="flex flex-wrap gap-2 mt-auto">
-                {hobby.tags.map((tag) => (
-                  <span key={tag} className="neon-tag !py-1 !px-2 !text-[10px]">{tag}</span>
+                {hobby.tags.map(tag => (
+                  <span key={tag} className="neon-tag lowercase group-hover:bg-void group-hover:text-neon transition-colors duration-150">{tag}</span>
                 ))}
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Experience */}
-        <div className="mb-4">
-          <span className="mono-label">— work experience</span>
-        </div>
-        {EXPERIENCE.map((exp, i) => (
-          <Entry
-            key={exp.id}
-            id={exp.id}
-            left={{ period: exp.period, name: exp.company.toLowerCase() }}
-            right={exp.role.toLowerCase()}
-            description={exp.description.toLowerCase()}
-            tags={exp.tags.map(t => t.toLowerCase())}
-            delay={0.1 + i * 0.1}
-          />
-        ))}
+        {/* Lists Container */}
+        <motion.div 
+          style={{ y: yParallaxLists }}
+          className="grid lg:grid-cols-[1fr_2.5fr] gap-12 lg:gap-24 items-start border-t border-line-light dark:border-line-dark pt-16"
+        >
+          
+          {/* Experience */}
+          <div className="border-t border-line-light dark:border-line-dark lg:border-none lg:pt-0 pt-12">
+            <span className="mono-label block mb-12">experience</span>
+            <motion.div 
+              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-15%" }}
+            >
+              {EXPERIENCE.map((item, i) => (
+                <Entry 
+                  key={item.id}
+                  id={item.id}
+                  left={{ name: item.company, period: item.period }}
+                  right={item.role}
+                  description={item.description}
+                  tags={item.tags}
+                  delay={i * 0.1}
+                />
+              ))}
+            </motion.div>
+          </div>
 
-        {/* Education */}
-        <div className="mt-16 mb-4">
-          <span className="mono-label">— education & certifications</span>
-        </div>
-        {EDUCATION.map((edu, i) => (
-          <Entry
-            key={edu.id}
-            id={edu.id}
-            left={{ period: edu.period, name: edu.institution.toLowerCase() }}
-            right={edu.credential.toLowerCase()}
-            description={null}
-            tags={edu.tags.map(t => t.toLowerCase())}
-            delay={0.1 + i * 0.1}
-          />
-        ))}
+          {/* Education */}
+          <div>
+            <span className="mono-label block mb-12">education & certs</span>
+            <motion.div 
+              variants={gridContainer} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-15%" }}
+            >
+              {EDUCATION.map((item, i) => (
+                <Entry 
+                  key={item.id}
+                  id={item.id}
+                  left={{ name: item.institution, period: item.period }}
+                  right={item.credential}
+                  tags={item.tags}
+                  delay={i * 0.1}
+                />
+              ))}
+            </motion.div>
+          </div>
+
+        </motion.div>
 
       </div>
     </PageTransition>

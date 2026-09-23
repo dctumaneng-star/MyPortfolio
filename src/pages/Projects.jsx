@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import PageTransition from "../components/PageTransition";
+import { KineticText, TE_EASE } from "../components/KineticText";
 
 const PROJECTS = [
   {
@@ -41,37 +42,48 @@ const PROJECTS = [
   },
 ];
 
-function ProjectCard({ project, index }) {
-  const [hovered, setHovered] = useState(false);
+const gridContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
 
+const cardItem = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: TE_EASE } }
+};
+
+function ProjectCard({ project }) {
+  const [hovered, setHovered] = useState(false);
   const Component = project.href ? motion.a : motion.article;
   const linkProps = project.href ? { href: project.href, target: "_blank", rel: "noopener noreferrer", "data-hover": "true" } : {};
 
   return (
     <Component
       {...linkProps}
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ delay: 0.1 + index * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      variants={cardItem}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       className={`relative border border-line-light dark:border-line-dark p-8 flex flex-col justify-between
-        min-h-[220px] md:min-h-[260px] transition-colors duration-300 group
-        hover:border-neon dark:hover:border-neon bg-chalk dark:bg-void block
+        min-h-[220px] md:min-h-[260px] transition-colors duration-150 group
+        hover:border-neon dark:hover:border-neon hover:bg-neon/5 bg-chalk dark:bg-void block
         ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}
         ${project.href ? "cursor-none" : ""}`}
     >
-      <motion.div
-        className="absolute top-0 left-0 h-px bg-neon"
-        animate={{ width: hovered ? "100%" : "0%" }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      <div 
+        className="absolute top-0 left-0 h-px bg-neon transition-all duration-150 ease-out"
+        style={{ width: hovered ? "100%" : "0%" }}
       />
       
       <div className="flex flex-col flex-1">
         <div className="flex items-start justify-between min-w-0">
           <div className="pr-4 min-w-0 flex-1">
-            <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-300">
+            <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-150">
               {project.index}
             </span>
             <div className="flex flex-wrap items-center gap-3 mb-1 min-w-0">
@@ -79,30 +91,31 @@ function ProjectCard({ project, index }) {
                 {project.name}
               </h3>
               {project.status && (
-                <span className="neon-tag !py-0.5 !px-1.5 !text-[10px] self-start mt-1 lowercase">
+                <span className="neon-tag !py-0.5 !px-1.5 !text-[10px] self-start mt-1 lowercase group-hover:bg-void group-hover:text-neon transition-colors duration-150">
                   {project.status}
                 </span>
               )}
             </div>
             <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 lowercase break-words">{project.subtitle}</p>
           </div>
-          <motion.div
-            animate={{ rotate: hovered ? 45 : 0, color: hovered ? "#C8FF00" : "inherit" }}
-            transition={{ duration: 0.3 }}
-            className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0 ml-2"
-          >
-            <ArrowUpRight size={18} />
-          </motion.div>
+          <div className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0 ml-2 overflow-hidden">
+            <motion.div
+              animate={{ x: hovered ? 4 : 0, y: hovered ? -4 : 0, color: hovered ? "#C8FF00" : "inherit" }}
+              transition={{ duration: 0.15, ease: "linear" }}
+            >
+              <ArrowUpRight size={24} />
+            </motion.div>
+          </div>
         </div>
 
-        <p className="text-sm text-ink/50 dark:text-chalk/35 leading-relaxed mt-6 mb-8">
+        <p className="text-sm text-ink/50 dark:text-chalk/35 leading-relaxed mt-6 mb-8 group-hover:text-ink/80 dark:group-hover:text-chalk/80 transition-colors duration-150">
           {project.description}
         </p>
       </div>
 
       <div className="flex flex-wrap gap-2 mt-auto">
         {project.stack.map((s) => (
-          <span key={s} className="neon-tag">{s}</span>
+          <span key={s} className="neon-tag group-hover:bg-void group-hover:text-neon transition-colors duration-150">{s}</span>
         ))}
       </div>
     </Component>
@@ -110,30 +123,34 @@ function ProjectCard({ project, index }) {
 }
 
 export default function Projects() {
+  const { scrollYProgress } = useScroll();
+  const yParallaxGrid = useTransform(scrollYProgress, [0, 1], [0, -60]);
+
   return (
     <PageTransition className="pt-8 pb-16">
       <div className="max-w-6xl mx-auto px-6 w-full">
         
         {/* Heading */}
         <div className="mb-16">
-          <div className="overflow-hidden">
-            <motion.h1 
-              className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none lowercase"
-              initial={{ y: "105%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            >
-              selected work
-            </motion.h1>
-          </div>
+          <KineticText 
+            text="selected work" 
+            className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none lowercase mb-0" 
+          />
         </div>
 
         {/* Asymmetric grid */}
-        <div className="grid md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark">
-          {PROJECTS.map((p, i) => (
-            <ProjectCard key={p.index} project={p} index={i} />
+        <motion.div 
+          style={{ y: yParallaxGrid }}
+          variants={gridContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-15%" }}
+          className="grid md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark"
+        >
+          {PROJECTS.map((p) => (
+            <ProjectCard key={p.index} project={p} />
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </PageTransition>
