@@ -39,7 +39,7 @@ export default function Home() {
         <div className="ticker-track">
           {TICKER_DOUBLE.map((item, i) => (
             <span key={i} className="inline-flex items-center">
-              <span className="font-display font-bold text-xl md:text-2xl text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
+              <span className="font-display font-medium text-xl md:text-2xl text-ink dark:text-chalk px-6 whitespace-nowrap tracking-tight">
                 {item}
               </span>
               <span className="text-neon font-mono text-sm px-2">✦</span>
@@ -62,7 +62,7 @@ export default function Home() {
               <span className="neon-tag lowercase">software engineer</span>
             </motion.div>
 
-            <h1 className="font-display font-bold leading-none text-ink dark:text-chalk mb-0" aria-label="daryl tumaneng">
+            <h1 className="font-display font-medium leading-none text-ink dark:text-chalk mb-0" aria-label="daryl tumaneng">
               <div className="overflow-hidden">
                 <motion.span
                   className="block text-display-xl"
@@ -140,7 +140,7 @@ export default function Home() {
                <span className="mono-label block mb-3 lowercase">featured work</span>
                <ArrowUpRight size={20} className="text-ink/30 dark:text-chalk/20 group-hover:text-neon transition-colors duration-300" />
              </div>
-             <h3 className="font-display font-bold text-3xl text-ink dark:text-chalk leading-none lowercase">
+             <h3 className="font-display font-medium text-3xl text-ink dark:text-chalk leading-none lowercase">
                 view projects
              </h3>
           </Link>

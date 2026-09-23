@@ -21,7 +21,7 @@ export default function Contact() {
           {["let's build", "something", "great."].map((line, i) => (
             <div key={i} className="overflow-hidden">
               <motion.h1
-                className={`font-display font-bold text-display-xl leading-none ${i === 1 ? 'text-stroke text-ink dark:text-chalk' : 'text-ink dark:text-chalk'}`}
+                className={`font-display font-medium text-display-xl leading-none ${i === 1 ? 'text-stroke text-ink dark:text-chalk' : 'text-ink dark:text-chalk'}`}
                 initial={{ y: "105%" }}
                 animate={{ y: "0%" }}
                 transition={{ delay: 0.2 + i * 0.1, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
@@ -43,7 +43,7 @@ export default function Contact() {
             className="group inline-flex items-center gap-6 border-2 border-ink dark:border-chalk px-8 md:px-12 py-6 md:py-8 bg-chalk dark:bg-void hover:bg-neon dark:hover:bg-neon hover:border-neon dark:hover:border-neon transition-all duration-300 relative overflow-hidden cursor-none shadow-[6px_6px_0px_0px_rgba(10,10,10,1)] dark:shadow-[6px_6px_0px_0px_rgba(245,245,243,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(200,255,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(200,255,0,1)] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none"
             data-hover="true"
           >
-            <span className="font-display font-bold text-3xl md:text-5xl text-ink dark:text-chalk group-hover:text-void transition-colors duration-300 relative z-10">
+            <span className="font-display font-medium text-3xl md:text-5xl text-ink dark:text-chalk group-hover:text-void transition-colors duration-300 relative z-10">
               initiate contact
             </span>
             <ArrowUpRight size={40} className="text-ink dark:text-chalk group-hover:text-void transition-colors duration-300 relative z-10" />

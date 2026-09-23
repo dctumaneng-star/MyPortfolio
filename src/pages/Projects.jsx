@@ -74,7 +74,7 @@ function ProjectCard({ project, index }) {
             {project.index}
           </span>
           <div className="flex flex-wrap items-center gap-3 mb-1">
-            <h3 className="font-display font-bold text-display-md text-ink dark:text-chalk leading-none lowercase">
+            <h3 className="font-display font-medium text-display-md text-ink dark:text-chalk leading-none lowercase">
               {project.name}
             </h3>
             {project.status && (
@@ -116,7 +116,7 @@ export default function Projects() {
         <div className="mb-16">
           <div className="overflow-hidden">
             <motion.h1 
-              className="font-display font-bold text-display-lg text-ink dark:text-chalk leading-none lowercase"
+              className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none lowercase"
               initial={{ y: "105%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}

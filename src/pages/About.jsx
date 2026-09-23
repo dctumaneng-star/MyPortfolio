@@ -102,7 +102,7 @@ export default function About() {
         {/* Header */}
         <div className="mb-16 overflow-hidden">
           <motion.h1 
-            className="font-display font-bold text-display-lg text-ink dark:text-chalk leading-none"
+            className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none"
             initial={{ y: "105%" }}
             animate={{ y: "0%" }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
@@ -128,7 +128,7 @@ export default function About() {
               <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-500 ease-out" />
               <div>
                 <span className="mono-label block mb-3">{hobby.id}</span>
-                <h3 className="font-display font-bold text-2xl text-ink dark:text-chalk leading-none mb-3">{hobby.title}</h3>
+                <h3 className="font-display font-medium text-2xl text-ink dark:text-chalk leading-none mb-3">{hobby.title}</h3>
                 <p className="font-body text-sm text-ink/70 dark:text-chalk/60 leading-relaxed mb-6">
                   {hobby.description}
                 </p>

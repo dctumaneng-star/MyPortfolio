@@ -42,7 +42,7 @@ function MobileMenu({ open, onClose }) {
           <Link
             to={href}
             onClick={onClose}
-            className="block font-display font-bold text-5xl text-ink dark:text-chalk py-4 hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
+            className="block font-display font-medium text-5xl text-ink dark:text-chalk py-4 hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
           >
             {label}
           </Link>
@@ -81,7 +81,7 @@ export default function Navbar({ dark, onToggle }) {
           {/* Name mark */}
           <Link
             to="/"
-            className="font-display font-bold text-xl tracking-tight text-ink dark:text-chalk
+            className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
                        hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
           >
             daryl tumaneng
