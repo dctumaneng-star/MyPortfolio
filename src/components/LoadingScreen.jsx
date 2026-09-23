@@ -1,66 +1,65 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export default function LoadingScreen({ onComplete }) {
-  const [progress, setProgress] = useState(0);
+const BOOT_SEQUENCE = [
+  "Initializing boot sequence...",
+  "Loading core Ubuntu modules...",
+  "Mounting root filesystem...",
+  "Configuring network interfaces via Netplan...",
+  "Starting Docker daemon...",
+  "Starting Caddy reverse proxy daemon...",
+  "Initializing Laravel backend application...",
+  "Establishing secure connections...",
+  "Boot sequence complete. Welcome."
+];
 
+export default function LoadingScreen({ onComplete }) {
+  const [displayedLines, setDisplayedLines] = useState([]);
+  
   useEffect(() => {
-    let current = 0;
-    const interval = setInterval(() => {
-      // Fast, slightly randomized increments for an engine-revving feel
-      current += Math.floor(Math.random() * 5) + 1;
-      
-      if (current >= 100) {
-        current = 100;
-        clearInterval(interval);
-        // Wait a beat at 100 before triggering the exit animation
-        setTimeout(onComplete, 500); 
-      }
-      setProgress(current);
-    }, 25);
+    let currentIndex = 0;
+    let timeoutId;
     
-    return () => clearInterval(interval);
+    const printNextLine = () => {
+      if (currentIndex < BOOT_SEQUENCE.length) {
+        setDisplayedLines((prev) => [...prev, BOOT_SEQUENCE[currentIndex]]);
+        currentIndex++;
+        
+        // Randomize the delay slightly for a more realistic terminal feel
+        // but keep it around the requested 250ms mark.
+        const delay = Math.random() * 150 + 150; 
+        timeoutId = setTimeout(printNextLine, delay);
+      } else {
+        // Exactly 1 second after the final line prints, trigger onComplete
+        timeoutId = setTimeout(() => {
+          onComplete();
+        }, 1000);
+      }
+    };
+    
+    // Start the boot sequence
+    timeoutId = setTimeout(printNextLine, 200);
+    
+    return () => clearTimeout(timeoutId);
   }, [onComplete]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] bg-void flex flex-col justify-center items-center overflow-hidden"
-      exit={{ y: "-100%" }}
-      transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }} // Cinematic slide up
+      className="fixed inset-0 z-[100] bg-black w-full h-screen p-6 md:p-12 flex flex-col justify-end overflow-hidden"
+      exit={{ opacity: 0, y: "-100%" }}
+      transition={{ duration: 0.8, ease: [0.77, 0, 0.175, 1] }}
     >
-      {/* Massive Kinetic Counter */}
-      <div className="overflow-hidden">
-        <motion.div
-          exit={{ y: "-105%", opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-medium text-[clamp(6rem,15vw,12rem)] text-chalk leading-none tracking-tighter lowercase flex flex-col items-center"
-        >
-          {progress.toString().padStart(2, "0")}
-        </motion.div>
-      </div>
-
-      {/* Mechanical Central Loading Bar */}
-      <motion.div 
-        className="w-48 md:w-64 h-1.5 border border-line-dark mt-8 p-[1px]"
-        exit={{ opacity: 0, y: 20 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <motion.div
-          className="h-full bg-neon"
-          style={{ width: `${progress}%` }}
-        />
-      </motion.div>
-
-      {/* Razor-thin Neon Progress Baseline */}
-      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-void">
-        <motion.div
-          className="h-full bg-neon"
-          style={{ width: `${progress}%` }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        />
+      <div className="font-mono text-neon text-sm md:text-base leading-relaxed break-words max-w-4xl">
+        {displayedLines.map((line, index) => (
+          <div key={index} className="mb-1">
+            <span className="text-neon/50 mr-2">[OK]</span> {line}
+          </div>
+        ))}
+        {/* Blinking cursor block */}
+        <div className="mt-1 flex items-center h-5">
+          <span className="w-2.5 h-4 bg-neon animate-pulse block"></span>
+        </div>
       </div>
     </motion.div>
   );
 }
-
