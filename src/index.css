@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Base: use plain CSS so custom color tokens are never @apply'd at base layer ── */
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
@@ -16,56 +17,108 @@
   }
 
   body {
-    @apply bg-white text-ink-900 font-sans;
-    @apply dark:bg-ink-900 dark:text-ink-50;
-    @apply transition-colors duration-300;
+    background-color: #ffffff;
+    color: #0a0a0a;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-size: 14px;
     line-height: 1.6;
-    /* Bottom padding for the persistent baseline footer */
+    /* Reserve space for the persistent baseline footer */
     padding-bottom: 48px;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  ::selection {
-    @apply bg-ink-900 text-white;
-    @apply dark:bg-ink-50 dark:text-ink-900;
+  .dark body {
+    background-color: #0a0a0a;
+    color: #f5f5f5;
   }
 
+  /* Scrollbar */
   ::-webkit-scrollbar { width: 1px; }
-  ::-webkit-scrollbar-track { @apply bg-ink-100 dark:bg-ink-800; }
-  ::-webkit-scrollbar-thumb { @apply bg-ink-400 dark:bg-ink-500; }
+  ::-webkit-scrollbar-track { background: #e8e8e8; }
+  ::-webkit-scrollbar-thumb { background: #a8a8a8; }
+  .dark ::-webkit-scrollbar-track { background: #1a1a1a; }
+  .dark ::-webkit-scrollbar-thumb { background: #404040; }
+
+  /* Selection */
+  ::selection {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    text-shadow: none;
+  }
+  .dark ::selection {
+    background-color: #f5f5f5;
+    color: #0a0a0a;
+  }
 }
 
 @layer components {
-  /* ── Section rule: every section grounded by a bottom hairline ── */
+  /* Every major section grounded by a single-pixel bottom hairline */
   .section-base {
-    @apply border-b border-ink-100 dark:border-ink-800;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .dark .section-base {
+    border-bottom-color: #1a1a1a;
   }
 
-  /* ── Label style ── */
+  /* Monospace label: tiny all-caps metadata */
   .label {
-    @apply font-mono text-2xs tracking-wider-xl uppercase text-ink-300 dark:text-ink-500;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a8a8a8;
+  }
+  .dark .label {
+    color: #404040;
   }
 
-  /* ── Minimal link ── */
+  /* Bare underline link */
   .link-bare {
-    @apply text-ink-900 dark:text-ink-100 underline underline-offset-2
-           decoration-ink-200 dark:decoration-ink-700
-           hover:decoration-ink-900 dark:hover:decoration-ink-100
-           transition-all duration-200;
+    color: #0a0a0a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: #d0d0d0;
+    transition: text-decoration-color 0.2s ease;
+  }
+  .link-bare:hover {
+    text-decoration-color: #0a0a0a;
+  }
+  .dark .link-bare {
+    color: #e8e8e8;
+    text-decoration-color: #282828;
+  }
+  .dark .link-bare:hover {
+    text-decoration-color: #e8e8e8;
   }
 
-  /* ── Theme toggle ── */
+  /* ── Theme toggle pill ── */
   .toggle-track {
-    @apply relative inline-flex items-center h-5 w-9 rounded-full cursor-pointer
-           bg-ink-200 dark:bg-ink-600
-           transition-colors duration-300;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 2.25rem;   /* 36px */
+    height: 1.25rem;  /* 20px */
+    border-radius: 9999px;
+    cursor: pointer;
+    background-color: #d0d0d0;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
   }
+  .dark .toggle-track {
+    background-color: #404040;
+  }
+
   .toggle-thumb {
-    @apply absolute left-0.5 w-4 h-4 rounded-full
-           bg-ink-900 dark:bg-ink-50
-           transition-transform duration-300;
+    position: absolute;
+    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    background-color: #0a0a0a;
+    transition: transform 0.3s ease, background-color 0.3s ease;
   }
   .dark .toggle-thumb {
+    background-color: #f5f5f5;
     transform: translateX(1rem);
   }
 }
@@ -73,5 +126,13 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Hairline separators using direct colors */
+  .border-hairline {
+    border-color: #e8e8e8;
+  }
+  .dark .border-hairline {
+    border-color: #1a1a1a;
   }
 }
