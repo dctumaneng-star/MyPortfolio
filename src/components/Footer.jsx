@@ -42,6 +42,7 @@ export default function Baseline() {
           {[
             { label: "linkedin", href: "https://linkedin.com/in/daryl-tumaneng-a594a1196" },
             { label: "github",   href: "https://github.com/daryltumaneng" },
+            { label: "instagram", href: "https://www.instagram.com/daryltumaneng_?stkn=NnRzZWMyazAwY3lt&utm_source=qr" },
           ].map(({ label, href }) => (
             <a
               key={label}
