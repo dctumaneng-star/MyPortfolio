@@ -69,13 +69,13 @@ function ProjectCard({ project, index }) {
       />
       
       <div className="flex flex-col flex-1">
-        <div className="flex items-start justify-between">
-          <div className="pr-4">
+        <div className="flex items-start justify-between min-w-0">
+          <div className="pr-4 min-w-0 flex-1">
             <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-300">
               {project.index}
             </span>
-            <div className="flex flex-wrap items-center gap-3 mb-1">
-              <h3 className="font-display font-medium text-display-md text-ink dark:text-chalk leading-none lowercase break-words">
+            <div className="flex flex-wrap items-center gap-3 mb-1 min-w-0">
+              <h3 className={`font-display font-medium text-ink dark:text-chalk leading-none lowercase break-words ${project.size === 'large' ? 'text-display-md' : 'text-4xl lg:text-5xl tracking-tight'}`}>
                 {project.name}
               </h3>
               {project.status && (
@@ -84,12 +84,12 @@ function ProjectCard({ project, index }) {
                 </span>
               )}
             </div>
-            <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 lowercase">{project.subtitle}</p>
+            <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 lowercase break-words">{project.subtitle}</p>
           </div>
           <motion.div
             animate={{ rotate: hovered ? 45 : 0, color: hovered ? "#C8FF00" : "inherit" }}
             transition={{ duration: 0.3 }}
-            className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0"
+            className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0 ml-2"
           >
             <ArrowUpRight size={18} />
           </motion.div>
