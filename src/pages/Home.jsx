@@ -75,12 +75,12 @@ export default function Home() {
             <div aria-label="daryl tumaneng">
               <KineticText 
                 text="daryl" 
-                className="font-display font-medium leading-[0.8] text-display-xl text-ink dark:text-chalk mb-0" 
+                className="font-display font-medium leading-none text-display-xl text-ink dark:text-chalk mb-0" 
                 delay={isFirstLoad ? 0.8 : 0.1} 
               />
               <KineticText 
                 text="tumaneng" 
-                className="font-display font-medium leading-[0.8] text-display-xl text-stroke text-ink dark:text-chalk -mt-2 md:-mt-6 mb-0" 
+                className="font-display font-medium leading-none text-display-xl text-stroke text-ink dark:text-chalk mb-0" 
                 delay={isFirstLoad ? 0.92 : 0.2} 
               />
             </div>

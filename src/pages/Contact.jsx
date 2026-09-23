@@ -22,9 +22,9 @@ export default function Contact() {
         </div>
 
         <div className="mb-12">
-          <KineticText text="let's build" className="font-display font-medium text-display-xl leading-[0.8] text-ink dark:text-chalk mb-2 md:mb-0" delay={0.2} />
-          <KineticText text="something" className="font-display font-medium text-display-xl leading-[0.8] text-stroke text-ink dark:text-chalk mb-2 md:mb-0" delay={0.3} />
-          <KineticText text="great." className="font-display font-medium text-display-xl leading-[0.8] text-ink dark:text-chalk" delay={0.4} />
+          <KineticText text="let's build" className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk mb-2 md:mb-0" delay={0.2} />
+          <KineticText text="something" className="font-display font-medium text-display-xl leading-none text-stroke text-ink dark:text-chalk mb-2 md:mb-0" delay={0.3} />
+          <KineticText text="great." className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk" delay={0.4} />
         </div>
 
         <motion.div
