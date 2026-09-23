@@ -20,7 +20,7 @@ const BOOT_SEQUENCE = [
   "> System ready."
 ];
 
-export default function LoadingScreen({ onComplete }) {
+export default function LoadingScreen({ onComplete, fullSequence = true }) {
   // phase 1: Percentage Load
   // phase 2: Terminal Boot
   // phase 3: Name Reveal
@@ -33,19 +33,28 @@ export default function LoadingScreen({ onComplete }) {
     if (phase !== 1) return;
     
     let current = 0;
+    // Speed up the interval significantly if we're skipping the cinematic sequence
+    const tickRate = fullSequence ? 45 : 15; 
+    
     const interval = setInterval(() => {
       // Slower increments to make loading time longer
-      current += Math.floor(Math.random() * 3) + 1;
+      current += Math.floor(Math.random() * (fullSequence ? 3 : 8)) + 1;
+      
       if (current >= 100) {
         current = 100;
         clearInterval(interval);
-        setTimeout(() => setPhase(2), 600); // Trigger Phase 2 after a pause
+        
+        if (fullSequence) {
+          setTimeout(() => setPhase(2), 600); // Trigger Phase 2 after a pause
+        } else {
+          setTimeout(() => onComplete(), 400); // Skip straight to Main UI
+        }
       }
       setProgress(current);
-    }, 45); // Slower interval
+    }, tickRate); 
     
     return () => clearInterval(interval);
-  }, [phase]);
+  }, [phase, fullSequence, onComplete]);
 
   // Phase 2 Logic: Terminal Sequence
   useEffect(() => {
