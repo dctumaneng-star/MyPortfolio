@@ -71,9 +71,9 @@ function ProjectCard({ project }) {
       variants={cardItem}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className={`relative border border-line-light dark:border-line-dark p-8 flex flex-col justify-between
+      className={`relative liquid-glass hoverable p-8 flex flex-col justify-between
         min-h-[220px] md:min-h-[260px] transition-colors duration-150 group
-        hover:border-neon dark:hover:border-neon hover:bg-neon/5 bg-chalk dark:bg-void block
+        hover:border-neon dark:hover:border-neon hover:bg-neon/5 block
         ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}
         ${project.href ? "cursor-none" : ""}`}
     >

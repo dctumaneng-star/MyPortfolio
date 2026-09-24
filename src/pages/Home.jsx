@@ -119,7 +119,7 @@ export default function Home() {
           className="grid md:grid-cols-3 gap-4 lg:gap-6 w-full"
         >
           {/* Card 1: Status */}
-          <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
+          <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="liquid-glass hoverable p-6 flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
              <div>
                 <span className="mono-label block mb-3 lowercase">current status</span>
@@ -133,7 +133,7 @@ export default function Home() {
 
           {/* Card 2: Quick Nav - Projects */}
           <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem}>
-            <Link to="/projects" className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:bg-neon dark:hover:bg-neon hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden cursor-none" data-hover="true">
+            <Link to="/projects" className="liquid-glass hoverable p-6 flex flex-col justify-between min-h-[160px] group hover:bg-neon dark:hover:bg-neon hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden cursor-none" data-hover="true">
                <div className="flex justify-between items-start">
                  <span className="mono-label block mb-3 lowercase group-hover:text-void transition-colors duration-150">featured work</span>
                  <ArrowUpRight size={24} className="text-ink/30 dark:text-chalk/20 group-hover:text-void group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-150" />
@@ -145,7 +145,7 @@ export default function Home() {
           </motion.div>
 
           {/* Card 3: Tech Focus */}
-          <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="border border-line-light dark:border-line-dark p-6 bg-chalk dark:bg-void flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
+          <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="liquid-glass hoverable p-6 flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
              <span className="mono-label block mb-3 lowercase">core stack</span>
              <div className="flex flex-wrap gap-2 mt-auto">
@@ -156,7 +156,7 @@ export default function Home() {
           </motion.div>
 
           {/* Card 4: Short Info / Beyond the Code */}
-          <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="md:col-span-3 border border-line-light dark:border-line-dark p-6 md:p-8 bg-chalk dark:bg-void flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
+          <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="md:col-span-3 liquid-glass hoverable p-6 md:p-8 flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
              <span className="mono-label block mb-4 lowercase">short info</span>
              <p className="font-body text-sm md:text-base text-ink/70 dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">

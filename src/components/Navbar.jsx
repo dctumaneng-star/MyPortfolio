@@ -84,8 +84,7 @@ export default function Navbar({ dark, onToggle }) {
         animate={{ y: hidden ? "-100%" : "0%" }}
         transition={{ delay: 1.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300
-          bg-chalk dark:bg-void
-          ${scrolled || menuOpen ? "border-b border-line-light dark:border-line-dark" : ""}`}
+          ${scrolled || menuOpen ? "liquid-glass" : "bg-transparent"} `}
       >
         <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
 
