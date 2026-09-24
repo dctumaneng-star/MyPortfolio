@@ -123,13 +123,28 @@ export default function About() {
     <PageTransition className="pt-8 pb-16 lowercase">
       <div className="max-w-6xl mx-auto px-6 w-full space-y-24">
         
-        {/* Header */}
-        <div className="mb-8">
-          <KineticText 
-            text="credentials." 
-            className="font-display font-medium text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] text-ink dark:text-chalk leading-none mb-0 tracking-tighter" 
-            delay={delayCascade}
-          />
+        {/* Header with Graduation Picture */}
+        <div className="flex flex-col md:flex-row md:items-end gap-8 md:gap-12 mb-8">
+          <motion.div 
+            className="w-48 h-64 md:w-56 md:h-72 lg:w-64 lg:h-80 relative rounded-3xl overflow-hidden liquid-glass border border-ink/10 dark:border-chalk/10 shadow-xl p-1.5 shrink-0"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: delayCascade, duration: 0.8, ease: TE_EASE }}
+          >
+            {/* The photo itself must remain fully vibrant, no grayscale filters! */}
+            <img 
+              src="/portrait.jpg" 
+              alt="Daryl Tumaneng Graduation" 
+              className="w-full h-full object-cover rounded-[1.25rem]"
+            />
+          </motion.div>
+          <div>
+            <KineticText 
+              text="credentials." 
+              className="font-display font-medium text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] text-ink dark:text-chalk leading-none mb-0 tracking-tighter" 
+              delay={delayCascade + 0.1}
+            />
+          </div>
         </div>
 
         {/* Top Section: Credentials */}

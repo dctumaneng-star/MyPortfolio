@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import PageTransition from "../components/PageTransition";
@@ -6,10 +7,37 @@ import { isFirstLoad } from "../utils/firstLoad";
 import FluidCard from "../components/FluidCard";
 
 export default function Contact() {
+  const [status, setStatus] = useState("idle"); // idle, loading, success, error
   const { scrollYProgress } = useScroll();
   const yParallax = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   const delayCascade = isFirstLoad ? 1.8 : 0.1;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("loading");
+    
+    const formData = new FormData(e.target);
+    // Hardcode Web3Forms URL as requested for plugging in API key
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      
+      if (res.ok) {
+        setStatus("success");
+        e.target.reset();
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 3000);
+      }
+    } catch (err) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+    }
+  };
 
   return (
     <PageTransition className="pt-8 pb-16 justify-center lowercase">
@@ -31,25 +59,87 @@ export default function Contact() {
           <KineticText text="great." className="font-display font-medium text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter leading-none text-ink dark:text-chalk" delay={delayCascade + 0.3} />
         </div>
 
-        <motion.div
+        {/* Liquid Glass Contact Form */}
+        <motion.form
+          onSubmit={handleSubmit}
+          className="w-full max-w-2xl mt-8 grid gap-6"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delayCascade + 0.5, duration: 0.7, ease: TE_EASE }}
         >
+          {/* Web3Forms Access Key */}
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="group flex flex-col gap-2 relative">
+              <label htmlFor="name" className="mono-label ml-2">full name</label>
+              <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                required 
+                className="w-full liquid-glass border border-line-light dark:border-line-dark rounded-2xl px-6 py-4 outline-none focus:border-neon dark:focus:border-neon transition-colors duration-300 font-body text-ink dark:text-chalk placeholder:text-ink/30 dark:placeholder:text-chalk/30 shadow-inner"
+                placeholder="john doe"
+              />
+            </div>
+            
+            <div className="group flex flex-col gap-2 relative">
+              <label htmlFor="email" className="mono-label ml-2">email address</label>
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                required 
+                className="w-full liquid-glass border border-line-light dark:border-line-dark rounded-2xl px-6 py-4 outline-none focus:border-neon dark:focus:border-neon transition-colors duration-300 font-body text-ink dark:text-chalk placeholder:text-ink/30 dark:placeholder:text-chalk/30 shadow-inner"
+                placeholder="john@example.com"
+              />
+            </div>
+          </div>
+
+          <div className="group flex flex-col gap-2 relative">
+            <label htmlFor="subject" className="mono-label ml-2">subject</label>
+            <input 
+              type="text" 
+              name="subject" 
+              id="subject" 
+              required 
+              className="w-full liquid-glass border border-line-light dark:border-line-dark rounded-2xl px-6 py-4 outline-none focus:border-neon dark:focus:border-neon transition-colors duration-300 font-body text-ink dark:text-chalk placeholder:text-ink/30 dark:placeholder:text-chalk/30 shadow-inner"
+              placeholder="project inquiry"
+            />
+          </div>
+
+          <div className="group flex flex-col gap-2 relative">
+            <label htmlFor="message" className="mono-label ml-2">message</label>
+            <textarea 
+              name="message" 
+              id="message" 
+              required 
+              rows={4}
+              className="w-full liquid-glass border border-line-light dark:border-line-dark rounded-2xl px-6 py-4 outline-none focus:border-neon dark:focus:border-neon transition-colors duration-300 font-body text-ink dark:text-chalk placeholder:text-ink/30 dark:placeholder:text-chalk/30 shadow-inner resize-none"
+              placeholder="tell me about your project..."
+            />
+          </div>
+
           <FluidCard
-            as="a"
-            href="mailto:dctumaneng13@gmail.com"
-            className="group inline-flex items-center gap-6 liquid-glass px-8 md:px-12 py-6 md:py-8 transition-colors duration-300 cursor-none w-fit"
+            as="button"
+            type="submit"
+            disabled={status === "loading"}
+            className="group mt-4 flex items-center justify-center gap-4 liquid-glass border border-line-light dark:border-line-dark px-8 py-5 transition-colors duration-300 cursor-none w-full md:w-auto self-start"
             data-hover="true"
           >
-            <span className="font-display font-medium text-3xl md:text-5xl text-ink dark:text-chalk transition-colors duration-150 relative z-20">
-              initiate contact
+            <span className="font-display font-medium text-2xl text-ink dark:text-chalk transition-colors duration-150 relative z-20">
+              {status === "idle" && "send transmission"}
+              {status === "loading" && "initiating..."}
+              {status === "success" && "transmission sent"}
+              {status === "error" && "error. retry?"}
             </span>
-            <div className="overflow-hidden z-20 relative">
-              <ArrowUpRight size={40} className="text-ink dark:text-chalk group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
-            </div>
+            {status === "idle" && (
+              <div className="overflow-hidden z-20 relative">
+                <ArrowUpRight size={28} className="text-ink dark:text-chalk group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+              </div>
+            )}
           </FluidCard>
-        </motion.div>
+        </motion.form>
 
         <motion.div 
           className="mt-20 pt-8 border-t border-line-light dark:border-line-dark grid grid-cols-1 md:grid-cols-3 gap-8"
