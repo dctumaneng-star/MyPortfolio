@@ -11,14 +11,21 @@ const LINKS = [
 
 function ThemeToggle({ dark, onToggle }) {
   return (
-    <button
+    <motion.button
       onClick={onToggle}
-      className="toggle-track"
+      className="relative flex items-center w-10 h-5 bg-chalk/20 dark:bg-void/40 rounded-full border border-ink/10 dark:border-chalk/10 cursor-none"
+      whileTap={{ scale: 0.9 }}
       aria-label="Toggle dark mode"
-      aria-pressed={dark}
+      data-hover="true"
     >
-      <span className="toggle-thumb" />
-    </button>
+      <motion.div
+        layout
+        initial={false}
+        animate={{ x: dark ? 18 : 0 }}
+        transition={{ type: "spring", stiffness: 500, damping: 30, mass: 0.8 }}
+        className="w-4 h-4 bg-ink dark:bg-neon rounded-full ml-0.5 shadow-sm"
+      />
+    </motion.button>
   );
 }
 
@@ -85,8 +92,8 @@ export default function Navbar({ dark, onToggle }) {
         className="fixed top-6 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full"
         style={{ x: "-50%" }}
       >
-        {/* The background materializes independently */}
-        <div className="absolute inset-0 rounded-full overflow-hidden nav-reveal-bg liquid-glass grain-overlay" />
+        {/* The background materializes independently, expanding from the text's location */}
+        <div className="absolute inset-0 rounded-full overflow-hidden nav-reveal-bg liquid-glass grain-overlay" style={{ transformOrigin: "10% 50%" }} />
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">
 
