@@ -75,10 +75,10 @@ export default function Navbar({ dark, onToggle }) {
       <motion.header
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="fixed top-3 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full"
+        className="fixed top-3 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full border border-ink/10 dark:border-chalk/10"
         style={{ x: "-50%" }}
       >
-        {/* The background materializes independently, expanding from the text's location */}
+        {/* The background materializes independently, transitioning opacity */}
         <motion.div 
           animate={{ opacity: scrolled ? 1 : 0 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}

@@ -1,8 +1,31 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function Baseline() {
   const [time, setTime] = useState("");
+  const [atBottom, setAtBottom] = useState(false);
+  const { scrollYProgress } = useScroll();
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // If the page is scrolled to 99% or more, show the footer
+    if (latest >= 0.99) {
+      setAtBottom(true);
+    } else {
+      setAtBottom(false);
+    }
+  });
+
+  // If the page isn't scrollable (height < viewport), we should show it.
+  useEffect(() => {
+    const handleResize = () => {
+      if (document.body.scrollHeight <= window.innerHeight) {
+        setAtBottom(true);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -15,6 +38,9 @@ export default function Baseline() {
 
   return (
     <motion.footer
+      initial={{ y: "100%" }}
+      animate={{ y: atBottom ? "0%" : "100%" }}
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
       className="fixed bottom-0 left-0 right-0 z-50 liquid-glass grain-overlay border-t border-line-light dark:border-line-dark transition-colors duration-300"
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6 h-12 flex justify-between items-center relative z-10 w-full overflow-x-auto no-scrollbar gap-8">

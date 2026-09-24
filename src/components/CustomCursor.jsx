@@ -59,7 +59,7 @@ export default function CustomCursor() {
           width.set(rect.width + padding);
           height.set(rect.height + padding);
           borderRadius.set(12); // rounded-xl look
-          opacity.set(0.15); // fade out slightly when snapped
+          opacity.set(1); // remain fully visible as a hollow ring
         };
         const onLeave = () => {
           setHoveredEl(null);
@@ -97,7 +97,13 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999] bg-neon"
+      className="fixed top-0 left-0 pointer-events-none z-[9999]"
+      animate={{
+        backgroundColor: hoveredEl ? "transparent" : "#00E5C0",
+        border: hoveredEl ? "1px solid #00E5C0" : "0px solid transparent",
+        scale: hoveredEl ? [1, 1.05, 1] : 1
+      }}
+      transition={{ duration: 0.2, scale: { repeat: hoveredEl ? Infinity : 0, duration: 2 } }}
       style={{
         x: smoothX,
         y: smoothY,
