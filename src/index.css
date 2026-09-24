@@ -198,7 +198,6 @@
 
   /* Liquid Glass Aesthetics */
   .liquid-glass {
-    position: relative;
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     background-color: rgba(245, 245, 243, 0.4);
