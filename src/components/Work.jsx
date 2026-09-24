@@ -80,7 +80,7 @@ function Entry({ id, left, right, description, tags, delay }) {
     >
       {/* Left */}
       <div>
-        <span className="mono-label block mb-2 group-hover:text-neon transition-colors duration-300">{id}</span>
+        <span className="mono-label block mb-2 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-300">{id}</span>
         <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 mb-1">{left.period}</p>
         <p className="font-medium text-sm text-ink dark:text-chalk leading-snug">{left.name}</p>
       </div>

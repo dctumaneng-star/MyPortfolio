@@ -53,7 +53,7 @@ export default function Contact() {
                 animate={inView ? { y: "0%" } : {}}
                 transition={{ delay: i * 0.15 + 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                {line}{i === 1 && <span className="text-neon">.</span>}
+                {line}{i === 1 && <span className="text-ink dark:text-neon">.</span>}
               </motion.h2>
             </div>
           ))}
@@ -70,7 +70,7 @@ export default function Contact() {
           >
             {submitted ? (
               <div className="glass-card rounded-2xl p-12 text-center border-neon/20">
-                <div className="w-14 h-14 rounded-full bg-neon/10 border border-neon/30 flex items-center justify-center text-neon mx-auto mb-6">
+                <div className="w-14 h-14 rounded-full bg-neon/10 border border-neon/30 flex items-center justify-center text-ink dark:text-neon mx-auto mb-6">
                   <Send size={20} />
                 </div>
                 <h3 className="font-display text-4xl text-white mb-2 uppercase tracking-tight">Sent!</h3>
@@ -158,13 +158,13 @@ export default function Contact() {
                   className="group flex items-center justify-between py-4 border-b border-white/5 hover:border-neon/20 transition-colors duration-300"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-ash group-hover:text-neon transition-colors duration-300">{social.icon}</span>
+                    <span className="text-ash group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-300">{social.icon}</span>
                     <div>
                       <p className="text-white text-sm font-medium">{social.label}</p>
                       <p className="text-ash text-xs font-mono">{social.handle}</p>
                     </div>
                   </div>
-                  <ArrowRight size={14} className="text-ash/30 group-hover:text-neon group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight size={14} className="text-ash/30 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon group-hover:translate-x-1 transition-all duration-300" />
                 </a>
               ))}
             </div>
@@ -172,7 +172,7 @@ export default function Contact() {
             {/* Availability — neon pill */}
             <div className="flex items-center gap-3 pt-2">
               <div className="w-2 h-2 rounded-full bg-neon animate-pulse" />
-              <p className="font-mono text-xs text-neon tracking-wider">Currently Available for Work</p>
+              <p className="font-mono text-xs text-ink dark:text-neon tracking-wider">Currently Available for Work</p>
             </div>
           </motion.div>
         </div>

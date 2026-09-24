@@ -86,7 +86,7 @@ function Entry({ id, left, right, description, tags, delay }) {
       className="grid md:grid-cols-[1.2fr_2fr] gap-6 md:gap-16 py-8 border-t border-line-light dark:border-line-dark group"
     >
       <div>
-        <span className="mono-label block mb-2 group-hover:text-neon transition-colors duration-150">{id}</span>
+        <span className="mono-label block mb-2 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-150">{id}</span>
         <p className="font-mono text-xs text-ink/70 dark:text-chalk/30 mb-1">{left.period}</p>
         <p className="font-medium text-sm text-ink dark:text-chalk leading-snug">{left.name}</p>
       </div>
@@ -151,7 +151,7 @@ export default function About() {
               <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
               
               <div className="flex flex-col flex-1">
-                <span className="mono-label block mb-4 group-hover:text-neon transition-colors duration-150">{hobby.id}</span>
+                <span className="mono-label block mb-4 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-150">{hobby.id}</span>
                 <h3 className="font-display font-medium text-3xl md:text-4xl text-ink dark:text-chalk leading-none mb-4 break-words">
                   {hobby.title}
                 </h3>

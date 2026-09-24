@@ -60,7 +60,7 @@ function ProjectCard({ project, index }) {
       {/* Header */}
       <div className="flex items-start justify-between mb-auto">
         <div>
-          <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-300">
+          <span className="mono-label block mb-3 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-300">
             {project.index}
           </span>
           <h3 className="font-display text-display-md text-ink dark:text-chalk leading-none mb-1">

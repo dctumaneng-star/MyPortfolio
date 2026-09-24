@@ -42,7 +42,7 @@ function MobileMenu({ open, onClose }) {
           <Link
             to={href}
             onClick={onClose}
-            className="block font-display font-medium text-5xl text-ink dark:text-chalk py-4 hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase"
+            className="block font-display font-medium text-5xl text-ink dark:text-chalk py-4 hover:text-ink dark:hover:text-neon transition-colors duration-200 lowercase"
           >
             {label}
           </Link>
@@ -91,7 +91,7 @@ export default function Navbar({ dark, onToggle }) {
           <Link
             to="/"
             className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
-                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block"
+                       hover:text-ink dark:hover:text-neon transition-colors duration-200 lowercase block"
           >
             <motion.span layoutId="brand-name" className="inline-block">daryl tumaneng.</motion.span>
           </Link>

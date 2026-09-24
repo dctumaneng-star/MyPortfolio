@@ -85,7 +85,7 @@ function ProjectCard({ project }) {
       <div className="flex flex-col flex-1">
         <div className="flex items-start justify-between min-w-0">
           <div className="pr-4 min-w-0 flex-1">
-            <span className="mono-label block mb-3 group-hover:text-neon transition-colors duration-150">
+            <span className="mono-label block mb-3 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-150">
               {project.index}
             </span>
             <div className="flex flex-wrap items-center gap-3 mb-1 min-w-0">

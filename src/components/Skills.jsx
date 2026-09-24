@@ -60,7 +60,7 @@ export default function Skills() {
               transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-16 py-6 border-t border-line-light dark:border-line-dark group"
             >
-              <p className="mono-label pt-0.5 group-hover:text-neon transition-colors duration-300">
+              <p className="mono-label pt-0.5 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-300">
                 {group.label}
               </p>
               <p className="text-sm text-ink/60 dark:text-chalk/45 leading-relaxed">

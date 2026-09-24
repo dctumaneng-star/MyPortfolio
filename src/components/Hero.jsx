@@ -101,7 +101,7 @@ export default function Hero() {
           >
             <span>0969-596-7105</span>
             <a href="mailto:dctumaneng13@gmail.com"
-               className="hover:text-neon transition-colors duration-200">
+               className="hover:text-ink dark:hover:text-neon transition-colors duration-200">
               dctumaneng13@gmail.com
             </a>
             <span>Rocka Village, Tabang, Plaridel, Bulacan</span>
