@@ -38,29 +38,27 @@ export default function App() {
   };
 
   return (
-    <LayoutGroup>
-      <AnimatePresence>
-        {loading ? (
-          <LoadingScreen 
-            key="preloader" 
-            fullSequence={location.pathname === "/"}
-            onComplete={() => {
-              setLoading(false);
-              clearFirstLoad();
-            }} 
-          />
-        ) : (
-          <motion.div
-            key="layout"
-            exit={{ opacity: 0, scale: 0.9, filter: "brightness(0)" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Layout dark={dark} onToggle={toggleDark} onReboot={handleReboot}>
-              <AnimatedRoutes />
-            </Layout>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </LayoutGroup>
+    <AnimatePresence>
+      {loading ? (
+        <LoadingScreen 
+          key="preloader" 
+          fullSequence={location.pathname === "/"}
+          onComplete={() => {
+            setLoading(false);
+            clearFirstLoad();
+          }} 
+        />
+      ) : (
+        <motion.div
+          key="layout"
+          exit={{ opacity: 0, scale: 0.9, filter: "brightness(0)" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Layout dark={dark} onToggle={toggleDark} onReboot={handleReboot}>
+            <AnimatedRoutes />
+          </Layout>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
