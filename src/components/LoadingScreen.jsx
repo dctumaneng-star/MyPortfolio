@@ -44,8 +44,8 @@ function TelemetryLine({ text, delay }) {
 }
 
 export default function LoadingScreen({ onComplete, fullSequence = true }) {
-  const [phase, setPhase] = useState(1);
-  const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState(fullSequence ? 1 : 3);
+  const [progress, setProgress] = useState(fullSequence ? 0 : 100);
 
   // Auto progression Phase 1 & 2
   useEffect(() => {
@@ -83,21 +83,25 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at center, rgba(0, 229, 192, 0.03) 0%, transparent 60%)" }} />
 
       {/* Telemetry data overlays */}
-      <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest flex flex-col gap-2">
-        <span className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-neon rounded-full animate-pulse-dot shadow-[0_0_8px_rgba(0,229,192,0.5)]" />
-          SYSTEM_ONLINE
-        </span>
-        <div className="flex flex-col gap-1 mt-4 opacity-60">
-          {TELEMETRY.map((line, i) => (
-            <TelemetryLine key={i} text={line} delay={i * 200 + 100} />
-          ))}
-        </div>
-      </div>
-      <div className="absolute bottom-6 right-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest text-right">
-        MEMORY: 64.0GB / 128.0GB<br/>
-        VRAM: ALLOCATED (ACTIVE)
-      </div>
+      {fullSequence && (
+        <>
+          <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest flex flex-col gap-2">
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-neon rounded-full animate-pulse-dot shadow-[0_0_8px_rgba(0,229,192,0.5)]" />
+              SYSTEM_ONLINE
+            </span>
+            <div className="flex flex-col gap-1 mt-4 opacity-60">
+              {TELEMETRY.map((line, i) => (
+                <TelemetryLine key={i} text={line} delay={i * 200 + 100} />
+              ))}
+            </div>
+          </div>
+          <div className="absolute bottom-6 right-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest text-right">
+            MEMORY: 64.0GB / 128.0GB<br/>
+            VRAM: ALLOCATED (ACTIVE)
+          </div>
+        </>
+      )}
 
       <div className={`absolute inset-0 flex justify-center ${phase >= 3 ? "items-center" : "items-center"}`}>
         <AnimatePresence>

@@ -28,6 +28,7 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  const location = useLocation();
   const [dark, toggleDark] = useTheme();
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +43,7 @@ export default function App() {
         {loading ? (
           <LoadingScreen 
             key="preloader" 
-            fullSequence={true}
+            fullSequence={location.pathname === "/"}
             onComplete={() => {
               setLoading(false);
               clearFirstLoad();
