@@ -14,7 +14,7 @@ function ThemeToggle({ dark, onToggle }) {
     <motion.button
       onClick={onToggle}
       className="relative flex items-center w-10 h-5 bg-chalk/20 dark:bg-void/40 rounded-full border border-ink/10 dark:border-chalk/10 cursor-none"
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.95 }}
       aria-label="Toggle dark mode"
       data-hover="true"
     >

@@ -6,19 +6,19 @@ export default {
     extend: {
       colors: {
         neon: {
-          DEFAULT: "#C8FF00",
-          dim:     "#9BCC00",
-          glow:    "rgba(200,255,0,0.15)",
+          DEFAULT: "#00E5C0", // Petronas Green
+          dim:     "#00B395",
+          glow:    "rgba(0,229,192,0.15)",
         },
-        void:  "#0A0A0A",
-        chalk: "#F5F5F3",
+        void:  "#0B0C10", // Obsidian Black
+        chalk: "#FFFFFF", // Stark White
         line: {
-          light: "#E0E0E0",
-          dark:  "#1E1E1E",
+          light: "#E2E4E6", // Slate / Silver
+          dark:  "#1F2229",
         },
         ink: {
-          muted:   "#707070",
-          DEFAULT: "#0A0A0A",
+          muted:   "#6E737F",
+          DEFAULT: "#11141A", // Dark graphite
         },
       },
       fontFamily: {

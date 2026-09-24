@@ -45,7 +45,7 @@ export default function FluidCard({ children, className = "", as: Component = mo
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       whileHover={{ scale: 1.01 }}
-      whileTap={{ scale: 0.98 }}
+      whileTap={{ scale: 0.95 }}
       style={{
         rotateX,
         rotateY,
@@ -61,7 +61,7 @@ export default function FluidCard({ children, className = "", as: Component = mo
           background: useMotionTemplate`
             radial-gradient(
               400px circle at ${mouseX}px ${mouseY}px,
-              rgba(200, 255, 0, 0.15),
+              rgba(0, 229, 192, 0.15),
               transparent 80%
             )
           `,
@@ -85,7 +85,7 @@ export default function FluidCard({ children, className = "", as: Component = mo
               transparent 80%
             )
           `,
-          border: "1px solid #C8FF00"
+          border: "1px solid #00E5C0"
         }}
       />
       
