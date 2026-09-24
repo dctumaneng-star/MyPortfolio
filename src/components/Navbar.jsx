@@ -60,7 +60,7 @@ function MobileMenu({ open, onClose }) {
   );
 }
 
-export default function Navbar({ dark, onToggle, onReboot }) {
+export default function Navbar({ dark, onToggle }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -89,12 +89,9 @@ export default function Navbar({ dark, onToggle, onReboot }) {
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">
 
-          {/* Name mark - Reboot Trigger */}
+          {/* Name mark */}
           <button
-            onClick={() => {
-              navigate("/");
-              if (onReboot) onReboot();
-            }}
+            onClick={() => navigate("/")}
             className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
                        hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none"
             data-hover="true"

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useAnimate, stagger } from "framer-motion";
 import { isFirstLoad } from "../utils/firstLoad";
 
-export default function Layout({ dark, onToggle, onReboot, children }) {
+export default function Layout({ dark, onToggle, children }) {
   const [scope, animate] = useAnimate();
   
   const mouseX = useMotionValue(0);
@@ -56,7 +56,7 @@ export default function Layout({ dark, onToggle, onReboot, children }) {
   return (
     <div ref={scope} className="relative z-10">
       <CustomCursor />
-      <Navbar dark={dark} onToggle={onToggle} onReboot={onReboot} />
+      <Navbar dark={dark} onToggle={onToggle} />
 
 
 
