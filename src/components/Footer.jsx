@@ -1,14 +1,8 @@
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function Baseline() {
   const [time, setTime] = useState("");
-  const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (y) => {
-    setScrolled(y > 40);
-  });
 
   useEffect(() => {
     const updateTime = () => {
@@ -21,18 +15,12 @@ export default function Baseline() {
 
   return (
     <motion.footer
-      className="fixed bottom-0 left-0 right-0 z-50 transition-colors duration-300"
+      className="fixed bottom-0 left-0 right-0 z-50 liquid-glass grain-overlay border-t border-line-light dark:border-line-dark transition-colors duration-300"
     >
-      <motion.div 
-        animate={{ opacity: scrolled ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-        className="absolute inset-0 liquid-glass grain-overlay border-t border-line-light dark:border-line-dark"
-      />
-      
-      <div className="max-w-6xl mx-auto px-6 h-12 grid grid-cols-3 items-center relative z-10 w-full">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 h-12 flex justify-between items-center relative z-10 w-full overflow-x-auto no-scrollbar gap-8">
         
         {/* Left side: Socials */}
-        <nav className="flex items-center gap-5 justify-start">
+        <nav className="flex items-center gap-4 md:gap-5 shrink-0">
           {[
             { label: "linkedin", href: "https://linkedin.com/in/daryl-tumaneng-a594a1196" },
             { label: "github",   href: "https://github.com/daryltumaneng" },
@@ -52,14 +40,14 @@ export default function Baseline() {
         </nav>
 
         {/* Center side: Name & Year */}
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center shrink-0">
           <span className="font-mono text-[10px] md:text-xs text-ink/70 dark:text-chalk/70 tracking-widest uppercase lowercase">
             daryl tumaneng, 2026.
           </span>
         </div>
 
         {/* Right side: Time & Status */}
-        <div className="flex items-center gap-4 justify-end">
+        <div className="flex items-center gap-4 shrink-0">
           <span className="mono-label hidden md:inline border-r border-ink/10 dark:border-chalk/10 pr-4">{time} pst</span>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse-dot" />

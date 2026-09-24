@@ -53,7 +53,7 @@ export default function Home() {
       </motion.div>
 
       <div className="max-w-6xl mx-auto px-6 w-full flex-1 flex flex-col">
-        <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-end mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-end mb-16">
           
           {/* Typography & Intro */}
           <div>
@@ -77,12 +77,12 @@ export default function Home() {
             <div aria-label="daryl tumaneng">
               <KineticText 
                 text="daryl" 
-                className="font-display font-medium leading-none text-display-xl text-ink dark:text-chalk mb-0" 
+                className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-ink dark:text-chalk mb-0" 
                 delay={isFirstLoad ? 0.8 : 0.1} 
               />
               <KineticText 
                 text="tumaneng." 
-                className="font-display font-medium leading-none text-display-xl text-stroke text-ink dark:text-chalk mb-0" 
+                className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-stroke text-ink dark:text-chalk mb-0" 
                 delay={isFirstLoad ? 0.92 : 0.2} 
               />
             </div>
@@ -125,7 +125,7 @@ export default function Home() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}
-          className="grid md:grid-cols-2 gap-4 lg:gap-6 w-full"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 w-full"
         >
           {/* Card 1: Beyond the Code */}
           <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
@@ -157,22 +157,22 @@ export default function Home() {
                 <span className="font-mono text-[10px] text-ink/40 dark:text-chalk/40 uppercase tracking-widest border border-ink/10 dark:border-chalk/10 px-2 py-1 rounded-sm">spec v1.0</span>
              </div>
 
-             <div className="font-mono text-sm text-ink/70 dark:text-chalk/70 leading-relaxed uppercase tracking-wider space-y-4">
-               <div className="grid grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2">
+             <div className="font-mono text-xs sm:text-sm text-ink/70 dark:text-chalk/70 leading-relaxed uppercase tracking-wider space-y-4">
+               <div className="grid grid-cols-1 sm:grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2 gap-2 sm:gap-0">
                  <span className="col-span-1 opacity-50">framework</span>
-                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">react.js</span>
+                 <span className="col-span-1 sm:col-span-2 font-semibold text-ink dark:text-chalk">react.js</span>
                </div>
-               <div className="grid grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2">
+               <div className="grid grid-cols-1 sm:grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2 gap-2 sm:gap-0">
                  <span className="col-span-1 opacity-50">styling</span>
-                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">tailwind css</span>
+                 <span className="col-span-1 sm:col-span-2 font-semibold text-ink dark:text-chalk">tailwind css</span>
                </div>
-               <div className="grid grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2">
+               <div className="grid grid-cols-1 sm:grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2 gap-2 sm:gap-0">
                  <span className="col-span-1 opacity-50">physics</span>
-                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">framer motion</span>
+                 <span className="col-span-1 sm:col-span-2 font-semibold text-ink dark:text-chalk">framer motion</span>
                </div>
-               <div className="grid grid-cols-3 pb-2">
+               <div className="grid grid-cols-1 sm:grid-cols-3 pb-2 gap-2 sm:gap-0">
                  <span className="col-span-1 opacity-50">routing</span>
-                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">react router dom</span>
+                 <span className="col-span-1 sm:col-span-2 font-semibold text-ink dark:text-chalk">react router dom</span>
                </div>
              </div>
           </FluidCard>
