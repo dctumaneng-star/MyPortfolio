@@ -89,7 +89,7 @@ export default function Navbar({ dark, onToggle }) {
       <motion.header
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="fixed top-6 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full"
+        className="fixed top-3 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full"
         style={{ x: "-50%" }}
       >
         {/* The background materializes independently, expanding from the text's location */}
