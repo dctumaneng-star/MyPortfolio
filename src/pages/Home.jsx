@@ -79,7 +79,7 @@ export default function Home() {
             </div>
 
             <motion.p
-              className="text-base md:text-lg text-ink/70 dark:text-chalk/60 leading-relaxed max-w-xl mt-8 pt-6 border-t border-line-light dark:border-line-dark"
+              className="text-base md:text-lg text-ink dark:text-chalk/60 leading-relaxed max-w-xl mt-8 pt-6 border-t border-line-light dark:border-line-dark"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: delayCascade + 0.1, duration: 0.7, ease: TE_EASE }}
@@ -159,7 +159,7 @@ export default function Home() {
           <motion.div layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="md:col-span-3 liquid-glass hoverable p-6 md:p-8 flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
              <span className="mono-label block mb-4 lowercase">short info</span>
-             <p className="font-body text-sm md:text-base text-ink/70 dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
+             <p className="font-body text-sm md:text-base text-ink dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
                self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
              </p>
           </motion.div>

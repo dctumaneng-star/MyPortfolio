@@ -98,7 +98,7 @@ function ProjectCard({ project }) {
                 </span>
               )}
             </div>
-            <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 lowercase break-words">{project.subtitle}</p>
+            <p className="font-mono text-xs text-ink/70 dark:text-chalk/30 lowercase break-words">{project.subtitle}</p>
           </div>
           <div className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0 ml-2 overflow-hidden">
             <motion.div

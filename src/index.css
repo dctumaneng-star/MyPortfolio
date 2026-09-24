@@ -18,7 +18,7 @@
 
   body {
     font-family: 'Inter', 'Helvetica Neue', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
     background-color: #F5F5F3;
     color: #0A0A0A;
@@ -59,13 +59,14 @@
   /* ── Label — tiny mono caps ── */
   .mono-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: lowercase;
-    color: #707070;
+    color: #333333;
+    font-weight: 500;
   }
   .dark .mono-label {
-    color: #505050;
+    color: #A0A0A0;
   }
 
   /* ── Neon accent pill ── */

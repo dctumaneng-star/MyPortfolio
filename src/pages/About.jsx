@@ -87,13 +87,13 @@ function Entry({ id, left, right, description, tags, delay }) {
     >
       <div>
         <span className="mono-label block mb-2 group-hover:text-neon transition-colors duration-150">{id}</span>
-        <p className="font-mono text-xs text-ink/40 dark:text-chalk/30 mb-1">{left.period}</p>
+        <p className="font-mono text-xs text-ink/70 dark:text-chalk/30 mb-1">{left.period}</p>
         <p className="font-medium text-sm text-ink dark:text-chalk leading-snug">{left.name}</p>
       </div>
       <div>
         <p className="font-semibold text-sm text-ink dark:text-chalk mb-2">{right}</p>
         {description && (
-          <p className="text-sm text-ink/55 dark:text-chalk/40 leading-relaxed mb-4">{description}</p>
+          <p className="text-sm text-ink/80 dark:text-chalk/40 leading-relaxed mb-4">{description}</p>
         )}
         <div className="flex flex-wrap gap-2">
           {tags.map((t) => <span key={t} className="neon-tag lowercase group-hover:bg-void group-hover:text-neon transition-colors duration-150">{t}</span>)}
@@ -155,7 +155,7 @@ export default function About() {
                 <h3 className="font-display font-medium text-3xl md:text-4xl text-ink dark:text-chalk leading-none mb-4 break-words">
                   {hobby.title}
                 </h3>
-                <p className="font-body text-sm text-ink/70 dark:text-chalk/60 leading-relaxed mb-6">
+                <p className="font-body text-sm text-ink dark:text-chalk/60 leading-relaxed mb-6">
                   {hobby.description}
                 </p>
               </div>
