@@ -89,8 +89,8 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
   // Phase 3: Name Drop
   useEffect(() => {
     if (phase !== 3) return;
-    // Fast track: hold for 500ms, Full: 1500ms
-    const t = setTimeout(() => onComplete(), fullSequence ? 1500 : 500);
+    // Wait for stagger + spring + legibility hold
+    const t = setTimeout(() => onComplete(), fullSequence ? 2400 : 1200);
     return () => clearTimeout(t);
   }, [phase, fullSequence, onComplete]);
 
@@ -173,11 +173,40 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
             key="phase-3"
             initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: fullSequence ? 0.8 : 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: fullSequence ? 0.4 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center justify-center absolute inset-0"
           >
             <h1 className="font-display font-medium text-5xl md:text-7xl text-ink dark:text-chalk tracking-tight lowercase">
-              <motion.span layoutId="brand-name" className="inline-block">daryl tumaneng.</motion.span>
+              <motion.span 
+                layoutId="brand-name" 
+                className="inline-flex overflow-visible"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: { staggerChildren: fullSequence ? 0.05 : 0.02 }
+                  }
+                }}
+              >
+                {"daryl tumaneng.".split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+                      visible: { 
+                        opacity: 1, 
+                        y: 0, 
+                        filter: "blur(0px)",
+                        transition: { type: "spring", stiffness: 100, damping: 20 }
+                      }
+                    }}
+                    className={char === " " ? "w-[0.25em]" : "inline-block"}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </motion.span>
             </h1>
           </motion.div>
         )}
