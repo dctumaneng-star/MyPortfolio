@@ -144,9 +144,10 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
               <div className="relative z-10 font-display font-medium text-3xl sm:text-4xl md:text-5xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
                 <motion.span 
                   layoutId="brand-name"
-                  className="inline-flex overflow-visible"
+                  className="inline-flex whitespace-nowrap overflow-visible"
                   initial="hidden"
                   animate="visible"
+                  transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
                   variants={{
                     hidden: {},
                     visible: { transition: { staggerChildren: fullSequence ? 0.05 : 0.02 } }

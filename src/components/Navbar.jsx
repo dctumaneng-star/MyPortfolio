@@ -101,16 +101,16 @@ export default function Navbar({ dark, onToggle, onReboot }) {
           >
             <motion.span 
               layoutId="brand-name" 
-              transition={{ type: "spring", stiffness: 100, damping: 20 }} 
-              className="inline-flex overflow-visible relative z-10"
+              transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} 
+              className="inline-flex whitespace-nowrap overflow-visible relative z-10"
             >
               {"daryl tumaneng.".split("").map((char, index) => (
-                <span
+                <motion.span
                   key={index}
                   className={char === " " ? "w-[0.25em]" : "inline-block"}
                 >
                   {char}
-                </span>
+                </motion.span>
               ))}
             </motion.span>
           </button>

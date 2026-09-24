@@ -2,7 +2,7 @@ import "./index.css";
 import { useState } from "react";
 import { useTheme } from "./hooks/useTheme";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
 import { clearFirstLoad, resetFirstLoad } from "./utils/firstLoad";
 
 import Layout from "./components/Layout";
@@ -37,7 +37,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <LayoutGroup>
       <AnimatePresence>
         {loading ? (
           <LoadingScreen 
@@ -60,6 +60,6 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </LayoutGroup>
   );
 }
