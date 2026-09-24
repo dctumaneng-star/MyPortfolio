@@ -30,11 +30,17 @@ export default function Layout({ dark, onToggle, children }) {
     async function runSequence() {
       if (isFirstLoad) {
         // Timeline Orchestration: Resolves the component mount sequence dynamically
-        await animate("header", { y: [-100, 0], opacity: [0, 1], x: "-50%" }, { type: "spring", stiffness: 100, damping: 20, delay: 0.6 });
+        // The header container stays in place so layoutId morphing calculates the exact final coordinates.
+        // We only fade in the background/borders and internal elements after the morph finishes.
+        await animate(".nav-reveal-bg", { opacity: [0, 1], scale: [0.95, 1] }, { type: "spring", stiffness: 100, damping: 20, delay: 0.8 });
+        animate(".nav-item", { opacity: [0, 1], y: [-10, 0] }, { type: "spring", stiffness: 100, damping: 20 });
+        
         animate("footer", { y: [100, 0], opacity: [0, 1] }, { type: "spring", stiffness: 100, damping: 20 });
         animate("main", { opacity: [0, 1], scale: [0.95, 1] }, { type: "spring", stiffness: 100, damping: 20, delay: 0.1 });
       } else {
         // Normal fast entrance for subsequent navigations
+        animate(".nav-reveal-bg", { opacity: 1, scale: 1 }, { duration: 0 });
+        animate(".nav-item", { opacity: 1, y: 0 }, { duration: 0 });
         animate("header", { y: 0, opacity: 1 }, { duration: 0 });
         animate("footer", { y: 0, opacity: 1 }, { duration: 0 });
         animate("main", { opacity: 1, scale: 1 }, { duration: 0 });

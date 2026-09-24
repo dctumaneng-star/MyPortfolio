@@ -80,24 +80,27 @@ export default function Navbar({ dark, onToggle }) {
   return (
     <>
       <motion.header
-        animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1, x: "-50%" }}
+        animate={{ y: hidden ? -100 : 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`fixed top-6 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full overflow-hidden
-          liquid-glass grain-overlay`}
+        className="fixed top-6 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full"
+        style={{ x: "-50%" }}
       >
+        {/* The background materializes independently */}
+        <div className={`absolute inset-0 rounded-full overflow-hidden nav-reveal-bg ${scrolled || menuOpen ? "liquid-glass grain-overlay" : "bg-transparent"}`} />
+        
         <div className="relative px-8 h-14 flex items-center justify-between z-10">
 
-          {/* Name mark */}
+          {/* Name mark - ALWAYS visible for layout morphing */}
           <Link
             to="/"
             className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
                        hover:text-ink dark:hover:text-neon transition-colors duration-200 lowercase block"
           >
-            <motion.span layoutId="brand-name" className="inline-block">daryl tumaneng.</motion.span>
+            <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 lowercase">
+          <nav className="hidden md:flex items-center gap-8 lowercase nav-item">
             {LINKS.map(({ href, label }) => {
               const isActive = location.pathname === href;
               return (
@@ -115,7 +118,7 @@ export default function Navbar({ dark, onToggle }) {
             })}
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 nav-item">
             <ThemeToggle dark={dark} onToggle={onToggle} />
 
             {/* Mobile hamburger */}
