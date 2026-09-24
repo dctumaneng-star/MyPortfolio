@@ -101,7 +101,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.1 }} 
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         
         {(phase === 1 || phase === 2) && (
           <motion.div
@@ -172,9 +172,9 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
         {phase === 3 && (
           <motion.div
             key="phase-3"
-            initial={{ scale: 0.95, opacity: 0, filter: "blur(10px)" }}
-            animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center justify-center absolute inset-0"
           >
             <h1 className="font-display font-medium text-5xl md:text-7xl text-ink dark:text-chalk tracking-tight lowercase">
