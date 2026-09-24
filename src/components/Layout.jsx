@@ -1,12 +1,13 @@
 import CustomCursor from "./CustomCursor";
 import Navbar from "./Navbar";
 import Baseline from "./Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useAnimate } from "framer-motion";
 import { isFirstLoad } from "../utils/firstLoad";
 
 export default function Layout({ dark, onToggle, children }) {
   const [scope, animate] = useAnimate();
+  const [showContent, setShowContent] = useState(!isFirstLoad);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { damping: 20, stiffness: 100 });
@@ -34,7 +35,6 @@ export default function Layout({ dark, onToggle, children }) {
         animate(".nav-reveal-bg", { opacity: 0, scaleX: 0.4, scaleY: 0.4 }, { duration: 0 });
         animate(".nav-item", { opacity: 0, y: -10 }, { duration: 0 });
         animate("footer", { y: 100, opacity: 0 }, { duration: 0 });
-        animate("main", { opacity: 0, scale: 0.95 }, { duration: 0 });
 
         // 1. Wait for the text to fly to the navbar (approx 0.7s)
         await new Promise(r => setTimeout(r, 700));
@@ -46,15 +46,14 @@ export default function Layout({ dark, onToggle, children }) {
         animate(".nav-item", { opacity: 1, y: 0 }, { type: "spring", stiffness: 100, damping: 20 });
         animate("footer", { y: 0, opacity: 1 }, { type: "spring", stiffness: 100, damping: 20 });
         
-        // 4. Finally, the main page content bursts outward
-        animate("main", { opacity: 1, scale: 1 }, { type: "spring", stiffness: 100, damping: 20 });
+        // 4. Finally, mount the main page content so it bursts outward
+        setShowContent(true);
       } else {
         // Normal fast entrance for subsequent navigations
         animate(".nav-reveal-bg", { opacity: 1, scale: 1 }, { duration: 0 });
         animate(".nav-item", { opacity: 1, y: 0 }, { duration: 0 });
         animate("header", { y: 0, opacity: 1 }, { duration: 0 });
         animate("footer", { y: 0, opacity: 1 }, { duration: 0 });
-        animate("main", { opacity: 1, scale: 1 }, { duration: 0 });
       }
     }
     runSequence();
@@ -95,8 +94,8 @@ export default function Layout({ dark, onToggle, children }) {
         />
       </div>
 
-      <main className="pt-12 min-h-[calc(100vh-48px)] flex flex-col relative z-10" style={{ opacity: isFirstLoad ? 0 : 1 }}>
-        {children}
+      <main className="pt-12 min-h-[calc(100vh-48px)] flex flex-col relative z-10">
+        {showContent && children}
       </main>
 
       <Baseline />
