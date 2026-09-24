@@ -63,19 +63,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <motion.div 
-              aria-label="daryl tumaneng"
-              layoutId="brand-name"
-              transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="flex flex-col"
-            >
-              <span className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-ink dark:text-chalk mb-0 block">
-                daryl
-              </span>
-              <span className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-stroke text-ink dark:text-chalk mb-0 block">
-                tumaneng.
-              </span>
-            </motion.div>
+
 
             <motion.p
               className="font-display text-xl md:text-2xl text-ink dark:text-chalk/90 leading-snug max-w-2xl mt-8 pt-8 border-t border-line-light dark:border-line-dark lowercase"

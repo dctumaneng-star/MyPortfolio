@@ -2,7 +2,7 @@ import CustomCursor from "./CustomCursor";
 import Navbar from "./Navbar";
 import Baseline from "./Footer";
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring, useAnimate } from "framer-motion";
+import { motion, useMotionValue, useSpring, useAnimate, stagger } from "framer-motion";
 import { isFirstLoad } from "../utils/firstLoad";
 
 export default function Layout({ dark, onToggle, onReboot, children }) {
@@ -42,24 +42,18 @@ export default function Layout({ dark, onToggle, onReboot, children }) {
       if (isFirstLoad) {
         // Timeline Orchestration: Resolves the component mount sequence dynamically
         // Immediately hide elements that will be revealed later
-        animate(".nav-reveal-bg", { opacity: 0, scaleX: 0.9, scaleY: 0.9 }, { duration: 0 });
-        animate(".nav-item", { opacity: 0, y: -10 }, { duration: 0 });
+        animate(".nav-item", { opacity: 0, x: -15 }, { duration: 0 });
         animate("footer", { y: 20, opacity: 0 }, { duration: 0 });
 
-        // 1. Wait for the text to fluidly break out and expand to hero (approx 0.8s spring)
+        // Wait for the Phase 4 layout morph (Pill -> Navbar) to settle (approx 0.8s spring)
         await new Promise(r => setTimeout(r, 800));
 
-        // 2. The floating liquid glass navbar background materializes
-        await animate(".nav-reveal-bg", { opacity: 1, scaleX: 1, scaleY: 1 }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
-        
-        // 3. The internal nav items and the baseline footer materialize
-        animate(".nav-item", { opacity: 1, y: 0 }, { duration: 0.6, ease: [0.22, 1, 0.36, 1] });
+        // Phase 5: Cascade Reveal
+        animate(".nav-item", { opacity: 1, x: 0 }, { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: stagger(0.1) });
         animate("footer", { y: 0, opacity: 1 }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
       } else {
         // Normal fast entrance for subsequent navigations
-        animate(".nav-reveal-bg", { opacity: 1, scale: 1 }, { duration: 0 });
-        animate(".nav-item", { opacity: 1, y: 0 }, { duration: 0 });
-        animate("header", { y: 0, opacity: 1 }, { duration: 0 });
+        animate(".nav-item", { opacity: 1, x: 0 }, { duration: 0 });
         animate("footer", { y: 0, opacity: 1 }, { duration: 0 });
       }
     }

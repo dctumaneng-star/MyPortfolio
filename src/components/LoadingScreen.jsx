@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useAnimate } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const TELEMETRY = [
@@ -22,7 +22,6 @@ function TelemetryLine({ text, delay }) {
       i++;
       
       if (i <= text.length) {
-        // Smooth deliberate typing
         timeoutId = setTimeout(typeChar, 30);
       }
     };
@@ -42,176 +41,133 @@ function TelemetryLine({ text, delay }) {
 export default function LoadingScreen({ onComplete, fullSequence = true }) {
   const [phase, setPhase] = useState(1);
   const [progress, setProgress] = useState(0);
-  const [counterScope, animateCounter] = useAnimate();
 
-  // Phase 1 -> 2
+  // Auto progression Phase 1 & 2
   useEffect(() => {
-    if (phase !== 1) return;
-    // Fast track: 500ms, Full: 2000ms
-    const t = setTimeout(() => setPhase(2), fullSequence ? 2000 : 500);
-    return () => clearTimeout(t);
+    if (phase === 1 || phase === 2) {
+      const duration = fullSequence ? 2500 : 500;
+      const startTime = Date.now();
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const next = Math.min(100, Math.floor((elapsed / duration) * 100));
+        setProgress(next);
+        if (next === 100) {
+          clearInterval(interval);
+          setPhase(3);
+        }
+      }, 30);
+      return () => clearInterval(interval);
+    }
   }, [phase, fullSequence]);
 
-  // Phase 2: Counting
+  // Phase 3 hold
   useEffect(() => {
-    if (phase !== 2) return;
-    
-    let current = 0;
-    const tickRate = fullSequence ? 25 : 10; 
-    
-    const interval = setInterval(() => {
-      // Steady counting; fast track jumps by 5
-      current += fullSequence ? 1 : 5;
-      
-      if (current >= 100) {
-        current = 100;
-        clearInterval(interval);
-        
-        // Smooth dissolve effect instead of glitch
-        if (counterScope.current) {
-          animateCounter(counterScope.current, {
-            filter: "blur(10px)",
-            opacity: 0,
-            scale: 1.1
-          }, { duration: fullSequence ? 0.8 : 0.3, ease: [0.22, 1, 0.36, 1] }).then(() => {
-            setPhase(3);
-          });
-        } else {
-          setTimeout(() => onComplete(), 100);
-        }
-      }
-      setProgress(current);
-    }, tickRate); 
-    
-    return () => clearInterval(interval);
-  }, [phase, fullSequence, onComplete, animateCounter, counterScope]);
-
-  // Phase 3: Name Drop
-  useEffect(() => {
-    if (phase !== 3) return;
-    // Wait for stagger + spring, then break out immediately
-    const t = setTimeout(() => onComplete(), fullSequence ? 1800 : 800);
-    return () => clearTimeout(t);
+    if (phase === 3) {
+      // Hold the massive centered pill state for 1.5 - 2s
+      const t = setTimeout(() => onComplete(), fullSequence ? 1800 : 800);
+      return () => clearTimeout(t);
+    }
   }, [phase, fullSequence, onComplete]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] overflow-hidden flex flex-col justify-center items-center pointer-events-none"
+      className="fixed inset-0 z-[100] bg-void overflow-hidden pointer-events-none text-chalk"
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.1 }} 
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      <AnimatePresence>
-        
-        {(phase === 1 || phase === 2) && (
-          <motion.div
-            key="preloader-bg"
-            exit={{ y: "-100%", opacity: 0 }} // Masks away upwards, fast
-            transition={{ duration: 0.6, ease: [0.77, 0, 0.175, 1] }}
-            className="absolute inset-0 bg-chalk dark:bg-void flex flex-col items-center justify-center w-full"
-          >
-            {/* Phase 1 Structural Grid Lines */}
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }} 
-              className="absolute top-1/2 left-0 w-full h-px bg-ink/10 dark:bg-neon/20" 
-            />
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }} 
-              className="absolute top-0 left-1/2 w-px h-full bg-ink/10 dark:bg-neon/20" 
-            />
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at center, rgba(0, 229, 192, 0.03) 0%, transparent 60%)" }} />
 
-            {/* Phase 1 Telemetry Corners */}
-            <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase">
-              <TelemetryLine text={TELEMETRY[0]} delay={100} />
-            </div>
-            <div className="absolute top-6 right-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase text-right">
-              <TelemetryLine text={TELEMETRY[1]} delay={300} />
-            </div>
-            <div className="absolute bottom-10 left-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase">
-              <TelemetryLine text={TELEMETRY[2]} delay={500} />
-            </div>
-            <div className="absolute bottom-10 right-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase text-right">
-              <TelemetryLine text={TELEMETRY[3]} delay={200} />
-            </div>
+      {/* Telemetry data overlays */}
+      <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest flex flex-col gap-2">
+        <span className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 bg-neon rounded-full animate-pulse-dot shadow-[0_0_8px_rgba(0,229,192,0.5)]" />
+          SYSTEM_ONLINE
+        </span>
+        <div className="flex flex-col gap-1 mt-4 opacity-60">
+          {TELEMETRY.map((line, i) => (
+            <TelemetryLine key={i} text={line} delay={i * 400 + 200} />
+          ))}
+        </div>
+      </div>
+      <div className="absolute bottom-6 right-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest text-right">
+        MEMORY: 64.0GB / 128.0GB<br/>
+        VRAM: ALLOCATED (ACTIVE)
+      </div>
 
-            {/* Phase 2 Counter & Baseline */}
-            {phase === 2 && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                transition={{ type: "spring", damping: 20, stiffness: 200 }}
-                className="absolute inset-0 flex flex-col items-center justify-center w-full"
-              >
-                <div 
-                  ref={counterScope}
-                  className="font-mono text-ink dark:text-neon text-7xl md:text-9xl font-bold tracking-tighter"
-                  style={{ textShadow: "0px 0px transparent" }}
-                >
-                  {progress < 10 ? `0${progress}` : progress}
-                </div>
-                
-                {/* Razor thin neon baseline progress */}
-                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-chalk dark:bg-void">
-                  <motion.div
-                    className="h-full bg-ink dark:bg-neon"
-                    style={{ width: `${progress}%` }}
-                    transition={{ ease: "linear", duration: 0.1 }}
-                  />
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
-        )}
-
-        {/* Phase 3: Name Drop (Navbar Origin Point) */}
-        {phase === 3 && (
-          <motion.div
-            key="phase-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: fullSequence ? 0.4 : 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-3 left-1/2 -translate-x-1/2 z-50 px-8 h-14 flex items-center justify-between w-[95%] max-w-5xl"
-          >
-            <h1 className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk lowercase flex">
+      <div className={`absolute inset-0 flex justify-center ${phase >= 3 ? "items-center" : "items-center"}`}>
+        <AnimatePresence>
+          {phase <= 2 && (
+            <motion.div
+              layoutId="navbar-bg"
+              className="relative w-48 h-48 rounded-full flex items-center justify-center"
+              style={{ borderRadius: "50%" }}
+              transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
+            >
+              {/* The SVG Circle */}
+              <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="48" stroke="rgba(255,255,255,0.05)" strokeWidth="1" fill="none" />
+                <motion.circle 
+                  cx="50" cy="50" r="48" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  fill="none" 
+                  className="text-neon drop-shadow-[0_0_8px_rgba(0,229,192,0.5)]"
+                  strokeDasharray="301.59"
+                  strokeDashoffset={301.59 - (progress / 100) * 301.59}
+                  transition={{ ease: "linear", duration: 0.1 }}
+                />
+              </svg>
+              {/* Counter Text */}
               <motion.span 
-                layoutId="brand-name" 
-                className="inline-flex overflow-visible"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: {},
-                  visible: {
-                    transition: { staggerChildren: fullSequence ? 0.05 : 0.02 }
-                  }
-                }}
+                className="font-mono text-4xl text-chalk tracking-tighter"
+                exit={{ opacity: 0, filter: "blur(10px)", scale: 1.2 }}
+                transition={{ duration: 0.3 }}
               >
-                {"daryl tumaneng.".split("").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    variants={{
-                      hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
-                      visible: { 
-                        opacity: 1, 
-                        y: 0, 
-                        filter: "blur(0px)",
-                        transition: { type: "spring", stiffness: 100, damping: 20 }
-                      }
-                    }}
-                    className={char === " " ? "w-[0.25em]" : "inline-block"}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
+                {progress.toString().padStart(2, '0')}
               </motion.span>
-            </h1>
-          </motion.div>
-        )}
-        
-      </AnimatePresence>
+            </motion.div>
+          )}
+
+          {phase === 3 && (
+            <motion.div
+              layoutId="navbar-bg"
+              className="relative w-[90vw] md:w-[70vw] max-w-4xl h-32 md:h-48 rounded-[40px] md:rounded-[60px] liquid-glass flex items-center justify-center border border-chalk/10"
+              transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
+            >
+              <h1 className="font-display font-medium text-4xl sm:text-6xl md:text-7xl tracking-tight text-chalk lowercase overflow-visible">
+                <motion.span 
+                  layoutId="brand-name"
+                  className="inline-flex overflow-visible"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: {},
+                    visible: { transition: { staggerChildren: fullSequence ? 0.05 : 0.02 } }
+                  }}
+                >
+                  {"daryl tumaneng.".split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      variants={{
+                        hidden: { opacity: 0, y: 30, filter: "blur(12px)" },
+                        visible: { 
+                          opacity: 1, 
+                          y: 0, 
+                          filter: "blur(0px)",
+                          transition: { type: "spring", stiffness: 100, damping: 20 }
+                        }
+                      }}
+                      className={char === " " ? "w-[0.25em]" : "inline-block"}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.span>
+              </h1>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.div>
   );
 }

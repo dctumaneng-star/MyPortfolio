@@ -81,10 +81,9 @@ export default function Navbar({ dark, onToggle, onReboot }) {
       >
         {/* The background materializes independently, transitioning opacity */}
         <motion.div 
-          animate={{ opacity: scrolled ? 1 : 0 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="absolute inset-0 rounded-full overflow-hidden nav-reveal-bg liquid-glass grain-overlay" 
-          style={{ transformOrigin: "10% 50%" }} 
+          layoutId="navbar-bg"
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+          className="absolute inset-0 rounded-full overflow-hidden liquid-glass grain-overlay" 
         />
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">
@@ -95,25 +94,22 @@ export default function Navbar({ dark, onToggle, onReboot }) {
               navigate("/");
               if (onReboot) onReboot();
             }}
-            className={`font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
-                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none
-                       ${location.pathname === "/" ? "opacity-0 pointer-events-none" : "opacity-100"}`}
-            data-hover={location.pathname !== "/"}
+            className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
+                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none"
+            data-hover="true"
           >
-            {location.pathname !== "/" && (
-              <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
-            )}
+            <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
           </button>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 lowercase nav-item">
+          <nav className="hidden md:flex items-center gap-8 lowercase">
             {LINKS.map(({ href, label }) => {
               const isActive = location.pathname === href;
               return (
                 <Link
                   key={href}
                   to={href}
-                  className={`mono-label transition-colors duration-200 cursor-none relative
+                  className={`nav-item mono-label transition-colors duration-200 cursor-none relative
                     ${isActive ? "text-neon opacity-100" : "text-ink dark:text-chalk opacity-60 hover:opacity-100 hover:text-neon dark:hover:text-neon"}`}
                   data-hover="true"
                 >
@@ -130,8 +126,10 @@ export default function Navbar({ dark, onToggle, onReboot }) {
             })}
           </nav>
 
-          <div className="flex items-center gap-4 nav-item">
-            <ThemeToggle dark={dark} onToggle={onToggle} />
+          <div className="flex items-center gap-4">
+            <div className="nav-item">
+              <ThemeToggle dark={dark} onToggle={onToggle} />
+            </div>
 
             {/* Mobile hamburger */}
             <button
