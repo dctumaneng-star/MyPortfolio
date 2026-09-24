@@ -37,7 +37,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-void min-h-screen selection:bg-neon selection:text-void">
+    <>
       <AnimatePresence mode="wait">
         {loading ? (
           <LoadingScreen 
@@ -60,6 +60,6 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 }
