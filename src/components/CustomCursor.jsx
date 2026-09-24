@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  const [hoveredEl, setHoveredEl] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
   
   useEffect(() => {
@@ -24,27 +24,13 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const onMove = (e) => {
-      if (!hoveredEl) {
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
-      } else {
-        // Magnetic pull toward the center of the hovered element
-        const rect = hoveredEl.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        // Calculate a slight parallax based on mouse position within the element
-        const pullX = (e.clientX - centerX) * 0.1;
-        const pullY = (e.clientY - centerY) * 0.1;
-        
-        mouseX.set(centerX + pullX);
-        mouseY.set(centerY + pullY);
-      }
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
 
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, [hoveredEl, mouseX, mouseY]);
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
     const attach = () => {
@@ -53,19 +39,15 @@ export default function CustomCursor() {
 
       els.forEach((el) => {
         const onEnter = () => {
-          setHoveredEl(el);
-          const rect = el.getBoundingClientRect();
-          const padding = 8;
-          width.set(rect.width + padding);
-          height.set(rect.height + padding);
-          borderRadius.set(12); // rounded-xl look
-          opacity.set(1); // remain fully visible as a hollow ring
+          setIsHovered(true);
+          width.set(36);
+          height.set(36);
+          opacity.set(0.5); 
         };
         const onLeave = () => {
-          setHoveredEl(null);
+          setIsHovered(false);
           width.set(12);
           height.set(12);
-          borderRadius.set(9999);
           opacity.set(1);
         };
 
@@ -99,11 +81,11 @@ export default function CustomCursor() {
     <motion.div
       className="fixed top-0 left-0 pointer-events-none z-[9999]"
       animate={{
-        backgroundColor: hoveredEl ? "transparent" : "#00E5C0",
-        border: hoveredEl ? "1px solid #00E5C0" : "0px solid transparent",
-        scale: hoveredEl ? [1, 1.05, 1] : 1
+        backgroundColor: isHovered ? "transparent" : "#00E5C0",
+        border: isHovered ? "1px solid #00E5C0" : "0px solid transparent",
+        scale: isHovered ? [1, 1.05, 1] : 1
       }}
-      transition={{ duration: 0.2, scale: { repeat: hoveredEl ? Infinity : 0, duration: 2 } }}
+      transition={{ duration: 0.2, scale: { repeat: isHovered ? Infinity : 0, duration: 2 } }}
       style={{
         x: smoothX,
         y: smoothY,
