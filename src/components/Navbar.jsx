@@ -86,7 +86,7 @@ export default function Navbar({ dark, onToggle }) {
         style={{ x: "-50%" }}
       >
         {/* The background materializes independently */}
-        <div className={`absolute inset-0 rounded-full overflow-hidden nav-reveal-bg ${scrolled || menuOpen ? "liquid-glass grain-overlay" : "bg-transparent"}`} />
+        <div className="absolute inset-0 rounded-full overflow-hidden nav-reveal-bg liquid-glass grain-overlay" />
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">
 

@@ -36,7 +36,7 @@ export default function Home() {
   const yParallaxBento = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const yParallaxImage = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
-  const delayCascade = isFirstLoad ? 1.0 : 0.4;
+  const delayCascade = isFirstLoad ? 1.2 : 0.4;
 
   return (
     <PageTransition className="justify-start pt-8 pb-16 overflow-x-hidden lowercase">

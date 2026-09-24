@@ -30,13 +30,24 @@ export default function Layout({ dark, onToggle, children }) {
     async function runSequence() {
       if (isFirstLoad) {
         // Timeline Orchestration: Resolves the component mount sequence dynamically
-        // The header container stays in place so layoutId morphing calculates the exact final coordinates.
-        // We only fade in the background/borders and internal elements after the morph finishes.
-        await animate(".nav-reveal-bg", { opacity: [0, 1], scale: [0.95, 1] }, { type: "spring", stiffness: 100, damping: 20, delay: 0.8 });
-        animate(".nav-item", { opacity: [0, 1], y: [-10, 0] }, { type: "spring", stiffness: 100, damping: 20 });
+        // Immediately hide elements that will be revealed later
+        animate(".nav-reveal-bg", { opacity: 0, scaleX: 0.4, scaleY: 0.4 }, { duration: 0 });
+        animate(".nav-item", { opacity: 0, y: -10 }, { duration: 0 });
+        animate("footer", { y: 100, opacity: 0 }, { duration: 0 });
+        animate("main", { opacity: 0, scale: 0.95 }, { duration: 0 });
+
+        // 1. Wait for the text to fly to the navbar (approx 0.7s)
+        await new Promise(r => setTimeout(r, 700));
+
+        // 2. The navbar liquid glass pill "opens" around the text
+        await animate(".nav-reveal-bg", { opacity: 1, scaleX: 1, scaleY: 1 }, { type: "spring", stiffness: 150, damping: 20 });
         
-        animate("footer", { y: [100, 0], opacity: [0, 1] }, { type: "spring", stiffness: 100, damping: 20 });
-        animate("main", { opacity: [0, 1], scale: [0.95, 1] }, { type: "spring", stiffness: 100, damping: 20, delay: 0.1 });
+        // 3. The internal nav items and the footer materialize
+        animate(".nav-item", { opacity: 1, y: 0 }, { type: "spring", stiffness: 100, damping: 20 });
+        animate("footer", { y: 0, opacity: 1 }, { type: "spring", stiffness: 100, damping: 20 });
+        
+        // 4. Finally, the main page content bursts outward
+        animate("main", { opacity: 1, scale: 1 }, { type: "spring", stiffness: 100, damping: 20 });
       } else {
         // Normal fast entrance for subsequent navigations
         animate(".nav-reveal-bg", { opacity: 1, scale: 1 }, { duration: 0 });
