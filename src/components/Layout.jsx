@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useAnimate } from "framer-motion";
 import { isFirstLoad } from "../utils/firstLoad";
 
-export default function Layout({ dark, onToggle, children }) {
+export default function Layout({ dark, onToggle, onReboot, children }) {
   const [scope, animate] = useAnimate();
   const [showContent, setShowContent] = useState(!isFirstLoad);
   const mouseX = useMotionValue(0);
@@ -35,7 +35,7 @@ export default function Layout({ dark, onToggle, children }) {
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, cursorRawX, cursorRawY]);
 
   useEffect(() => {
     async function runSequence() {
@@ -72,7 +72,7 @@ export default function Layout({ dark, onToggle, children }) {
   return (
     <div ref={scope}>
       <CustomCursor />
-      <Navbar dark={dark} onToggle={onToggle} />
+      <Navbar dark={dark} onToggle={onToggle} onReboot={onReboot} />
 
       {/* Ambient Fluid Mesh Background & Grid Overlay */}
       <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-chalk dark:bg-void">

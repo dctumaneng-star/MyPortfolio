@@ -2,8 +2,8 @@ import "./index.css";
 import { useState } from "react";
 import { useTheme } from "./hooks/useTheme";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import { clearFirstLoad } from "./utils/firstLoad";
+import { AnimatePresence, motion } from "framer-motion";
+import { clearFirstLoad, resetFirstLoad } from "./utils/firstLoad";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -31,26 +31,35 @@ export default function App() {
   const [dark, toggleDark] = useTheme();
   const [loading, setLoading] = useState(true);
 
+  const handleReboot = () => {
+    resetFirstLoad();
+    setLoading(true);
+  };
+
   return (
-    <>
-      <AnimatePresence>
-        {loading && (
+    <div className="bg-void min-h-screen selection:bg-neon selection:text-void">
+      <AnimatePresence mode="wait">
+        {loading ? (
           <LoadingScreen 
             key="preloader" 
-            fullSequence={window.location.pathname === "/"}
+            fullSequence={true}
             onComplete={() => {
               setLoading(false);
               clearFirstLoad();
             }} 
           />
+        ) : (
+          <motion.div
+            key="layout"
+            exit={{ opacity: 0, scale: 0.9, filter: "brightness(0)" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Layout dark={dark} onToggle={toggleDark} onReboot={handleReboot}>
+              <AnimatedRoutes />
+            </Layout>
+          </motion.div>
         )}
       </AnimatePresence>
-
-      {!loading && (
-        <Layout dark={dark} onToggle={toggleDark}>
-          <AnimatedRoutes />
-        </Layout>
-      )}
-    </>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const LINKS = [
   { href: "/",         label: "home"     },
@@ -60,11 +60,12 @@ function MobileMenu({ open, onClose }) {
   );
 }
 
-export default function Navbar({ dark, onToggle }) {
+export default function Navbar({ dark, onToggle, onReboot }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useMotionValueEvent(scrollY, "change", (y) => {
     setScrolled(y > 40);
@@ -88,15 +89,18 @@ export default function Navbar({ dark, onToggle }) {
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">
 
-          {/* Name mark - ALWAYS visible for layout morphing */}
-          <Link
-            to="/"
+          {/* Name mark - Reboot Trigger */}
+          <button
+            onClick={() => {
+              navigate("/");
+              if (onReboot) onReboot();
+            }}
             className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
                        hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none"
             data-hover="true"
           >
             <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
-          </Link>
+          </button>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8 lowercase nav-item">
