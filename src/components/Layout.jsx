@@ -1,10 +1,29 @@
 import CustomCursor from "./CustomCursor";
 import Navbar from "./Navbar";
 import Baseline from "./Footer";
-
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function Layout({ dark, onToggle, children }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { damping: 20, stiffness: 100 });
+  const smoothY = useSpring(mouseY, { damping: 20, stiffness: 100 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Normalize to 0-1 across viewport
+      mouseX.set(e.clientX / window.innerWidth);
+      mouseY.set(e.clientY / window.innerHeight);
+      
+      // Update global CSS vars for components to use (e.g., reactive glare)
+      document.documentElement.style.setProperty('--mouse-norm-x', e.clientX / window.innerWidth);
+      document.documentElement.style.setProperty('--mouse-norm-y', e.clientY / window.innerHeight);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
   return (
     <>
       <CustomCursor />
