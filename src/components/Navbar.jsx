@@ -93,7 +93,12 @@ export default function Navbar({ dark, onToggle }) {
         style={{ x: "-50%" }}
       >
         {/* The background materializes independently, expanding from the text's location */}
-        <div className="absolute inset-0 rounded-full overflow-hidden nav-reveal-bg liquid-glass grain-overlay" style={{ transformOrigin: "10% 50%" }} />
+        <motion.div 
+          animate={{ opacity: scrolled ? 1 : 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="absolute inset-0 rounded-full overflow-hidden nav-reveal-bg liquid-glass grain-overlay" 
+          style={{ transformOrigin: "10% 50%" }} 
+        />
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">
 
