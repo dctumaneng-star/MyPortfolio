@@ -10,18 +10,33 @@ const TELEMETRY = [
 
 function TelemetryLine({ text, delay }) {
   const [displayText, setDisplayText] = useState("");
+  
   useEffect(() => {
     let i = 0;
-    const to = setTimeout(() => {
-      const int = setInterval(() => {
-        setDisplayText(text.slice(0, i));
-        i++;
-        if (i > text.length) clearInterval(int);
-      }, 20);
-      return () => clearInterval(int);
-    }, delay);
-    return () => clearTimeout(to);
+    let timeoutId;
+    let mounted = true;
+
+    const typeChar = () => {
+      if (!mounted) return;
+      setDisplayText(text.slice(0, i));
+      i++;
+      
+      if (i <= text.length) {
+        // Simulate processing delays: mostly fast, occasional lag spike
+        const lag = Math.random() > 0.85 ? Math.random() * 150 : Math.random() * 20 + 10;
+        timeoutId = setTimeout(typeChar, lag);
+      }
+    };
+
+    const initialTimeout = setTimeout(typeChar, delay);
+
+    return () => {
+      mounted = false;
+      clearTimeout(initialTimeout);
+      clearTimeout(timeoutId);
+    };
   }, [text, delay]);
+
   return <span>{displayText}</span>;
 }
 
@@ -33,7 +48,8 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
   // Phase 1 -> 2
   useEffect(() => {
     if (phase !== 1) return;
-    const t = setTimeout(() => setPhase(2), 1200);
+    // Enforce 1.5s to 2s for System Power-On
+    const t = setTimeout(() => setPhase(2), 2000);
     return () => clearTimeout(t);
   }, [phase]);
 
@@ -42,10 +58,12 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
     if (phase !== 2) return;
     
     let current = 0;
-    const tickRate = fullSequence ? 20 : 10; 
+    // Set duration of at least 2.5 seconds for counting (100 steps * 25ms = 2500ms)
+    const tickRate = fullSequence ? 25 : 10; 
     
     const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 8) + 2;
+      // Steady counting instead of massive jumps
+      current += fullSequence ? 1 : Math.floor(Math.random() * 8) + 2;
       
       if (current >= 100) {
         current = 100;
@@ -64,7 +82,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
             ],
             opacity: [1, 0.5, 1, 0.8, 1]
           }, { duration: 0.3, times: [0, 0.25, 0.5, 0.75, 1] }).then(() => {
-            setTimeout(() => setPhase(3), 200);
+            setTimeout(() => setPhase(3), 400); // Brief hold after glitch
           });
         } else {
           setTimeout(() => onComplete(), 100);
@@ -79,7 +97,8 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
   // Phase 3: Name Drop
   useEffect(() => {
     if (phase !== 3) return;
-    const t = setTimeout(() => onComplete(), 1000);
+    // Hold for a brief moment so it is fully legible (1.5 seconds)
+    const t = setTimeout(() => onComplete(), 1500);
     return () => clearTimeout(t);
   }, [phase, onComplete]);
 
