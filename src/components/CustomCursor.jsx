@@ -3,7 +3,14 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const [hoveredEl, setHoveredEl] = useState(null);
+  const [isTouch, setIsTouch] = useState(false);
   
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      setIsTouch(true);
+    }
+  }, []);
+
   const mouseX = useMotionValue(window.innerWidth / 2);
   const mouseY = useMotionValue(window.innerHeight / 2);
   
@@ -86,9 +93,11 @@ export default function CustomCursor() {
     };
   }, [width, height, borderRadius, opacity]);
 
+  if (isTouch) return null;
+
   return (
     <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999] bg-white mix-blend-difference"
+      className="fixed top-0 left-0 pointer-events-none z-[9999] bg-neon"
       style={{
         x: smoothX,
         y: smoothY,

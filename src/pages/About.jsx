@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import PageTransition from "../components/PageTransition";
 import { KineticText, TE_EASE } from "../components/KineticText";
+import FluidCard from "../components/FluidCard";
 
 const HOBBIES = [
   {
@@ -120,63 +121,23 @@ export default function About() {
 
   return (
     <PageTransition className="pt-8 pb-16 lowercase">
-      <div className="max-w-6xl mx-auto px-6 w-full">
+      <div className="max-w-6xl mx-auto px-6 w-full space-y-24">
         
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-8">
           <KineticText 
-            text="beyond the code." 
-            className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none mb-0" 
+            text="credentials." 
+            className="font-display font-medium text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] text-ink dark:text-chalk leading-none mb-0 tracking-tighter" 
             delay={delayCascade}
           />
         </div>
 
-        {/* Hobbies / Interests Bento Grid */}
+        {/* Top Section: Credentials */}
         <motion.div 
-          layout
-          transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }}
-          style={{ y: yParallaxHobby }}
-          variants={dynamicGridContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, margin: "-15%" }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark mb-24"
+          className="grid lg:grid-cols-[1fr_2.5fr] gap-12 lg:gap-24 items-start border-t border-line-light dark:border-line-dark pt-12"
         >
-          {HOBBIES.map((hobby) => (
-            <motion.div
-              key={hobby.id}
-              variants={gridItem}
-              className={`bg-chalk dark:bg-void p-6 md:p-8 flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden min-h-[220px] ${hobby.colSpan}`}
-            >
-              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
-              
-              <div className="flex flex-col flex-1">
-                <span className="mono-label block mb-4 group-hover:text-ink dark:group-hover:text-ink dark:hover:text-neon transition-colors duration-150">{hobby.id}</span>
-                <h3 className="font-display font-medium text-3xl md:text-4xl text-ink dark:text-chalk leading-none mb-4 break-words">
-                  {hobby.title}
-                </h3>
-                <p className="font-body text-sm text-ink dark:text-chalk/60 leading-relaxed mb-6">
-                  {hobby.description}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {hobby.tags.map(tag => (
-                  <span key={tag} className="neon-tag lowercase group-hover:bg-void group-hover:text-neon transition-colors duration-150">{tag}</span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Lists Container */}
-        <motion.div 
-          style={{ y: yParallaxLists }}
-          className="grid lg:grid-cols-[1fr_2.5fr] gap-12 lg:gap-24 items-start border-t border-line-light dark:border-line-dark pt-16"
-        >
-          
           {/* Experience */}
-          <div className="border-t border-line-light dark:border-line-dark lg:border-none lg:pt-0 pt-12">
+          <div className="lg:border-none lg:pt-0">
             <span className="mono-label block mb-12">experience</span>
             <motion.div 
               variants={dynamicGridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
@@ -195,8 +156,8 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Education */}
-          <div>
+          {/* Education & Certs */}
+          <div className="border-t border-line-light dark:border-line-dark lg:border-none pt-12 lg:pt-0">
             <span className="mono-label block mb-12">education & certs</span>
             <motion.div 
               variants={dynamicGridContainer} initial="hidden" whileInView="show" viewport={{ once: false, margin: "-15%" }}
@@ -213,8 +174,60 @@ export default function About() {
               ))}
             </motion.div>
           </div>
-
         </motion.div>
+
+        {/* Middle Section: Personal Bio */}
+        <motion.div 
+          style={{ y: yParallaxLists }}
+          className="max-w-4xl mx-auto border-t border-line-light dark:border-line-dark pt-24 pb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.8, ease: TE_EASE }}
+        >
+          <span className="mono-label block mb-8">personal biography</span>
+          <p className="font-display text-2xl md:text-4xl lg:text-5xl text-ink dark:text-chalk/90 leading-tight tracking-tight">
+            i am a multidimensional developer and designer based in plaridel, bulacan. while my foundation is in full-stack web and mobile application development, my passion lies in bridging the gap between deep backend infrastructure and hyper-fluid user interfaces. i build systems that are as structurally sound as they are visually striking.
+          </p>
+        </motion.div>
+
+        {/* Bottom Section: Interests Grid */}
+        <div className="border-t border-line-light dark:border-line-dark pt-24">
+          <span className="mono-label block mb-12">interests module</span>
+          <motion.div 
+            style={{ y: yParallaxHobby }}
+            variants={dynamicGridContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, margin: "-15%" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6"
+          >
+            {HOBBIES.map((hobby) => (
+              <FluidCard
+                key={hobby.id}
+                variants={gridItem}
+                className={`liquid-glass grain-overlay p-8 md:p-10 flex flex-col justify-between group transition-colors duration-300 min-h-[240px] ${hobby.colSpan}`}
+              >
+                <div className="flex flex-col flex-1 z-20">
+                  <span className="font-mono text-[10px] text-ink/50 dark:text-chalk/50 uppercase tracking-widest border border-ink/10 dark:border-chalk/10 px-2 py-1 rounded-sm self-start mb-6">
+                    {hobby.id}
+                  </span>
+                  <h3 className="font-display font-medium text-2xl md:text-3xl text-ink dark:text-chalk leading-none mb-4 break-words">
+                    {hobby.title}
+                  </h3>
+                  <p className="font-body text-sm md:text-base text-ink/70 dark:text-chalk/70 leading-relaxed mb-8">
+                    {hobby.description}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-auto z-20">
+                  {hobby.tags.map(tag => (
+                    <span key={tag} className="neon-tag lowercase transition-colors duration-150">{tag}</span>
+                  ))}
+                </div>
+              </FluidCard>
+            ))}
+          </motion.div>
+        </div>
 
       </div>
     </PageTransition>

@@ -56,15 +56,36 @@ export default function FluidCard({ children, className = "", as: Component = mo
     >
       {/* Proximity Glow */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100 mix-blend-overlay z-10"
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100 z-10"
         style={{
           background: useMotionTemplate`
             radial-gradient(
               400px circle at ${mouseX}px ${mouseY}px,
-              rgba(255, 255, 255, 0.4),
+              rgba(200, 255, 0, 0.15),
               transparent 80%
             )
           `,
+        }}
+      />
+      {/* 1px Border Reveal */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100 z-20"
+        style={{
+          WebkitMaskImage: useMotionTemplate`
+            radial-gradient(
+              250px circle at ${mouseX}px ${mouseY}px,
+              black,
+              transparent 80%
+            )
+          `,
+          maskImage: useMotionTemplate`
+            radial-gradient(
+              250px circle at ${mouseX}px ${mouseY}px,
+              black,
+              transparent 80%
+            )
+          `,
+          border: "1px solid #C8FF00"
         }}
       />
       

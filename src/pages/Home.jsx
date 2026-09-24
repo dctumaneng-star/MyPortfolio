@@ -97,21 +97,40 @@ export default function Home() {
             </motion.p>
           </div>
 
-          {/* Portrait Image */}
+          {/* Abstract Hero Artwork */}
           <motion.div 
             style={{ y: yParallaxImage }}
-            className="w-48 h-64 md:w-64 md:h-80 lg:w-72 lg:h-96 relative transition-all duration-150 object-cover shrink-0"
-            initial={{ opacity: 0, scale: 0.95 }}
+            className="w-48 h-64 md:w-64 md:h-80 lg:w-72 lg:h-96 relative shrink-0 flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: delayCascade + 0.2, duration: 0.8, ease: TE_EASE }}
+            transition={{ delay: delayCascade + 0.2, duration: 1.2, ease: TE_EASE }}
           >
-            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-neon z-10" />
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-neon z-10" />
-            <img 
-              src="/portrait.jpg" 
-              alt="daryl tumaneng." 
-              className="w-full h-full object-cover"
+            {/* Fluid glowing orb */}
+            <motion.div 
+              className="absolute w-3/4 h-3/4 rounded-full bg-neon mix-blend-screen blur-[40px] opacity-40 dark:opacity-20"
+              animate={{
+                scale: [1, 1.2, 0.9, 1.1, 1],
+                rotate: [0, 90, 180, 270, 360],
+                borderRadius: ["50%", "40% 60% 70% 30%", "30% 70% 40% 60%", "50%"]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             />
+            {/* Spinning Wireframe Core */}
+            <motion.div 
+              className="absolute w-1/2 h-1/2 rounded-full border border-ink/20 dark:border-chalk/20"
+              animate={{ rotateX: [0, 360], rotateY: [0, 360] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <motion.div 
+                className="absolute inset-0 rounded-full border border-ink/10 dark:border-chalk/10" 
+                style={{ transform: "rotateX(90deg)" }} 
+              />
+              <motion.div 
+                className="absolute inset-0 rounded-full border border-ink/10 dark:border-chalk/10" 
+                style={{ transform: "rotateY(90deg)" }} 
+              />
+            </motion.div>
           </motion.div>
 
         </div>
@@ -129,7 +148,7 @@ export default function Home() {
         >
           {/* Card 1: Beyond the Code */}
           <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
-             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
+             
              <span className="mono-label block mb-6 lowercase">beyond the code</span>
              
              <ul className="space-y-4 font-display text-xl md:text-2xl text-ink dark:text-chalk/90 tracking-tight lowercase">
@@ -150,7 +169,7 @@ export default function Home() {
 
           {/* Card 2: Site Architecture */}
           <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass grain-overlay p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
-             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
+             
              
              <div className="flex justify-between items-start mb-6">
                 <span className="mono-label block lowercase">site architecture</span>

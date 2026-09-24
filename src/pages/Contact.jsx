@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import PageTransition from "../components/PageTransition";
 import { KineticText, TE_EASE } from "../components/KineticText";
 import { isFirstLoad } from "../utils/firstLoad";
+import FluidCard from "../components/FluidCard";
 
 export default function Contact() {
   const { scrollYProgress } = useScroll();
@@ -25,9 +26,9 @@ export default function Contact() {
         </div>
 
         <div className="mb-12">
-          <KineticText text="let's build" className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk mb-2 md:mb-0" delay={delayCascade + 0.1} />
-          <KineticText text="something" className="font-display font-medium text-display-xl leading-none text-stroke text-ink dark:text-chalk mb-2 md:mb-0" delay={delayCascade + 0.2} />
-          <KineticText text="great." className="font-display font-medium text-display-xl leading-none text-ink dark:text-chalk" delay={delayCascade + 0.3} />
+          <KineticText text="let's build" className="font-display font-medium text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter leading-none text-ink dark:text-chalk mb-2 md:mb-0" delay={delayCascade + 0.1} />
+          <KineticText text="something" className="font-display font-medium text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter leading-none text-stroke text-ink dark:text-chalk mb-2 md:mb-0" delay={delayCascade + 0.2} />
+          <KineticText text="great." className="font-display font-medium text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter leading-none text-ink dark:text-chalk" delay={delayCascade + 0.3} />
         </div>
 
         <motion.div
@@ -35,19 +36,19 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delayCascade + 0.5, duration: 0.7, ease: TE_EASE }}
         >
-          <motion.a
+          <FluidCard
+            as="a"
             href="mailto:dctumaneng13@gmail.com"
-            whileTap={{ scale: 0.98 }}
-            className="group inline-flex items-center gap-6 border-2 border-ink dark:border-chalk px-8 md:px-12 py-6 md:py-8 bg-chalk dark:bg-void hover:bg-neon dark:hover:bg-neon hover:border-neon dark:hover:border-neon transition-all duration-150 relative overflow-hidden cursor-none shadow-[6px_6px_0px_0px_rgba(10,10,10,1)] dark:shadow-[6px_6px_0px_0px_rgba(245,245,243,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(200,255,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(200,255,0,1)] active:translate-x-[6px] active:translate-y-[6px] active:shadow-none"
+            className="group inline-flex items-center gap-6 liquid-glass px-8 md:px-12 py-6 md:py-8 transition-colors duration-300 cursor-none w-fit"
             data-hover="true"
           >
-            <span className="font-display font-medium text-3xl md:text-5xl text-ink dark:text-chalk group-hover:text-void transition-colors duration-150 relative z-10">
+            <span className="font-display font-medium text-3xl md:text-5xl text-ink dark:text-chalk transition-colors duration-150 relative z-20">
               initiate contact
             </span>
-            <div className="overflow-hidden">
-              <ArrowUpRight size={40} className="text-ink dark:text-chalk group-hover:text-void group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-150 relative z-10" />
+            <div className="overflow-hidden z-20 relative">
+              <ArrowUpRight size={40} className="text-ink dark:text-chalk group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
             </div>
-          </motion.a>
+          </FluidCard>
         </motion.div>
 
         <motion.div 

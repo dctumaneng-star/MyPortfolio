@@ -75,14 +75,9 @@ function ProjectCard({ project }) {
       onHoverEnd={() => setHovered(false)}
       className={`liquid-glass p-8 flex flex-col justify-between
         min-h-[220px] md:min-h-[260px] transition-colors duration-150 group
-        hover:border-neon dark:hover:border-neon hover:bg-neon/5 block
         ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}
         ${project.href ? "cursor-none" : ""}`}
     >
-      <div 
-        className="absolute top-0 left-0 h-px bg-neon transition-all duration-150 ease-out"
-        style={{ width: hovered ? "100%" : "0%" }}
-      />
       
       <div className="flex flex-col flex-1">
         <div className="flex items-start justify-between min-w-0">
@@ -153,7 +148,7 @@ export default function Projects() {
         <div className="mb-16">
           <KineticText 
             text="selected work." 
-            className="font-display font-medium text-display-lg text-ink dark:text-chalk leading-none lowercase mb-0" 
+            className="font-display font-medium text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] text-ink dark:text-chalk leading-none lowercase mb-0 tracking-tighter" 
             delay={delayCascade}
           />
         </div>
@@ -167,7 +162,7 @@ export default function Projects() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}
-          className="grid md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark"
+          className="grid grid-cols-1 md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark"
         >
           {PROJECTS.map((p) => (
             <ProjectCard key={p.index} project={p} />
