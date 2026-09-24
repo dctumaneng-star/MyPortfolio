@@ -146,35 +146,39 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
                 transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
               />
               <div className="relative z-10 font-display font-medium text-3xl sm:text-4xl md:text-5xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
-                <motion.span 
-                  layoutId="brand-name"
-                  className="inline-flex whitespace-nowrap overflow-visible"
+                <motion.div
                   initial="hidden"
                   animate="visible"
-                  transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
                   variants={{
                     hidden: {},
                     visible: { transition: { staggerChildren: fullSequence ? 0.05 : 0.02 } }
                   }}
+                  className="inline-flex whitespace-nowrap overflow-visible"
                 >
-                  {"daryl tumaneng.".split("").map((char, index) => (
-                    <motion.span
-                      key={index}
-                      variants={{
-                        hidden: { opacity: 0, y: 30, filter: "blur(12px)" },
-                        visible: { 
-                          opacity: 1, 
-                          y: 0, 
-                          filter: "blur(0px)",
-                          transition: { type: "spring", stiffness: 100, damping: 20 }
-                        }
-                      }}
-                      className={char === " " ? "w-[0.25em]" : "inline-block"}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </motion.span>
+                  <motion.span 
+                    layoutId="brand-name"
+                    transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
+                    className="inline-flex whitespace-nowrap overflow-visible"
+                  >
+                    {"daryl tumaneng.".split("").map((char, index) => (
+                      <motion.span
+                        key={index}
+                        variants={{
+                          hidden: { opacity: 0, y: 30, filter: "blur(12px)" },
+                          visible: { 
+                            opacity: 1, 
+                            y: 0, 
+                            filter: "blur(0px)",
+                            transition: { type: "spring", stiffness: 100, damping: 20 }
+                          }
+                        }}
+                        className={char === " " ? "w-[0.25em]" : "inline-block"}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </motion.span>
+                </motion.div>
               </div>
             </div>
           )}

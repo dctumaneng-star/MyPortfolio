@@ -162,7 +162,7 @@ export default function Projects() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-px bg-line-light dark:bg-line-dark border-y border-line-light dark:border-line-dark"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 w-full"
         >
           {PROJECTS.map((p) => (
             <ProjectCard key={p.index} project={p} />

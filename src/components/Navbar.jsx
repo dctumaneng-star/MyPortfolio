@@ -101,12 +101,18 @@ export default function Navbar({ dark, onToggle, onReboot }) {
           >
             <motion.span 
               layoutId="brand-name" 
+              initial="visible"
+              animate="visible"
               transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} 
               className="inline-flex whitespace-nowrap overflow-visible relative z-10"
             >
               {"daryl tumaneng.".split("").map((char, index) => (
                 <motion.span
                   key={index}
+                  variants={{
+                    hidden: { opacity: 0, y: 30, filter: "blur(12px)" },
+                    visible: { opacity: 1, y: 0, filter: "blur(0px)" }
+                  }}
                   className={char === " " ? "w-[0.25em]" : "inline-block"}
                 >
                   {char}
