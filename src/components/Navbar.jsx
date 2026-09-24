@@ -49,7 +49,8 @@ function MobileMenu({ open, onClose }) {
           <Link
             to={href}
             onClick={onClose}
-            className="block font-display font-medium text-5xl text-ink dark:text-chalk py-4 hover:text-ink dark:hover:text-neon transition-colors duration-200 lowercase"
+            className="block font-display font-medium text-5xl text-ink dark:text-chalk py-4 hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase cursor-none"
+            data-hover="true"
           >
             {label}
           </Link>
@@ -91,7 +92,8 @@ export default function Navbar({ dark, onToggle }) {
           <Link
             to="/"
             className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
-                       hover:text-ink dark:hover:text-neon transition-colors duration-200 lowercase block"
+                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none"
+            data-hover="true"
           >
             <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
           </Link>
@@ -104,12 +106,18 @@ export default function Navbar({ dark, onToggle }) {
                 <Link
                   key={href}
                   to={href}
-                  className={`mono-label transition-colors duration-200 px-2 py-0.5 rounded-sm
-                    ${isActive
-                      ? "bg-neon text-ink dark:bg-transparent dark:text-neon"
-                      : "hover:bg-neon hover:text-ink dark:hover:bg-transparent dark:hover:text-neon"}`}
+                  className={`mono-label transition-colors duration-200 cursor-none relative
+                    ${isActive ? "text-neon opacity-100" : "text-ink dark:text-chalk opacity-60 hover:opacity-100 hover:text-neon dark:hover:text-neon"}`}
+                  data-hover="true"
                 >
                   {label}
+                  {isActive && (
+                    <motion.div 
+                      layoutId="nav-indicator"
+                      className="absolute -bottom-1 left-0 right-0 h-[1px] bg-neon"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
                 </Link>
               );
             })}

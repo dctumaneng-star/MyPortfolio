@@ -31,7 +31,7 @@ export default function Baseline() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mono-label hover:text-ink dark:hover:text-neon transition-colors duration-200 opacity-60 hover:opacity-100 cursor-none"
+              className="mono-label hover:text-neon dark:hover:text-neon transition-colors duration-200 opacity-60 hover:opacity-100 cursor-none"
               data-hover="true"
             >
               {label}
