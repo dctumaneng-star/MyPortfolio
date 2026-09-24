@@ -76,14 +76,14 @@ export default function Navbar({ dark, onToggle, onReboot }) {
       <motion.header
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="fixed top-3 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full border border-ink/10 dark:border-chalk/10"
+        className="fixed top-3 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full"
         style={{ x: "-50%" }}
       >
         {/* The background materializes independently, transitioning opacity */}
         <motion.div 
           layoutId="navbar-bg"
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="absolute inset-0 rounded-full overflow-hidden liquid-glass grain-overlay" 
+          className="absolute inset-0 rounded-full overflow-hidden liquid-glass grain-overlay border border-ink/10 dark:border-chalk/10" 
         />
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">

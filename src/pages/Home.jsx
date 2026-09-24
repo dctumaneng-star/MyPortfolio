@@ -26,7 +26,7 @@ export default function Home() {
   const yParallaxBento = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const yParallaxImage = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
-  const delayCascade = isFirstLoad ? 1.6 : 0.2;
+  const delayCascade = isFirstLoad ? 0.8 : 0.2;
 
   return (
     <PageTransition className="justify-start pt-8 pb-16 overflow-x-hidden lowercase">
@@ -62,6 +62,19 @@ export default function Home() {
                 <span>plaridel, bulacan</span>
               </div>
             </motion.div>
+
+            <div aria-label="hello, i am daryl!" className="flex flex-col mb-4">
+              <KineticText 
+                text="hello," 
+                className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-ink dark:text-chalk mb-0 block" 
+                delay={isFirstLoad ? 0.6 : 0.1} 
+              />
+              <KineticText 
+                text="i am daryl!" 
+                className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-stroke text-ink dark:text-chalk mb-0 block" 
+                delay={isFirstLoad ? 0.72 : 0.2} 
+              />
+            </div>
 
 
 

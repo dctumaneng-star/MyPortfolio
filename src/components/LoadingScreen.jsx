@@ -131,10 +131,10 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
           {phase === 3 && (
             <motion.div
               layoutId="navbar-bg"
-              className="relative w-[90vw] md:w-[70vw] max-w-4xl h-32 md:h-48 rounded-[40px] md:rounded-[60px] liquid-glass flex items-center justify-center border border-chalk/10"
+              className="relative w-[95%] max-w-5xl h-14 rounded-full liquid-glass grain-overlay flex items-center justify-center border border-ink/10 dark:border-chalk/10"
               transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
             >
-              <h1 className="font-display font-medium text-4xl sm:text-6xl md:text-7xl tracking-tight text-chalk lowercase overflow-visible">
+              <div className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
                 <motion.span 
                   layoutId="brand-name"
                   className="inline-flex overflow-visible"
@@ -163,7 +163,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
                     </motion.span>
                   ))}
                 </motion.span>
-              </h1>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
