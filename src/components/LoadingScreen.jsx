@@ -108,33 +108,33 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
             key="preloader-bg"
             exit={{ y: "-100%", opacity: 0 }} // Masks away upwards, fast
             transition={{ duration: 0.6, ease: [0.77, 0, 0.175, 1] }}
-            className="absolute inset-0 bg-void flex flex-col items-center justify-center w-full"
+            className="absolute inset-0 bg-chalk dark:bg-void flex flex-col items-center justify-center w-full"
           >
             {/* Phase 1 Structural Grid Lines */}
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }} 
-              className="absolute top-1/2 left-0 w-full h-px bg-neon/20" 
+              className="absolute top-1/2 left-0 w-full h-px bg-ink/10 dark:bg-neon/20" 
             />
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }} 
-              className="absolute top-0 left-1/2 w-px h-full bg-neon/20" 
+              className="absolute top-0 left-1/2 w-px h-full bg-ink/10 dark:bg-neon/20" 
             />
 
             {/* Phase 1 Telemetry Corners */}
-            <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-neon/70 tracking-widest uppercase">
+            <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase">
               <TelemetryLine text={TELEMETRY[0]} delay={100} />
             </div>
-            <div className="absolute top-6 right-6 font-mono text-[10px] md:text-xs text-neon/70 tracking-widest uppercase text-right">
+            <div className="absolute top-6 right-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase text-right">
               <TelemetryLine text={TELEMETRY[1]} delay={300} />
             </div>
-            <div className="absolute bottom-10 left-6 font-mono text-[10px] md:text-xs text-neon/70 tracking-widest uppercase">
+            <div className="absolute bottom-10 left-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase">
               <TelemetryLine text={TELEMETRY[2]} delay={500} />
             </div>
-            <div className="absolute bottom-10 right-6 font-mono text-[10px] md:text-xs text-neon/70 tracking-widest uppercase text-right">
+            <div className="absolute bottom-10 right-6 font-mono text-[10px] md:text-xs text-ink/50 dark:text-neon/70 tracking-widest uppercase text-right">
               <TelemetryLine text={TELEMETRY[3]} delay={200} />
             </div>
 
@@ -149,16 +149,16 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
               >
                 <div 
                   ref={counterScope}
-                  className="font-mono text-neon text-7xl md:text-9xl font-bold tracking-tighter"
+                  className="font-mono text-ink dark:text-neon text-7xl md:text-9xl font-bold tracking-tighter"
                   style={{ textShadow: "0px 0px transparent" }}
                 >
                   {progress < 10 ? `0${progress}` : progress}
                 </div>
                 
                 {/* Razor thin neon baseline progress */}
-                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-void">
+                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-chalk dark:bg-void">
                   <motion.div
-                    className="h-full bg-neon"
+                    className="h-full bg-ink dark:bg-neon"
                     style={{ width: `${progress}%` }}
                     transition={{ ease: "linear", duration: 0.1 }}
                   />
