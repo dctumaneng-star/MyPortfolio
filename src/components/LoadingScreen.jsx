@@ -40,41 +40,40 @@ function TelemetryLine({ text, delay }) {
 }
 
 export default function LoadingScreen({ onComplete, fullSequence = true }) {
-  const [phase, setPhase] = useState(fullSequence ? 1 : 2);
+  const [phase, setPhase] = useState(1);
   const [progress, setProgress] = useState(0);
   const [counterScope, animateCounter] = useAnimate();
 
   // Phase 1 -> 2
   useEffect(() => {
     if (phase !== 1) return;
-    // Enforce 1.5s to 2s for System Power-On
-    const t = setTimeout(() => setPhase(2), 2000);
+    // Fast track: 500ms, Full: 2000ms
+    const t = setTimeout(() => setPhase(2), fullSequence ? 2000 : 500);
     return () => clearTimeout(t);
-  }, [phase]);
+  }, [phase, fullSequence]);
 
   // Phase 2: Counting
   useEffect(() => {
     if (phase !== 2) return;
     
     let current = 0;
-    // Set duration of at least 2.5 seconds for counting (100 steps * 25ms = 2500ms)
     const tickRate = fullSequence ? 25 : 10; 
     
     const interval = setInterval(() => {
-      // Steady counting instead of massive jumps
-      current += fullSequence ? 1 : Math.floor(Math.random() * 8) + 2;
+      // Steady counting; fast track jumps by 5
+      current += fullSequence ? 1 : 5;
       
       if (current >= 100) {
         current = 100;
         clearInterval(interval);
         
         // Smooth dissolve effect instead of glitch
-        if (fullSequence && counterScope.current) {
+        if (counterScope.current) {
           animateCounter(counterScope.current, {
             filter: "blur(10px)",
             opacity: 0,
             scale: 1.1
-          }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] }).then(() => {
+          }, { duration: fullSequence ? 0.8 : 0.3, ease: [0.22, 1, 0.36, 1] }).then(() => {
             setPhase(3);
           });
         } else {
@@ -90,10 +89,10 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
   // Phase 3: Name Drop
   useEffect(() => {
     if (phase !== 3) return;
-    // Hold for a brief moment so it is fully legible (1.5 seconds)
-    const t = setTimeout(() => onComplete(), 1500);
+    // Fast track: hold for 500ms, Full: 1500ms
+    const t = setTimeout(() => onComplete(), fullSequence ? 1500 : 500);
     return () => clearTimeout(t);
-  }, [phase, onComplete]);
+  }, [phase, fullSequence, onComplete]);
 
   return (
     <motion.div
@@ -174,7 +173,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
             key="phase-3"
             initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: fullSequence ? 0.8 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center justify-center absolute inset-0"
           >
             <h1 className="font-display font-medium text-5xl md:text-7xl text-ink dark:text-chalk tracking-tight lowercase">
