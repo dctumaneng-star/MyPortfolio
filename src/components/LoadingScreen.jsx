@@ -76,7 +76,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] bg-chalk dark:bg-void overflow-hidden pointer-events-none text-ink dark:text-chalk transition-colors duration-1000"
+      className="fixed inset-0 z-[100] overflow-hidden pointer-events-none text-ink dark:text-chalk transition-colors duration-1000"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >

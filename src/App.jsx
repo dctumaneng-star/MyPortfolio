@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import LoadingScreen from "./components/LoadingScreen";
+import AmbientBackground from "./components/AmbientBackground";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -38,7 +39,9 @@ export default function App() {
   };
 
   return (
-    <AnimatePresence>
+    <>
+      <AmbientBackground dark={dark} />
+      <AnimatePresence>
       {loading ? (
         <LoadingScreen 
           key="preloader" 
@@ -60,5 +63,6 @@ export default function App() {
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   );
 }
