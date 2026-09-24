@@ -72,13 +72,21 @@ export default function Baseline() {
           </span>
         </div>
 
-        {/* Right side: Time & Status */}
+        {/* Right side: Time & Vercel */}
         <div className="flex items-center gap-4 shrink-0">
           <span className="mono-label hidden md:inline border-r border-ink/10 dark:border-chalk/10 pr-4">{time} pst</span>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse-dot" />
-            <span className="mono-label hidden sm:inline">available</span>
-          </div>
+          <a 
+            href="https://vercel.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity duration-200 cursor-none"
+            data-hover="true"
+          >
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-ink dark:text-chalk">
+              <path d="M12 2L24 22H0L12 2Z" />
+            </svg>
+            <span className="font-mono text-[10px] text-ink dark:text-chalk tracking-widest lowercase">powered by vercel</span>
+          </a>
         </div>
       </div>
     </motion.footer>
