@@ -129,13 +129,14 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
           )}
 
           {phase === 3 && (
-            <motion.div
-              layoutId="navbar-bg"
-              className="relative w-[90vw] md:w-[70vw] max-w-4xl h-24 md:h-32 rounded-full liquid-glass grain-overlay flex items-center justify-center border border-ink/10 dark:border-chalk/10"
-              style={{ borderRadius: 9999 }}
-              transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
-            >
-              <div className="font-display font-medium text-3xl sm:text-4xl md:text-5xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
+            <div className="relative w-[90vw] md:w-[70vw] max-w-4xl h-24 md:h-32 flex items-center justify-center">
+              <motion.div
+                layoutId="navbar-bg"
+                className="absolute inset-0 rounded-full liquid-glass grain-overlay border border-ink/10 dark:border-chalk/10"
+                style={{ borderRadius: 9999 }}
+                transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
+              />
+              <div className="relative z-10 font-display font-medium text-3xl sm:text-4xl md:text-5xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
                 <motion.span 
                   layoutId="brand-name"
                   className="inline-flex overflow-visible"
@@ -165,7 +166,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
                   ))}
                 </motion.span>
               </div>
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>

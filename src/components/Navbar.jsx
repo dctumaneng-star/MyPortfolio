@@ -99,7 +99,20 @@ export default function Navbar({ dark, onToggle, onReboot }) {
                        hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none"
             data-hover="true"
           >
-            <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
+            <motion.span 
+              layoutId="brand-name" 
+              transition={{ type: "spring", stiffness: 100, damping: 20 }} 
+              className="inline-flex overflow-visible relative z-10"
+            >
+              {"daryl tumaneng.".split("").map((char, index) => (
+                <span
+                  key={index}
+                  className={char === " " ? "w-[0.25em]" : "inline-block"}
+                >
+                  {char}
+                </span>
+              ))}
+            </motion.span>
           </button>
 
           {/* Desktop nav */}
