@@ -197,6 +197,37 @@ export default function Home() {
           </FluidCard>
         </motion.div>
 
+        {/* Navigation Tiles (The Bottom Bento) */}
+        <motion.div
+          style={{ y: yParallaxBento }}
+          variants={bentoContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, margin: "-15%" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 w-full mt-12 lg:mt-24"
+        >
+          {["About", "Projects", "Contact"].map((page) => (
+            <FluidCard
+              as={Link}
+              key={page}
+              to={`/${page.toLowerCase()}`}
+              className="liquid-glass p-8 md:p-10 flex flex-col justify-between min-h-[200px] group transition-colors duration-300 cursor-none"
+              data-hover="true"
+              variants={bentoItem}
+            >
+              <div className="flex justify-between items-start">
+                <span className="mono-label block lowercase">navigate</span>
+                <div className="overflow-hidden">
+                  <ArrowUpRight size={24} className="text-ink/30 dark:text-chalk/30 group-hover:text-neon transition-colors duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </div>
+              </div>
+              <span className="font-display font-medium text-4xl text-ink dark:text-chalk tracking-tight lowercase mt-8 block transition-colors duration-300 group-hover:text-neon">
+                {page}
+              </span>
+            </FluidCard>
+          ))}
+        </motion.div>
+
       </div>
     </PageTransition>
   );

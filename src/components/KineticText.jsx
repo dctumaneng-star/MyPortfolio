@@ -4,8 +4,8 @@ export const TE_EASE = [0.22, 1, 0.36, 1];
 export const TE_LAYOUT = { type: "spring", stiffness: 400, damping: 30, mass: 0.8 };
 
 export function KineticText({ text, className = "", delay = 0, as: Component = "h1" }) {
-  // Split into words, but preserve spaces
-  const words = text.split(" ");
+  // Split into letters, preserving spaces as components or margins
+  const chars = text.split("");
   
   const container = {
     hidden: { opacity: 0 },
@@ -19,30 +19,34 @@ export function KineticText({ text, className = "", delay = 0, as: Component = "
   };
 
   const item = {
-    hidden: { y: "140%" },
+    hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
     show: {
-      y: "0%",
-      transition: { duration: 0.8, ease: TE_EASE }
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { type: "spring", stiffness: 100, damping: 20 }
     }
   };
 
   return (
     <Component className={className}>
-      <motion.div
+      <motion.span
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, margin: "-15%" }}
-        className="flex flex-wrap"
+        viewport={{ once: false, margin: "-10%" }}
+        className="inline-flex flex-wrap overflow-visible"
       >
-        {words.map((word, i) => (
-          <div key={i} className="overflow-hidden inline-block mr-[0.25em] pb-[0.3em] -mb-[0.3em] pt-[0.2em] -mt-[0.2em]">
-            <motion.span variants={item} className="inline-block">
-              {word}
-            </motion.span>
-          </div>
+        {chars.map((char, i) => (
+          <motion.span 
+            key={i} 
+            variants={item} 
+            className={char === " " ? "w-[0.25em]" : "inline-block"}
+          >
+            {char}
+          </motion.span>
         ))}
-      </motion.div>
+      </motion.span>
     </Component>
   );
 }
