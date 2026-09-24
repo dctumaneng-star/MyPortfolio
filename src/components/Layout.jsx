@@ -75,7 +75,7 @@ export default function Layout({ dark, onToggle, children }) {
           transition={{ duration: 15, ease: "linear", repeat: Infinity }}
           className="absolute top-[10%] left-[20%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full"
           style={{ 
-            background: "radial-gradient(circle, rgba(200, 255, 0, 0.25) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(0, 229, 192, 0.25) 0%, transparent 70%)",
             filter: "blur(80px)"
           }}
         />

@@ -99,7 +99,7 @@ function ProjectCard({ project }) {
           </div>
           <div className="text-ink/30 dark:text-chalk/20 mt-1 shrink-0 ml-2 overflow-hidden">
             <motion.div
-              animate={{ x: hovered ? 4 : 0, y: hovered ? -4 : 0, color: hovered ? "#C8FF00" : "inherit" }}
+              animate={{ x: hovered ? 4 : 0, y: hovered ? -4 : 0, color: hovered ? "#00E5C0" : "inherit" }}
               transition={{ duration: 0.15, ease: "linear" }}
             >
               <ArrowUpRight size={24} />
