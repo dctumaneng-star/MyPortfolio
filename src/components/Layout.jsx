@@ -54,7 +54,7 @@ export default function Layout({ dark, onToggle, onReboot, children }) {
   }, [animate]);
 
   return (
-    <div ref={scope}>
+    <div ref={scope} className="relative z-10">
       <CustomCursor />
       <Navbar dark={dark} onToggle={onToggle} onReboot={onReboot} />
 

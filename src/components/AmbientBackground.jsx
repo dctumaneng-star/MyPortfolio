@@ -17,12 +17,12 @@ export default function AmbientBackground({ dark }) {
   }, [cursorRawX, cursorRawY]);
 
   return (
-    <div className="fixed inset-0 z-[-10] pointer-events-none overflow-hidden bg-chalk dark:bg-void">
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-chalk dark:bg-void">
       {/* Orb 1: Slate/Silver (Drifting) */}
       <motion.div
         animate={{ x: ["-10%", "10%", "-10%"], y: ["0%", "20%", "0%"], scale: [1, 1.1, 1] }}
         transition={{ duration: 22, ease: "linear", repeat: Infinity, repeatType: "mirror" }}
-        className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full mix-blend-normal opacity-10 dark:opacity-40 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
+        className="absolute top-[-10%] left-[-10%] w-[120vw] h-[120vw] rounded-full mix-blend-normal opacity-10 dark:opacity-40 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
         style={{ backgroundColor: dark ? "#1F2229" : "#E2E4E6" }}
       />
       
@@ -30,7 +30,7 @@ export default function AmbientBackground({ dark }) {
       <motion.div
         animate={{ x: ["20%", "-20%", "20%"], y: ["-10%", "30%", "-10%"], scale: [1.2, 0.9, 1.2] }}
         transition={{ duration: 18, ease: "linear", repeat: Infinity, repeatType: "mirror" }}
-        className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full mix-blend-normal opacity-[0.08] dark:opacity-30 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
+        className="absolute bottom-[-20%] right-[-10%] w-[100vw] h-[100vw] rounded-full mix-blend-normal opacity-[0.08] dark:opacity-30 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
         style={{ backgroundColor: "#00E5C0" }}
       />
 
@@ -38,13 +38,13 @@ export default function AmbientBackground({ dark }) {
       <motion.div
         animate={{ x: ["-20%", "30%", "-20%"], y: ["30%", "-20%", "30%"], scale: [0.8, 1.3, 0.8] }}
         transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "mirror" }}
-        className="absolute top-[20%] right-[10%] w-[55vw] h-[55vw] rounded-full mix-blend-normal opacity-10 dark:opacity-40 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
+        className="absolute top-[20%] right-[10%] w-[110vw] h-[110vw] rounded-full mix-blend-normal opacity-10 dark:opacity-40 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
         style={{ backgroundColor: dark ? "#1F2229" : "#E2E4E6" }}
       />
 
       {/* Orb 4: Petronas Green (Cursor Tracking Parallax) */}
       <motion.div
-        className="absolute top-1/2 left-1/2 w-[60vw] h-[60vw] rounded-full mix-blend-normal opacity-10 dark:opacity-40 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
+        className="absolute top-1/2 left-1/2 w-[120vw] h-[120vw] rounded-full mix-blend-normal opacity-10 dark:opacity-40 blur-[120px] md:blur-[160px] transform-gpu will-change-transform"
         style={{ 
           backgroundColor: "#00E5C0",
           x: orbX,
