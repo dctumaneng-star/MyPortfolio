@@ -76,7 +76,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] bg-void overflow-hidden pointer-events-none text-chalk"
+      className="fixed inset-0 z-[100] bg-chalk dark:bg-void overflow-hidden pointer-events-none text-ink dark:text-chalk transition-colors duration-1000"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -85,7 +85,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
       {/* Telemetry data overlays */}
       {fullSequence && (
         <>
-          <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest flex flex-col gap-2">
+          <div className="absolute top-6 left-6 font-mono text-[10px] md:text-xs text-ink/40 dark:text-chalk/40 uppercase tracking-widest flex flex-col gap-2">
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-neon rounded-full animate-pulse-dot shadow-[0_0_8px_rgba(0,229,192,0.5)]" />
               SYSTEM_ONLINE
@@ -96,7 +96,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
               ))}
             </div>
           </div>
-          <div className="absolute bottom-6 right-6 font-mono text-[10px] md:text-xs text-chalk/40 uppercase tracking-widest text-right">
+          <div className="absolute bottom-6 right-6 font-mono text-[10px] md:text-xs text-ink/40 dark:text-chalk/40 uppercase tracking-widest text-right">
             MEMORY: 64.0GB / 128.0GB<br/>
             VRAM: ALLOCATED (ACTIVE)
           </div>
@@ -108,13 +108,13 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
           {phase <= 2 && (
             <motion.div
               layoutId="navbar-bg"
-              className="relative w-48 h-48 rounded-full flex items-center justify-center"
+              className="relative w-48 h-48 rounded-full flex items-center justify-center liquid-glass"
               style={{ borderRadius: 9999 }}
               transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
             >
               {/* The SVG Circle */}
               <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="48" stroke="rgba(255,255,255,0.05)" strokeWidth="1" fill="none" />
+                <circle cx="50" cy="50" r="48" className="stroke-ink/5 dark:stroke-chalk/5" strokeWidth="1" fill="none" />
                 <motion.circle 
                   cx="50" cy="50" r="48" 
                   stroke="currentColor" 
@@ -128,7 +128,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
               </svg>
               {/* Counter Text */}
               <motion.span 
-                className="font-mono text-4xl text-chalk tracking-tighter"
+                className="font-mono text-4xl text-ink dark:text-chalk tracking-tighter"
                 exit={{ opacity: 0, filter: "blur(10px)", scale: 1.2 }}
                 transition={{ duration: 0.3 }}
               >
