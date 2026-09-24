@@ -5,7 +5,12 @@ const TELEMETRY = [
   "INITIALIZING AUDIO ENGINE_v2.4",
   "MOUNTING ZFS POOL (DATA_01)",
   "LOADING CORE MODULES...",
-  "ESTABLISHING UPLINK :: 0x8F9B"
+  "ESTABLISHING UPLINK :: 0x8F9B",
+  "SYNCING KINETIC TYPOGRAPHY",
+  "CALIBRATING FLUID SPRING PHYSICS",
+  "INJECTING TE_EASE_CURVES",
+  "WARMING UP LIQUID GLASS SHADERS",
+  "AESTHETIC ENGINE: ONLINE"
 ];
 
 function TelemetryLine({ text, delay }) {
@@ -22,7 +27,7 @@ function TelemetryLine({ text, delay }) {
       i++;
       
       if (i <= text.length) {
-        timeoutId = setTimeout(typeChar, 30);
+        timeoutId = setTimeout(typeChar, 15);
       }
     };
 
@@ -85,7 +90,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
         </span>
         <div className="flex flex-col gap-1 mt-4 opacity-60">
           {TELEMETRY.map((line, i) => (
-            <TelemetryLine key={i} text={line} delay={i * 400 + 200} />
+            <TelemetryLine key={i} text={line} delay={i * 200 + 100} />
           ))}
         </div>
       </div>
