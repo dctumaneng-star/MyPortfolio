@@ -2,9 +2,11 @@ import CustomCursor from "./CustomCursor";
 import Navbar from "./Navbar";
 import Baseline from "./Footer";
 import { useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useAnimate } from "framer-motion";
+import { isFirstLoad } from "../utils/firstLoad";
 
 export default function Layout({ dark, onToggle, children }) {
+  const [scope, animate] = useAnimate();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { damping: 20, stiffness: 100 });
@@ -24,8 +26,25 @@ export default function Layout({ dark, onToggle, children }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
+  useEffect(() => {
+    async function runSequence() {
+      if (isFirstLoad) {
+        // Timeline Orchestration: Resolves the component mount sequence dynamically
+        await animate("header", { y: [-100, 0], opacity: [0, 1], x: "-50%" }, { type: "spring", stiffness: 100, damping: 20, delay: 0.6 });
+        animate("footer", { y: [100, 0], opacity: [0, 1] }, { type: "spring", stiffness: 100, damping: 20 });
+        animate("main", { opacity: [0, 1], scale: [0.95, 1] }, { type: "spring", stiffness: 100, damping: 20, delay: 0.1 });
+      } else {
+        // Normal fast entrance for subsequent navigations
+        animate("header", { y: 0, opacity: 1 }, { duration: 0 });
+        animate("footer", { y: 0, opacity: 1 }, { duration: 0 });
+        animate("main", { opacity: 1, scale: 1 }, { duration: 0 });
+      }
+    }
+    runSequence();
+  }, [animate]);
+
   return (
-    <>
+    <div ref={scope}>
       <CustomCursor />
       <Navbar dark={dark} onToggle={onToggle} />
 
@@ -59,12 +78,12 @@ export default function Layout({ dark, onToggle, children }) {
         />
       </div>
 
-      <main className="pt-12 min-h-[calc(100vh-48px)] flex flex-col relative z-10">
+      <main className="pt-12 min-h-[calc(100vh-48px)] flex flex-col relative z-10" style={{ opacity: isFirstLoad ? 0 : 1 }}>
         {children}
       </main>
 
       <Baseline />
-    </>
+    </div>
   );
 }
 

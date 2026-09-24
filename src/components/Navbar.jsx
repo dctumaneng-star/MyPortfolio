@@ -80,13 +80,12 @@ export default function Navbar({ dark, onToggle }) {
   return (
     <>
       <motion.header
-        initial={{ y: "-100%" }}
-        animate={{ y: hidden ? "-100%" : "0%" }}
-        transition={{ delay: 1.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300
-          ${scrolled || menuOpen ? "liquid-glass" : "bg-transparent"} `}
+        animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1, x: "-50%" }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className={`fixed top-6 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full overflow-hidden
+          liquid-glass grain-overlay`}
       >
-        <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
+        <div className="relative px-8 h-14 flex items-center justify-between z-10">
 
           {/* Name mark */}
           <Link
