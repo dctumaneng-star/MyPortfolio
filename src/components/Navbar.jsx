@@ -61,33 +61,18 @@ function MobileMenu({ open, onClose }) {
 
 export default function Navbar({ dark, onToggle }) {
   const [scrolled, setScrolled] = useState(false);
-  const [hidden,   setHidden]   = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   const location = useLocation();
-  let prev = 0;
 
   useMotionValueEvent(scrollY, "change", (y) => {
     setScrolled(y > 40);
-    setHidden(y > prev && y > 120 && !menuOpen);
-    prev = y;
   });
-
-  // Reveal navbar when hovering near the top of the screen
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (hidden && e.clientY < 60) {
-        setHidden(false);
-      }
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [hidden]);
 
   return (
     <>
       <motion.header
-        animate={{ y: hidden ? -100 : 0 }}
+        animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className="fixed top-3 left-1/2 z-50 transition-colors duration-300 w-[95%] max-w-5xl rounded-full"
         style={{ x: "-50%" }}
