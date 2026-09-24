@@ -58,12 +58,20 @@ export default function Home() {
           {/* Typography & Intro */}
           <div>
             <motion.div
-              className="mb-6"
+              className="mb-8 inline-flex items-center gap-3 liquid-glass px-4 py-2 rounded-full border border-ink/5 dark:border-chalk/10 backdrop-blur-3xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: delayCascade, duration: 0.6, ease: TE_EASE }}
             >
-              <span className="neon-tag lowercase">software engineer</span>
+              <div className="flex items-center gap-2 pr-3 border-r border-ink/10 dark:border-chalk/10">
+                <span className="w-2 h-2 rounded-full bg-neon animate-pulse-dot shadow-[0_0_8px_rgba(57,255,20,0.5)]" />
+                <span className="font-mono text-[10px] md:text-xs text-ink/70 dark:text-chalk/80 uppercase tracking-widest">available for opportunities</span>
+              </div>
+              <div className="flex items-center gap-3 pl-1 font-mono text-[10px] md:text-xs text-ink/50 dark:text-chalk/60 uppercase tracking-widest">
+                <span>philippine standard time</span>
+                <span className="w-1 h-1 bg-ink/20 dark:bg-chalk/20 rounded-full" />
+                <span>plaridel, bulacan</span>
+              </div>
             </motion.div>
 
             <div aria-label="daryl tumaneng">
@@ -80,12 +88,12 @@ export default function Home() {
             </div>
 
             <motion.p
-              className="text-base md:text-lg text-ink dark:text-chalk/60 leading-relaxed max-w-xl mt-8 pt-6 border-t border-line-light dark:border-line-dark"
+              className="font-display text-xl md:text-2xl text-ink dark:text-chalk/90 leading-snug max-w-2xl mt-8 pt-8 border-t border-line-light dark:border-line-dark lowercase"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: delayCascade + 0.1, duration: 0.7, ease: TE_EASE }}
             >
-              software engineer. bare-metal linux builder. electronic music producer. pickleball player.
+              self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
             </motion.p>
           </div>
 
@@ -111,58 +119,62 @@ export default function Home() {
         {/* ── Short Containers (Bento Box) ── */}
         <motion.div 
           layout
-          transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }}
+          transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
           style={{ y: yParallaxBento }}
           variants={bentoContainer}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}
-          className="grid md:grid-cols-3 gap-4 lg:gap-6 w-full"
+          className="grid md:grid-cols-2 gap-4 lg:gap-6 w-full"
         >
-          {/* Card 1: Status */}
-          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-6 flex flex-col justify-between min-h-[160px] group transition-colors duration-300">
+          {/* Card 1: Beyond the Code */}
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
              <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
-             <div>
-                <span className="mono-label block mb-3 lowercase">current status</span>
-                <p className="font-body font-medium text-ink dark:text-chalk">actively looking for full-time opportunities & internships.</p>
-             </div>
-             <div className="flex items-center gap-2 mt-4">
-                <span className="w-2 h-2 rounded-full bg-neon animate-pulse-dot" />
-                <span className="font-mono text-xs text-ink/50 dark:text-chalk/40 uppercase tracking-wider lowercase">available</span>
-             </div>
+             <span className="mono-label block mb-6 lowercase">beyond the code</span>
+             
+             <ul className="space-y-4 font-display text-xl md:text-2xl text-ink dark:text-chalk/90 tracking-tight lowercase">
+               <li className="flex items-center gap-4">
+                 <span className="w-1.5 h-1.5 rounded-full bg-neon/80" /> full-stack developer.
+               </li>
+               <li className="flex items-center gap-4">
+                 <span className="w-1.5 h-1.5 rounded-full bg-neon/80" /> bare-metal linux builder.
+               </li>
+               <li className="flex items-center gap-4">
+                 <span className="w-1.5 h-1.5 rounded-full bg-neon/80" /> electronic music producer.
+               </li>
+               <li className="flex items-center gap-4">
+                 <span className="w-1.5 h-1.5 rounded-full bg-neon/80" /> pickleball player.
+               </li>
+             </ul>
           </FluidCard>
 
-          {/* Card 2: Quick Nav - Projects */}
-          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-0 group transition-colors duration-300 cursor-none" data-hover="true">
-            <Link to="/projects" className="p-6 flex flex-col justify-between min-h-[160px] h-full w-full">
-               <div className="flex justify-between items-start">
-                 <span className="mono-label block mb-3 lowercase group-hover:text-void transition-colors duration-300">featured work</span>
-                 <ArrowUpRight size={24} className="text-ink/30 dark:text-chalk/20 group-hover:text-void group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+          {/* Card 2: Site Architecture */}
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass grain-overlay p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
+             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
+             
+             <div className="flex justify-between items-start mb-6">
+                <span className="mono-label block lowercase">site architecture</span>
+                <span className="font-mono text-[10px] text-ink/40 dark:text-chalk/40 uppercase tracking-widest border border-ink/10 dark:border-chalk/10 px-2 py-1 rounded-sm">spec v1.0</span>
+             </div>
+
+             <div className="font-mono text-sm text-ink/70 dark:text-chalk/70 leading-relaxed uppercase tracking-wider space-y-4">
+               <div className="grid grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2">
+                 <span className="col-span-1 opacity-50">framework</span>
+                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">react.js</span>
                </div>
-               <h3 className="font-display font-medium text-3xl text-ink dark:text-chalk group-hover:text-void leading-none lowercase transition-colors duration-300">
-                  view projects
-               </h3>
-            </Link>
-          </FluidCard>
-
-          {/* Card 3: Tech Focus */}
-          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-6 flex flex-col justify-between min-h-[160px] group transition-colors duration-300">
-             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
-             <span className="mono-label block mb-3 lowercase">core stack</span>
-             <div className="flex flex-wrap gap-2 mt-auto">
-               {["React", "Laravel", "TailwindCSS"].map(tech => (
-                 <span key={tech} className="neon-tag !py-1 !px-2 !text-[10px] lowercase transition-colors duration-300">{tech}</span>
-               ))}
+               <div className="grid grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2">
+                 <span className="col-span-1 opacity-50">styling</span>
+                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">tailwind css</span>
+               </div>
+               <div className="grid grid-cols-3 border-b border-ink/10 dark:border-chalk/10 pb-2">
+                 <span className="col-span-1 opacity-50">physics</span>
+                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">framer motion</span>
+               </div>
+               <div className="grid grid-cols-3 pb-2">
+                 <span className="col-span-1 opacity-50">routing</span>
+                 <span className="col-span-2 font-semibold text-ink dark:text-chalk">react router dom</span>
+               </div>
              </div>
-          </FluidCard>
-
-          {/* Card 4: Short Info / Beyond the Code */}
-          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="md:col-span-3 liquid-glass p-6 md:p-8 flex flex-col justify-between group transition-colors duration-300">
-             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
-             <span className="mono-label block mb-4 lowercase">short info</span>
-             <p className="font-body text-sm md:text-base text-ink dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
-               self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
-             </p>
           </FluidCard>
         </motion.div>
 

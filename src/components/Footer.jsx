@@ -31,24 +31,8 @@ export default function Baseline() {
       
       <div className="max-w-6xl mx-auto px-6 h-12 grid grid-cols-3 items-center relative z-10 w-full">
         
-        {/* Left side: Time & Status */}
-        <div className="flex items-center gap-4 justify-start">
-          <span className="mono-label hidden md:inline border-r border-ink/10 dark:border-chalk/10 pr-4">{time} mnl</span>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse-dot" />
-            <span className="mono-label hidden sm:inline">available</span>
-          </div>
-        </div>
-
-        {/* Center side: Name & Year */}
-        <div className="flex justify-center items-center">
-          <span className="font-mono text-[10px] md:text-xs text-ink/70 dark:text-chalk/70 tracking-widest uppercase lowercase">
-            daryl tumaneng, 2026.
-          </span>
-        </div>
-
-        {/* Right side: Socials */}
-        <nav className="flex items-center gap-5 justify-end">
+        {/* Left side: Socials */}
+        <nav className="flex items-center gap-5 justify-start">
           {[
             { label: "linkedin", href: "https://linkedin.com/in/daryl-tumaneng-a594a1196" },
             { label: "github",   href: "https://github.com/daryltumaneng" },
@@ -66,6 +50,22 @@ export default function Baseline() {
             </a>
           ))}
         </nav>
+
+        {/* Center side: Name & Year */}
+        <div className="flex justify-center items-center">
+          <span className="font-mono text-[10px] md:text-xs text-ink/70 dark:text-chalk/70 tracking-widest uppercase lowercase">
+            daryl tumaneng, 2026.
+          </span>
+        </div>
+
+        {/* Right side: Time & Status */}
+        <div className="flex items-center gap-4 justify-end">
+          <span className="mono-label hidden md:inline border-r border-ink/10 dark:border-chalk/10 pr-4">{time} pst</span>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse-dot" />
+            <span className="mono-label hidden sm:inline">available</span>
+          </div>
+        </div>
       </div>
     </motion.footer>
   );
