@@ -73,7 +73,7 @@ function ProjectCard({ project }) {
       variants={cardItem}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className={`liquid-glass p-8 flex flex-col justify-between
+      className={`liquid-glass grain-overlay rounded-3xl p-8 flex flex-col justify-between
         min-h-[220px] md:min-h-[260px] transition-colors duration-150 group
         ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}
         ${project.href ? "cursor-none" : ""}`}

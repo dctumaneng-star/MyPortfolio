@@ -147,7 +147,7 @@ export default function Home() {
           className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 w-full"
         >
           {/* Card 1: Beyond the Code */}
-          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass grain-overlay rounded-3xl p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
              
              <span className="mono-label block mb-6 lowercase">beyond the code</span>
              
@@ -168,7 +168,7 @@ export default function Home() {
           </FluidCard>
 
           {/* Card 2: Site Architecture */}
-          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass grain-overlay p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass grain-overlay rounded-3xl p-8 md:p-10 flex flex-col justify-between min-h-[240px] group transition-colors duration-300">
              
              
              <div className="flex justify-between items-start mb-6">
@@ -211,7 +211,7 @@ export default function Home() {
               as={Link}
               key={page}
               to={`/${page.toLowerCase()}`}
-              className="liquid-glass p-8 md:p-10 flex flex-col justify-between min-h-[200px] group transition-colors duration-300 cursor-none"
+              className="liquid-glass grain-overlay rounded-3xl p-8 md:p-10 flex flex-col justify-between min-h-[200px] group transition-colors duration-300 cursor-none"
               data-hover="true"
               variants={bentoItem}
             >

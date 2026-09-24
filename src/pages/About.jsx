@@ -221,7 +221,7 @@ export default function About() {
               <FluidCard
                 key={hobby.id}
                 variants={gridItem}
-                className={`liquid-glass grain-overlay p-8 md:p-10 flex flex-col justify-between group transition-colors duration-300 min-h-[240px] ${hobby.colSpan}`}
+                className={`liquid-glass grain-overlay rounded-3xl p-8 md:p-10 flex flex-col justify-between group transition-colors duration-300 min-h-[240px] ${hobby.colSpan}`}
               >
                 <div className="flex flex-col flex-1 z-20">
                   <span className="font-mono text-[10px] text-ink/50 dark:text-chalk/50 uppercase tracking-widest border border-ink/10 dark:border-chalk/10 px-2 py-1 rounded-sm self-start mb-6">

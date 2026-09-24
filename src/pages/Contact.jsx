@@ -124,7 +124,7 @@ export default function Contact() {
             as="button"
             type="submit"
             disabled={status === "loading"}
-            className="group mt-4 flex items-center justify-center gap-4 liquid-glass border border-line-light dark:border-line-dark px-8 py-5 transition-colors duration-300 hover:bg-neon dark:hover:bg-neon hover:border-neon dark:hover:border-neon cursor-none w-full md:w-auto self-start"
+            className="group mt-4 flex items-center justify-center gap-4 liquid-glass rounded-2xl border border-line-light dark:border-line-dark px-8 py-5 transition-colors duration-300 hover:bg-neon dark:hover:bg-neon hover:border-neon dark:hover:border-neon cursor-none w-full md:w-auto self-start"
             data-hover="true"
           >
             <span className="font-display font-medium text-2xl text-ink dark:text-chalk group-hover:text-void transition-colors duration-300 relative z-20">
