@@ -37,7 +37,7 @@ export default function App() {
         {loading && (
           <LoadingScreen 
             key="preloader" 
-            fullSequence={window.location.pathname === "/"}
+            fullSequence={true}
             onComplete={() => {
               setLoading(false);
               clearFirstLoad();
