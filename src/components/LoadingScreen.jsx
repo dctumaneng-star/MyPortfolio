@@ -131,10 +131,10 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
           {phase === 3 && (
             <motion.div
               layoutId="navbar-bg"
-              className="relative w-[95%] max-w-5xl h-14 rounded-full liquid-glass grain-overlay flex items-center justify-center border border-ink/10 dark:border-chalk/10"
+              className="relative w-[90vw] md:w-[70vw] max-w-4xl h-24 md:h-32 rounded-full liquid-glass grain-overlay flex items-center justify-center border border-ink/10 dark:border-chalk/10"
               transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
             >
-              <div className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
+              <div className="font-display font-medium text-3xl sm:text-4xl md:text-5xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
                 <motion.span 
                   layoutId="brand-name"
                   className="inline-flex overflow-visible"
