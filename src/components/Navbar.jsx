@@ -95,11 +95,14 @@ export default function Navbar({ dark, onToggle, onReboot }) {
               navigate("/");
               if (onReboot) onReboot();
             }}
-            className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
-                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none"
-            data-hover="true"
+            className={`font-display font-medium text-xl tracking-tight text-ink dark:text-chalk
+                       hover:text-neon dark:hover:text-neon transition-colors duration-200 lowercase block cursor-none
+                       ${location.pathname === "/" ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+            data-hover={location.pathname !== "/"}
           >
-            <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
+            {location.pathname !== "/" && (
+              <motion.span layoutId="brand-name" transition={{ type: "spring", stiffness: 100, damping: 20 }} className="inline-block relative z-10">daryl tumaneng.</motion.span>
+            )}
           </button>
 
           {/* Desktop nav */}

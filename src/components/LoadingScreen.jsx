@@ -89,8 +89,8 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
   // Phase 3: Name Drop
   useEffect(() => {
     if (phase !== 3) return;
-    // Wait for stagger + spring + legibility hold
-    const t = setTimeout(() => onComplete(), fullSequence ? 2400 : 1200);
+    // Wait for stagger + spring, then break out immediately
+    const t = setTimeout(() => onComplete(), fullSequence ? 1800 : 800);
     return () => clearTimeout(t);
   }, [phase, fullSequence, onComplete]);
 
@@ -167,16 +167,16 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
           </motion.div>
         )}
 
-        {/* Phase 3: Name Drop on Bare Screen */}
+        {/* Phase 3: Name Drop (Navbar Origin Point) */}
         {phase === 3 && (
           <motion.div
             key="phase-3"
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: fullSequence ? 0.4 : 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col items-center justify-center absolute inset-0"
+            className="absolute top-3 left-1/2 -translate-x-1/2 z-50 px-8 h-14 flex items-center justify-between w-[95%] max-w-5xl"
           >
-            <h1 className="font-display font-medium text-5xl md:text-7xl text-ink dark:text-chalk tracking-tight lowercase">
+            <h1 className="font-display font-medium text-xl tracking-tight text-ink dark:text-chalk lowercase flex">
               <motion.span 
                 layoutId="brand-name" 
                 className="inline-flex overflow-visible"

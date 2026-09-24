@@ -7,7 +7,7 @@ import { isFirstLoad } from "../utils/firstLoad";
 
 export default function Layout({ dark, onToggle, onReboot, children }) {
   const [scope, animate] = useAnimate();
-  const [showContent, setShowContent] = useState(!isFirstLoad);
+  
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { damping: 20, stiffness: 100 });
@@ -46,18 +46,15 @@ export default function Layout({ dark, onToggle, onReboot, children }) {
         animate(".nav-item", { opacity: 0, y: -10 }, { duration: 0 });
         animate("footer", { y: 20, opacity: 0 }, { duration: 0 });
 
-        // 1. Wait for the text to fly to the navbar (approx 0.7s)
-        await new Promise(r => setTimeout(r, 700));
+        // 1. Wait for the text to fluidly break out and expand to hero (approx 0.8s spring)
+        await new Promise(r => setTimeout(r, 800));
 
-        // 2. The navbar liquid glass pill "opens" around the text
+        // 2. The floating liquid glass navbar background materializes
         await animate(".nav-reveal-bg", { opacity: 1, scaleX: 1, scaleY: 1 }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
         
-        // 3. The internal nav items and the footer materialize
+        // 3. The internal nav items and the baseline footer materialize
         animate(".nav-item", { opacity: 1, y: 0 }, { duration: 0.6, ease: [0.22, 1, 0.36, 1] });
         animate("footer", { y: 0, opacity: 1 }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
-        
-        // 4. Finally, mount the main page content so it bursts outward
-        setShowContent(true);
       } else {
         // Normal fast entrance for subsequent navigations
         animate(".nav-reveal-bg", { opacity: 1, scale: 1 }, { duration: 0 });
@@ -127,7 +124,7 @@ export default function Layout({ dark, onToggle, onReboot, children }) {
       </div>
 
       <main className="pt-12 min-h-[calc(100vh-48px)] flex flex-col relative z-10">
-        {showContent && children}
+        {children}
       </main>
 
       <Baseline />

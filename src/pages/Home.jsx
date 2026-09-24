@@ -16,17 +16,6 @@ import { isFirstLoad } from "../utils/firstLoad";
 
 const TICKER_QUAD = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
 
-const bentoContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-};
-
 const bentoItem = {
   hidden: { y: 40, opacity: 0 },
   show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: TE_EASE } }
@@ -37,7 +26,7 @@ export default function Home() {
   const yParallaxBento = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const yParallaxImage = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
-  const delayCascade = 0.4;
+  const delayCascade = isFirstLoad ? 1.6 : 0.2;
 
   return (
     <PageTransition className="justify-start pt-8 pb-16 overflow-x-hidden lowercase">
@@ -74,18 +63,19 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <div aria-label="daryl tumaneng">
-              <KineticText 
-                text="daryl" 
-                className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-ink dark:text-chalk mb-0" 
-                delay={isFirstLoad ? 0.8 : 0.1} 
-              />
-              <KineticText 
-                text="tumaneng." 
-                className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-stroke text-ink dark:text-chalk mb-0" 
-                delay={isFirstLoad ? 0.92 : 0.2} 
-              />
-            </div>
+            <motion.div 
+              aria-label="daryl tumaneng"
+              layoutId="brand-name"
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              className="flex flex-col"
+            >
+              <span className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-ink dark:text-chalk mb-0 block">
+                daryl
+              </span>
+              <span className="font-display font-medium leading-none text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] tracking-tighter text-stroke text-ink dark:text-chalk mb-0 block">
+                tumaneng.
+              </span>
+            </motion.div>
 
             <motion.p
               className="font-display text-xl md:text-2xl text-ink dark:text-chalk/90 leading-snug max-w-2xl mt-8 pt-8 border-t border-line-light dark:border-line-dark lowercase"
@@ -140,7 +130,10 @@ export default function Home() {
           layout
           transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
           style={{ y: yParallaxBento }}
-          variants={bentoContainer}
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: delayCascade + 0.2 } }
+          }}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}
@@ -200,7 +193,10 @@ export default function Home() {
         {/* Navigation Tiles (The Bottom Bento) */}
         <motion.div
           style={{ y: yParallaxBento }}
-          variants={bentoContainer}
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: delayCascade + 0.4 } }
+          }}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, margin: "-15%" }}
