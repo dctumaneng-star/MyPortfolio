@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <>
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {loading ? (
           <LoadingScreen 
             key="preloader" 

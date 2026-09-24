@@ -84,6 +84,7 @@ export default function Navbar({ dark, onToggle, onReboot }) {
           layoutId="navbar-bg"
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
           className="absolute inset-0 rounded-full overflow-hidden liquid-glass grain-overlay border border-ink/10 dark:border-chalk/10" 
+          style={{ borderRadius: 9999 }}
         />
         
         <div className="relative px-8 h-14 flex items-center justify-between z-10">

@@ -100,7 +100,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
             <motion.div
               layoutId="navbar-bg"
               className="relative w-48 h-48 rounded-full flex items-center justify-center"
-              style={{ borderRadius: "50%" }}
+              style={{ borderRadius: 9999 }}
               transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
             >
               {/* The SVG Circle */}
@@ -132,6 +132,7 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
             <motion.div
               layoutId="navbar-bg"
               className="relative w-[90vw] md:w-[70vw] max-w-4xl h-24 md:h-32 rounded-full liquid-glass grain-overlay flex items-center justify-center border border-ink/10 dark:border-chalk/10"
+              style={{ borderRadius: 9999 }}
               transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
             >
               <div className="font-display font-medium text-3xl sm:text-4xl md:text-5xl tracking-tight text-ink dark:text-chalk lowercase overflow-visible flex items-center justify-center">
