@@ -32,19 +32,19 @@ export default function Layout({ dark, onToggle, children }) {
       if (isFirstLoad) {
         // Timeline Orchestration: Resolves the component mount sequence dynamically
         // Immediately hide elements that will be revealed later
-        animate(".nav-reveal-bg", { opacity: 0, scaleX: 0.4, scaleY: 0.4 }, { duration: 0 });
+        animate(".nav-reveal-bg", { opacity: 0, scaleX: 0.9, scaleY: 0.9 }, { duration: 0 });
         animate(".nav-item", { opacity: 0, y: -10 }, { duration: 0 });
-        animate("footer", { y: 100, opacity: 0 }, { duration: 0 });
+        animate("footer", { y: 20, opacity: 0 }, { duration: 0 });
 
         // 1. Wait for the text to fly to the navbar (approx 0.7s)
         await new Promise(r => setTimeout(r, 700));
 
         // 2. The navbar liquid glass pill "opens" around the text
-        await animate(".nav-reveal-bg", { opacity: 1, scaleX: 1, scaleY: 1 }, { type: "spring", stiffness: 150, damping: 20 });
+        await animate(".nav-reveal-bg", { opacity: 1, scaleX: 1, scaleY: 1 }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
         
         // 3. The internal nav items and the footer materialize
-        animate(".nav-item", { opacity: 1, y: 0 }, { type: "spring", stiffness: 100, damping: 20 });
-        animate("footer", { y: 0, opacity: 1 }, { type: "spring", stiffness: 100, damping: 20 });
+        animate(".nav-item", { opacity: 1, y: 0 }, { duration: 0.6, ease: [0.22, 1, 0.36, 1] });
+        animate("footer", { y: 0, opacity: 1 }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] });
         
         // 4. Finally, mount the main page content so it bursts outward
         setShowContent(true);

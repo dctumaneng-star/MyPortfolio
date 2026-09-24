@@ -1,60 +1,104 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-  const dotRef  = useRef(null);
-  const ringRef = useRef(null);
-  const [active, setActive] = useState(false);
-  const pos  = useRef({ x: 0, y: 0 });
-  const ring = useRef({ x: 0, y: 0 });
-  const raf  = useRef(null);
+  const [hoveredEl, setHoveredEl] = useState(null);
+  
+  const mouseX = useMotionValue(window.innerWidth / 2);
+  const mouseY = useMotionValue(window.innerHeight / 2);
+  
+  const smoothX = useSpring(mouseX, { damping: 25, stiffness: 300, mass: 0.5 });
+  const smoothY = useSpring(mouseY, { damping: 25, stiffness: 300, mass: 0.5 });
+  
+  const width = useSpring(useMotionValue(12), { damping: 25, stiffness: 300 });
+  const height = useSpring(useMotionValue(12), { damping: 25, stiffness: 300 });
+  const borderRadius = useSpring(useMotionValue(9999), { damping: 25, stiffness: 300 });
+  const opacity = useSpring(useMotionValue(1), { damping: 25, stiffness: 300 });
 
   useEffect(() => {
     const onMove = (e) => {
-      pos.current = { x: e.clientX, y: e.clientY };
-      if (dotRef.current) {
-        dotRef.current.style.left = `${e.clientX}px`;
-        dotRef.current.style.top  = `${e.clientY}px`;
+      if (!hoveredEl) {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      } else {
+        // Magnetic pull toward the center of the hovered element
+        const rect = hoveredEl.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        // Calculate a slight parallax based on mouse position within the element
+        const pullX = (e.clientX - centerX) * 0.1;
+        const pullY = (e.clientY - centerY) * 0.1;
+        
+        mouseX.set(centerX + pullX);
+        mouseY.set(centerY + pullY);
       }
     };
-    const loop = () => {
-      ring.current.x += (pos.current.x - ring.current.x) * 0.1;
-      ring.current.y += (pos.current.y - ring.current.y) * 0.1;
-      if (ringRef.current) {
-        ringRef.current.style.left = `${ring.current.x}px`;
-        ringRef.current.style.top  = `${ring.current.y}px`;
-      }
-      raf.current = requestAnimationFrame(loop);
-    };
-    const onEnter = () => setActive(true);
-    const onLeave = () => setActive(false);
 
     window.addEventListener("mousemove", onMove);
-    raf.current = requestAnimationFrame(loop);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [hoveredEl, mouseX, mouseY]);
 
+  useEffect(() => {
     const attach = () => {
-      const els = document.querySelectorAll("a,button,[data-hover]");
+      const els = document.querySelectorAll("a, button, [data-hover]");
+      const handlers = [];
+
       els.forEach((el) => {
+        const onEnter = () => {
+          setHoveredEl(el);
+          const rect = el.getBoundingClientRect();
+          const padding = 8;
+          width.set(rect.width + padding);
+          height.set(rect.height + padding);
+          borderRadius.set(12); // rounded-xl look
+          opacity.set(0.15); // fade out slightly when snapped
+        };
+        const onLeave = () => {
+          setHoveredEl(null);
+          width.set(12);
+          height.set(12);
+          borderRadius.set(9999);
+          opacity.set(1);
+        };
+
         el.addEventListener("mouseenter", onEnter);
         el.addEventListener("mouseleave", onLeave);
+        handlers.push({ el, onEnter, onLeave });
       });
-      return els;
+
+      return handlers;
     };
-    const els = attach();
+    
+    // Slight delay to allow DOM to render
+    const t = setTimeout(() => {
+      window.__cursorHandlers = attach();
+    }, 500);
 
     return () => {
-      window.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(raf.current);
-      els.forEach((el) => {
-        el.removeEventListener("mouseenter", onEnter);
-        el.removeEventListener("mouseleave", onLeave);
-      });
+      clearTimeout(t);
+      if (window.__cursorHandlers) {
+        window.__cursorHandlers.forEach(({ el, onEnter, onLeave }) => {
+          el.removeEventListener("mouseenter", onEnter);
+          el.removeEventListener("mouseleave", onLeave);
+        });
+      }
     };
-  }, []);
+  }, [width, height, borderRadius, opacity]);
 
   return (
-    <>
-      <div ref={dotRef}  className="cursor-dot" />
-      <div ref={ringRef} className={`cursor-ring${active ? " active" : ""}`} />
-    </>
+    <motion.div
+      className="fixed top-0 left-0 pointer-events-none z-[9999] bg-ink dark:bg-chalk mix-blend-difference"
+      style={{
+        x: smoothX,
+        y: smoothY,
+        width,
+        height,
+        borderRadius,
+        opacity,
+        translateX: "-50%",
+        translateY: "-50%",
+      }}
+    />
   );
 }

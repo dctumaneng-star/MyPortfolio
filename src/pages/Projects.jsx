@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import PageTransition from "../components/PageTransition";
 import { KineticText, TE_EASE } from "../components/KineticText";
+import FluidCard from "../components/FluidCard";
 
 const PROJECTS = [
   {
@@ -64,14 +65,15 @@ function ProjectCard({ project }) {
   const linkProps = project.href ? { href: project.href, target: "_blank", rel: "noopener noreferrer", "data-hover": "true" } : {};
 
   return (
-    <Component
+    <FluidCard
+      as={Component}
       {...linkProps}
       layout
-      transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }}
+      transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }}
       variants={cardItem}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className={`relative liquid-glass hoverable p-8 flex flex-col justify-between
+      className={`liquid-glass p-8 flex flex-col justify-between
         min-h-[220px] md:min-h-[260px] transition-colors duration-150 group
         hover:border-neon dark:hover:border-neon hover:bg-neon/5 block
         ${project.size === "large" ? "md:col-span-2" : "md:col-span-1"}
@@ -120,7 +122,7 @@ function ProjectCard({ project }) {
           <span key={s} className="neon-tag group-hover:bg-void group-hover:text-neon transition-colors duration-150">{s}</span>
         ))}
       </div>
-    </Component>
+    </FluidCard>
   );
 }
 

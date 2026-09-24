@@ -22,9 +22,8 @@ function TelemetryLine({ text, delay }) {
       i++;
       
       if (i <= text.length) {
-        // Simulate processing delays: mostly fast, occasional lag spike
-        const lag = Math.random() > 0.85 ? Math.random() * 150 : Math.random() * 20 + 10;
-        timeoutId = setTimeout(typeChar, lag);
+        // Smooth deliberate typing
+        timeoutId = setTimeout(typeChar, 30);
       }
     };
 
@@ -69,20 +68,14 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
         current = 100;
         clearInterval(interval);
         
-        // Glitch effect on counter
+        // Smooth dissolve effect instead of glitch
         if (fullSequence && counterScope.current) {
           animateCounter(counterScope.current, {
-            x: [-5, 5, -3, 3, 0],
-            y: [2, -2, 2, -1, 0],
-            textShadow: [
-              "-3px 0 red, 3px 0 cyan",
-              "3px 0 red, -3px 0 cyan",
-              "-2px 0 red, 2px 0 cyan",
-              "0px 0 transparent, 0px 0 transparent"
-            ],
-            opacity: [1, 0.5, 1, 0.8, 1]
-          }, { duration: 0.3, times: [0, 0.25, 0.5, 0.75, 1] }).then(() => {
-            setTimeout(() => setPhase(3), 400); // Brief hold after glitch
+            filter: "blur(10px)",
+            opacity: 0,
+            scale: 1.1
+          }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] }).then(() => {
+            setPhase(3);
           });
         } else {
           setTimeout(() => onComplete(), 100);
@@ -119,16 +112,16 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
           >
             {/* Phase 1 Structural Grid Lines */}
             <motion.div 
-              initial={{ scaleX: 0 }} 
-              animate={{ scaleX: 1 }} 
-              transition={{ duration: 0.8, ease: "circOut" }} 
-              className="absolute top-1/2 left-0 w-full h-px bg-neon/20 origin-left" 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }} 
+              className="absolute top-1/2 left-0 w-full h-px bg-neon/20" 
             />
             <motion.div 
-              initial={{ scaleY: 0 }} 
-              animate={{ scaleY: 1 }} 
-              transition={{ duration: 0.8, ease: "circOut", delay: 0.2 }} 
-              className="absolute top-0 left-1/2 w-px h-full bg-neon/20 origin-top" 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }} 
+              className="absolute top-0 left-1/2 w-px h-full bg-neon/20" 
             />
 
             {/* Phase 1 Telemetry Corners */}
@@ -179,9 +172,9 @@ export default function LoadingScreen({ onComplete, fullSequence = true }) {
         {phase === 3 && (
           <motion.div
             key="phase-3"
-            initial={{ scale: 2, opacity: 0, y: 50 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 250, damping: 15, mass: 1 }}
+            initial={{ scale: 0.95, opacity: 0, filter: "blur(10px)" }}
+            animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center justify-center absolute inset-0"
           >
             <h1 className="font-display font-medium text-5xl md:text-7xl text-ink dark:text-chalk tracking-tight lowercase">

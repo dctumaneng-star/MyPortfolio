@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import PageTransition from "../components/PageTransition";
 import DraggableMarquee from "../components/DraggableMarquee";
 import { KineticText, TE_EASE } from "../components/KineticText";
+import FluidCard from "../components/FluidCard";
 
 const TICKER_ITEMS = [
   "Java", "JavaScript", "PHP", "Python",
@@ -119,8 +120,8 @@ export default function Home() {
           className="grid md:grid-cols-3 gap-4 lg:gap-6 w-full"
         >
           {/* Card 1: Status */}
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }} layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="liquid-glass hoverable p-6 flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
-             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-6 flex flex-col justify-between min-h-[160px] group transition-colors duration-300">
+             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
              <div>
                 <span className="mono-label block mb-3 lowercase">current status</span>
                 <p className="font-body font-medium text-ink dark:text-chalk">actively looking for full-time opportunities & internships.</p>
@@ -129,40 +130,40 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-neon animate-pulse-dot" />
                 <span className="font-mono text-xs text-ink/50 dark:text-chalk/40 uppercase tracking-wider lowercase">available</span>
              </div>
-          </motion.div>
+          </FluidCard>
 
           {/* Card 2: Quick Nav - Projects */}
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }} layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem}>
-            <Link to="/projects" className="liquid-glass hoverable p-6 flex flex-col justify-between min-h-[160px] group hover:bg-neon dark:hover:bg-neon hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden cursor-none" data-hover="true">
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-0 group transition-colors duration-300 cursor-none" data-hover="true">
+            <Link to="/projects" className="p-6 flex flex-col justify-between min-h-[160px] h-full w-full">
                <div className="flex justify-between items-start">
-                 <span className="mono-label block mb-3 lowercase group-hover:text-void transition-colors duration-150">featured work</span>
-                 <ArrowUpRight size={24} className="text-ink/30 dark:text-chalk/20 group-hover:text-void group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-150" />
+                 <span className="mono-label block mb-3 lowercase group-hover:text-void transition-colors duration-300">featured work</span>
+                 <ArrowUpRight size={24} className="text-ink/30 dark:text-chalk/20 group-hover:text-void group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                </div>
-               <h3 className="font-display font-medium text-3xl text-ink dark:text-chalk group-hover:text-void leading-none lowercase transition-colors duration-150">
+               <h3 className="font-display font-medium text-3xl text-ink dark:text-chalk group-hover:text-void leading-none lowercase transition-colors duration-300">
                   view projects
                </h3>
             </Link>
-          </motion.div>
+          </FluidCard>
 
           {/* Card 3: Tech Focus */}
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }} layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="liquid-glass hoverable p-6 flex flex-col justify-between min-h-[160px] group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
-             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="liquid-glass p-6 flex flex-col justify-between min-h-[160px] group transition-colors duration-300">
+             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
              <span className="mono-label block mb-3 lowercase">core stack</span>
              <div className="flex flex-wrap gap-2 mt-auto">
                {["React", "Laravel", "TailwindCSS"].map(tech => (
-                 <span key={tech} className="neon-tag !py-1 !px-2 !text-[10px] lowercase group-hover:bg-void group-hover:text-neon transition-colors duration-150">{tech}</span>
+                 <span key={tech} className="neon-tag !py-1 !px-2 !text-[10px] lowercase transition-colors duration-300">{tech}</span>
                ))}
              </div>
-          </motion.div>
+          </FluidCard>
 
           {/* Card 4: Short Info / Beyond the Code */}
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }} layout transition={{ layout: { type: "spring", stiffness: 400, damping: 30, mass: 0.8 } }} variants={bentoItem} className="md:col-span-3 liquid-glass hoverable p-6 md:p-8 flex flex-col justify-between group hover:border-neon dark:hover:border-neon transition-colors duration-150 relative overflow-hidden">
-             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-150 ease-out" />
+          <FluidCard layout transition={{ layout: { type: "spring", stiffness: 100, damping: 20 } }} variants={bentoItem} className="md:col-span-3 liquid-glass p-6 md:p-8 flex flex-col justify-between group transition-colors duration-300">
+             <div className="absolute top-0 left-0 h-px bg-neon w-0 group-hover:w-full transition-all duration-300 ease-out" />
              <span className="mono-label block mb-4 lowercase">short info</span>
              <p className="font-body text-sm md:text-base text-ink dark:text-chalk/60 leading-relaxed max-w-4xl lowercase">
                self-assured and motivated aspiring software engineer prepared to apply knowledge to real-world projects.
              </p>
-          </motion.div>
+          </FluidCard>
         </motion.div>
 
       </div>
