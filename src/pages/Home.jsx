@@ -167,7 +167,7 @@ export default function Home() {
              
              <div className="flex justify-between items-start mb-6">
                 <span className="mono-label block lowercase">site architecture</span>
-                <span className="font-mono text-[10px] text-ink/40 dark:text-chalk/40 uppercase tracking-widest border border-ink/10 dark:border-chalk/10 px-2 py-1 rounded-sm">spec v1.0</span>
+                <span className="font-mono text-[10px] text-ink/40 dark:text-chalk/40 uppercase tracking-widest border border-ink/10 dark:border-chalk/10 px-2 py-1 rounded-sm">spec v6.0</span>
              </div>
 
              <div className="font-mono text-xs sm:text-sm text-ink/70 dark:text-chalk/70 leading-relaxed uppercase tracking-wider space-y-4">
