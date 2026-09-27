@@ -18,27 +18,34 @@ export default function Contact() {
     setStatus("loading");
     
     const formData = new FormData(e.target);
-    // Hardcode Web3Forms URL as requested for plugging in API key
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: formData
+        body: json
       });
       
-      if (res.ok) {
+      const data = await res.json();
+      
+      if (res.ok && data.success) {
         setStatus("success");
         e.target.reset();
         setTimeout(() => setStatus("idle"), 3000);
       } else {
-        setStatus("error");
-        setTimeout(() => setStatus("idle"), 3000);
+        console.error("Web3Forms Error:", data);
+        setStatus(data.message || "error");
+        setTimeout(() => setStatus("idle"), 4000);
       }
     } catch (err) {
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 3000);
+      console.error("Fetch Error:", err);
+      setStatus(err.message || "error");
+      setTimeout(() => setStatus("idle"), 4000);
     }
   };
 
@@ -70,8 +77,8 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delayCascade + 0.5, duration: 0.7, ease: TE_EASE }}
         >
-          {/* Web3Forms Access Key */}
-          <input type="hidden" name="access_key" value={import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || ""} />
+          {/* Web3Forms Access Key (Public) */}
+          <input type="hidden" name="access_key" value="2f52f0e4-8ddb-4959-a7fe-a5fa41bf0cb2" />
           
           <div className="grid md:grid-cols-2 gap-6">
             <div className="group flex flex-col gap-2 relative">
@@ -134,7 +141,7 @@ export default function Contact() {
               {status === "idle" && "send transmission"}
               {status === "loading" && "initiating..."}
               {status === "success" && "transmission sent"}
-              {status === "error" && "error. retry?"}
+              {status !== "idle" && status !== "loading" && status !== "success" && status}
             </span>
             {status === "idle" && (
               <div className="overflow-hidden z-20 relative text-ink dark:text-chalk group-hover:text-void transition-colors duration-300">
