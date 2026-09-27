@@ -78,7 +78,7 @@ export default function Contact() {
           transition={{ delay: delayCascade + 0.5, duration: 0.7, ease: TE_EASE }}
         >
           {/* Web3Forms Access Key (Public) */}
-          <input type="hidden" name="access_key" value="2f52f0e4-8ddb-4959-a7fe-a5fa41bf0cb2" />
+          <input type="hidden" name="access_key" value={import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "adcc46e8-0e1c-4341-95dc-deef1d970575"} />
           
           <div className="grid md:grid-cols-2 gap-6">
             <div className="group flex flex-col gap-2 relative">
