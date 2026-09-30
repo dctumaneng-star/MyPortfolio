@@ -147,7 +147,7 @@ export default function Home() {
              
              <ul className="space-y-4 font-display text-xl md:text-2xl text-ink dark:text-chalk/90 tracking-tight lowercase">
                <li className="flex items-center gap-4">
-                 <span className="w-1.5 h-1.5 rounded-full bg-neon/80" /> full-stack developer.
+                 <span className="w-1.5 h-1.5 rounded-full bg-neon/80" /> front-end developer.
                </li>
                <li className="flex items-center gap-4">
                  <span className="w-1.5 h-1.5 rounded-full bg-neon/80" /> bare-metal linux builder.

@@ -202,7 +202,7 @@ export default function About() {
         >
           <span className="mono-label block mb-8">personal biography</span>
           <p className="font-display text-2xl md:text-4xl lg:text-5xl text-ink dark:text-chalk/90 leading-tight tracking-tight">
-            i am a multidimensional developer and designer based in plaridel, bulacan. while my foundation is in full-stack web and mobile application development, my passion lies in bridging the gap between deep backend infrastructure and hyper-fluid user interfaces. i build systems that are as structurally sound as they are visually striking.
+            i am a multidimensional developer and designer based in plaridel, bulacan. while my foundation is in front-end web and mobile application development, my passion lies in bridging the gap between deep backend infrastructure and hyper-fluid user interfaces. i build systems that are as structurally sound as they are visually striking.
           </p>
         </motion.div>
 

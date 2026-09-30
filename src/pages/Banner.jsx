@@ -39,7 +39,7 @@ export default function Banner() {
               delay={0}
             />
             <p className="font-mono text-chalk/60 text-xl tracking-widest lowercase">
-              software engineer • full-stack developer
+              software engineer • front-end developer
             </p>
           </div>
           
