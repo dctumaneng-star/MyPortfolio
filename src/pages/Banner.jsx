@@ -30,35 +30,29 @@ export default function Banner() {
         {/* Content */}
         <div className="relative z-10 w-full px-24 flex items-center justify-between">
           <div>
-            <span className="neon-tag lowercase mb-6 tracking-[0.2em] px-3 py-1 text-sm border border-neon/30 bg-neon/5 text-neon rounded-sm inline-block">
-              open for opportunities
-            </span>
             <KineticText 
               text="daryl tumaneng." 
-              className="font-display font-medium text-8xl tracking-tighter leading-none text-chalk mb-4 lowercase" 
+              className="font-display font-medium text-9xl tracking-tighter leading-none text-chalk lowercase" 
               delay={0}
             />
-            <p className="font-mono text-chalk/60 text-xl tracking-widest lowercase">
-              software engineer • front-end developer
-            </p>
           </div>
           
-          <FluidCard className="liquid-glass border border-line-dark rounded-3xl p-8 max-w-[400px]">
+          <FluidCard className="liquid-glass border border-line-dark rounded-3xl p-8 w-full max-w-[420px]">
              <div className="flex justify-between items-start mb-6">
-                <span className="mono-label block lowercase text-chalk/60 text-sm tracking-widest">tech stack</span>
+                <span className="mono-label block lowercase text-chalk/60 text-sm tracking-widest">contact details</span>
              </div>
              <div className="font-mono text-sm text-chalk/80 leading-relaxed uppercase tracking-wider space-y-4">
-               <div className="grid grid-cols-2 border-b border-chalk/10 pb-2 gap-4">
-                 <span className="opacity-50">frontend</span>
-                 <span className="font-semibold text-neon text-right">react.js</span>
+               <div className="flex justify-between border-b border-chalk/10 pb-2 gap-4">
+                 <span className="opacity-50">email</span>
+                 <span className="font-semibold text-neon text-right">dctumaneng13@gmail.com</span>
                </div>
-               <div className="grid grid-cols-2 border-b border-chalk/10 pb-2 gap-4">
-                 <span className="opacity-50">backend</span>
-                 <span className="font-semibold text-chalk text-right">laravel</span>
+               <div className="flex justify-between border-b border-chalk/10 pb-2 gap-4">
+                 <span className="opacity-50">phone</span>
+                 <span className="font-semibold text-chalk text-right">0969-596-7105</span>
                </div>
-               <div className="grid grid-cols-2 gap-4">
-                 <span className="opacity-50">database</span>
-                 <span className="font-semibold text-chalk text-right">mysql</span>
+               <div className="flex justify-between gap-4">
+                 <span className="opacity-50">location</span>
+                 <span className="font-semibold text-chalk text-right">plaridel, bulacan</span>
                </div>
              </div>
           </FluidCard>
