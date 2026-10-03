@@ -28,23 +28,25 @@ export default function Banner() {
         <div className="absolute top-[10%] right-[-20%] w-[800px] h-[800px] rounded-full mix-blend-normal opacity-40 blur-[120px] bg-[#00E5C0]" />
 
         {/* Content */}
-        <div className="relative z-10 w-full px-24 flex items-center justify-between">
-          <div>
-            <KineticText 
-              text="daryl tumaneng." 
-              className="font-display font-medium text-9xl tracking-tighter leading-none text-chalk lowercase" 
-              delay={0}
-            />
-          </div>
-          
-          <FluidCard className="liquid-glass border border-line-dark rounded-3xl p-8 w-full max-w-[420px]">
-             <div className="flex justify-between items-start mb-6">
-                <span className="mono-label block lowercase text-chalk/60 text-sm tracking-widest">contact details</span>
+        <div className="relative z-10 w-full px-24 flex items-center justify-end">
+          <FluidCard className="liquid-glass border border-line-dark rounded-3xl p-10 w-full max-w-[480px]">
+             {/* Name & Role */}
+             <div className="mb-8 border-b border-chalk/10 pb-6">
+                <KineticText 
+                  text="daryl tumaneng." 
+                  className="font-display font-medium text-6xl tracking-tighter leading-none text-chalk lowercase mb-3" 
+                  delay={0}
+                />
+                <p className="font-mono text-neon text-sm tracking-widest lowercase">
+                  front-end developer
+                </p>
              </div>
+
+             {/* Contact Details */}
              <div className="font-mono text-sm text-chalk/80 leading-relaxed uppercase tracking-wider space-y-4">
                <div className="flex justify-between border-b border-chalk/10 pb-2 gap-4">
                  <span className="opacity-50">email</span>
-                 <span className="font-semibold text-neon text-right">dctumaneng13@gmail.com</span>
+                 <span className="font-semibold text-chalk text-right">dctumaneng13@gmail.com</span>
                </div>
                <div className="flex justify-between border-b border-chalk/10 pb-2 gap-4">
                  <span className="opacity-50">phone</span>
